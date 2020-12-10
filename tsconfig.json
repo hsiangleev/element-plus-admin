@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        // "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "ESNext",
+        "baseUrl": ".",
+        "paths": {
+            "@root/*": ["./*"],
+            "@src/*": ["src/*"]
+        }
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
