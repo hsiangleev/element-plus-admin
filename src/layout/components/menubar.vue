@@ -3,7 +3,12 @@
         <el-menu
             :default-active='activeMenu'
             :collapse='menubar.status === 1 || menubar.status === 3'
-            class='el-menu-vertical-demo w-64'
+            class='el-menu-vertical-demo'
+            :class='{ 
+                "w-64": menubar.status === 0 || menubar.status === 2, 
+                "w-0": menubar.status === 3, 
+                "w-16": menubar.status === 1, 
+            }'
             :collapse-transition='false'
             text-color='#fff'
             :unique-opened='true'
