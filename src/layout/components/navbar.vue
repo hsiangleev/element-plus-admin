@@ -44,7 +44,7 @@
 
 <script lang='ts'>
 import { defineComponent, reactive, watch } from 'vue'
-import { useStore } from '@src/store/index'
+import { useStore } from '/@/store/index'
 import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router'
 
 interface IBreadcrumbList {

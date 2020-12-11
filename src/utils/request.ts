@@ -1,4 +1,4 @@
-import { store } from '@src/store/index'
+import { store } from '/@/store/index'
 import axios from 'axios'
 import { ElLoading, ElNotification } from 'element-plus'
 

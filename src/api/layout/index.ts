@@ -1,4 +1,4 @@
-import request from '@src/utils/request'
+import request from '/@/utils/request'
 import { AxiosPromise } from 'axios'
 const api = {
     login: '/login',

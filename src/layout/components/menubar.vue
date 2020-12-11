@@ -21,8 +21,8 @@
 
 <script lang='ts'>
 import { defineComponent, computed } from 'vue'
-import MenubarItem from '@src/layout/components/menubarItem.vue'
-import { useStore } from '@src/store/index'
+import MenubarItem from '/@/layout/components/menubarItem.vue'
+import { useStore } from '/@/store/index'
 import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent ({

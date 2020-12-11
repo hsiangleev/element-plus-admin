@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { IMenubarList } from '@src/type/store/layout'
+import { IMenubarList } from '/@/type/store/layout'
 
 const components = {
-    Layout: () => import('@src/layout/index.vue'),
-    Redirect: () => import('@src/layout/redirect.vue'),
-    404: () => import('@src/views/404.vue'),
-    Workplace: () => import('@src/views/Dashboard/Workplace.vue'),
+    Layout: () => import('/@/layout/index.vue'),
+    Redirect: () => import('/@/layout/redirect.vue'),
+    404: () => import('/@/views/404.vue'),
+    Workplace: () => import('/@/views/Dashboard/Workplace.vue'),
 
-    Login: () => import('@src/views/User/Login.vue'),
+    Login: () => import('/@/views/User/Login.vue'),
 }
 
 // 免登录页面

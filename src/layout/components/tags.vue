@@ -55,11 +55,11 @@
 
 <script lang="ts">
 import { defineComponent, nextTick, ref, watch, onBeforeUpdate, onMounted, reactive } from 'vue'
-import { useStore } from '@src/store/index'
+import { useStore } from '/@/store/index'
 import { Store } from 'vuex'
-import { IState } from '@src/type/store/index'
+import { IState } from '/@/type/store/index'
 import { useRoute, useRouter, Router, RouteLocationNormalizedLoaded, } from 'vue-router'
-import { ITagsList } from '@src/type/store/layout'
+import { ITagsList } from '/@/type/store/layout'
 
 // 右键菜单
 const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNormalizedLoaded) => {

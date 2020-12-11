@@ -42,7 +42,7 @@ module.exports = {
         'no-lonely-if': 'error',                // 禁止 if 语句作为唯一语句出现在 else 语句块中
         'newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],       // 要求方法链中每个调用都有一个换行符
         // 路径别名设置
-        'no-submodule-imports': ['off', '@root', '@src'],
-        'no-implicit-dependencies': ['off', ['@root', '@src']]
+        'no-submodule-imports': ['off', '/@'],
+        'no-implicit-dependencies': ['off', ['/@']]
     }
 }

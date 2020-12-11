@@ -1,5 +1,5 @@
-import router from '@src/router'
-import { store } from '@src/store/index'
+import router from '/@/router'
+import { store } from '/@/store/index'
 import NProgress from 'nprogress' // progress bar
 // import { notification } from 'ant-design-vue'
 // import { setDocumentTitle, domTitle } from '@/utils/domUtil'

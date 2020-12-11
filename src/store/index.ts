@@ -1,6 +1,6 @@
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
-import layout from '@src/store/module/layout'
-import { IState } from '@src/type/store/index'
+import layout from '/@/store/module/layout'
+import { IState } from '/@/type/store/index'
 
 export const store = createStore<IState>({
     modules: {

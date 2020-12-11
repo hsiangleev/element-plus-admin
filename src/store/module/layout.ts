@@ -1,10 +1,10 @@
-import { login, loginParam, getRouterList } from '@src/api/layout/index'
-import { ILayout, IMenubarStatus, ITagsList, IMenubarList } from '@src/type/store/layout'
-import { IState } from '@src/type/store/index'
+import { login, loginParam, getRouterList } from '/@/api/layout/index'
+import { ILayout, IMenubarStatus, ITagsList, IMenubarList } from '/@/type/store/layout'
+import { IState } from '/@/type/store/index'
 import { ActionContext } from 'vuex'
-import router from '@src/router/index'
-import { allowRouter } from '@src/router/index'
-import { generatorDynamicRouter } from '@src/router/asyncRouter'
+import router from '/@/router/index'
+import { allowRouter } from '/@/router/index'
+import { generatorDynamicRouter } from '/@/router/asyncRouter'
 
 const state:ILayout = {
     menubar: {

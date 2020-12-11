@@ -1,4 +1,4 @@
-import { IMenubarList } from '@src/type/store/layout'
+import { IMenubarList } from '/@/type/store/layout'
 /**
  * list结构转tree
  * @param data list原始数据

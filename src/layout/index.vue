@@ -37,12 +37,12 @@
 
 <script lang='ts'>
 import { defineComponent, onMounted } from 'vue'
-import LayoutContent from '@src/layout/components/content.vue'
-import LayoutMenubar from '@src/layout/components/menubar.vue'
-import LayoutNavbar from '@src/layout/components/navbar.vue'
-import LayoutTags from '@src/layout/components/tags.vue'
-import { useStore } from '@src/store/index'
-import throttle from '@src/utils/throttle'
+import LayoutContent from '/@/layout/components/content.vue'
+import LayoutMenubar from '/@/layout/components/menubar.vue'
+import LayoutNavbar from '/@/layout/components/navbar.vue'
+import LayoutTags from '/@/layout/components/tags.vue'
+import { useStore } from '/@/store/index'
+import throttle from '/@/utils/throttle'
 
 export default defineComponent ({
     name: 'Layout',

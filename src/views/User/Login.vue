@@ -41,8 +41,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
-import { store } from '@src/store/index'
-import router from '@src/router/index'
+import { store } from '/@/store/index'
+import router from '/@/router/index'
 import { ElNotification } from 'element-plus'
 
 const formRender = () => {

@@ -1,5 +1,5 @@
 import { App } from 'vue'
-import router from '@src/router/index'
+import router from '/@/router/index'
 export default (app:App<Element>):void => {
     app.directive('action', {
         mounted(el, binding) {

@@ -1,15 +1,15 @@
 import { createApp } from 'vue'
-import App from '@src/App.vue'
+import App from '/@/App.vue'
 import ElementPlus from 'element-plus'
-import direct from '@src/directive/action'
-import router from '@src/router/index'
-import { store } from '@src/store/index'
-import '@src/mock/index'
-import '@src/permission'
+import direct from '/@/directive/action'
+import router from '/@/router/index'
+import { store } from '/@/store/index'
+import '/@/mock/index'
+import '/@/permission'
 
 import 'element-plus/lib/theme-chalk/index.css'
 import 'nprogress/nprogress.css'
-import '@src/index.css'
+import '/@/index.css'
 
 const app = createApp(App)
 direct(app)

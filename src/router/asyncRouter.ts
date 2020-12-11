@@ -1,17 +1,17 @@
-import { IMenubarList } from '@src/type/store/layout'
-import { listToTree } from '@src/utils/listToTree'
-import { store } from '@src/store/index'
+import { IMenubarList } from '/@/type/store/layout'
+import { listToTree } from '/@/utils/listToTree'
+import { store } from '/@/store/index'
 const components = {
-    Layout: () => import('@src/layout/index.vue'),
-    404: () => import('@src/views/404.vue'),
-    Workplace: () => import('@src/views/Dashboard/Workplace.vue'),
-    ProjectList: () => import('@src/views/Project/ProjectList.vue'),
-    ProjectDetail: () => import('@src/views/Project/ProjectDetail.vue'),
-    ProjectImport: () => import('@src/views/Project/ProjectImport.vue'),
-    SecondNav: () => import('@src/views/Nav/SecondNav/Index.vue'),
-    ThirdNav: () => import('@src/views/Nav/SecondNav/ThirdNav/Index.vue'),
-    SecondText: () => import('@src/views/Nav/SecondText/Index.vue'),
-    ThirdText: () => import('@src/views/Nav/SecondText/ThirdText/Index.vue'),
+    Layout: () => import('/@/layout/index.vue'),
+    404: () => import('/@/views/404.vue'),
+    Workplace: () => import('/@/views/Dashboard/Workplace.vue'),
+    ProjectList: () => import('/@/views/Project/ProjectList.vue'),
+    ProjectDetail: () => import('/@/views/Project/ProjectDetail.vue'),
+    ProjectImport: () => import('/@/views/Project/ProjectImport.vue'),
+    SecondNav: () => import('/@/views/Nav/SecondNav/Index.vue'),
+    ThirdNav: () => import('/@/views/Nav/SecondNav/ThirdNav/Index.vue'),
+    SecondText: () => import('/@/views/Nav/SecondText/Index.vue'),
+    ThirdText: () => import('/@/views/Nav/SecondText/ThirdText/Index.vue'),
 }
 
 const asyncRouter:Array<IMenubarList> = [
