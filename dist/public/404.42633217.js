@@ -1,0 +1,1 @@
+let e=document.createElement("style");e.innerHTML="",document.head.appendChild(e);import{d as a,o as d,e as t,x as n}from"./index.2d40f6f7.js";var f=a({name:"404"});const o=n("data-v-e0f535f2")(((e,a,n,f,o,r)=>(d(),t("div",null," 404 page "))));f.render=o,f.__scopeId="data-v-e0f535f2";export default f;

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { IMenubarList } from '/@/type/store/layout'
 
 const components = {
@@ -55,7 +55,7 @@ export const allowRouter:Array<IMenubarList> = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),        // createWebHistory
     routes: allowRouter,
 })
 
