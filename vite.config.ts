@@ -10,7 +10,7 @@ import { UserConfig } from 'vite'
 // console.log(env)
 
 const config:UserConfig = {
-    base: '/element-plus-admin',
+    // base: '/element-plus-admin',
     alias: {
         '/@/': path.resolve(__dirname, 'src')
     },
