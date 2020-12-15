@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "eslint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
-    "page": "git subtree push --prefix=dist element-plus-admin gh-pages"
+    "page": "git subtree push --prefix=dist coding gh-pages"
   },
   "dependencies": {
     "element-plus": "^1.0.1-beta.6",
