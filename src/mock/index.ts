@@ -94,6 +94,31 @@ const routes = [
         component: 'ThirdText',
         meta: { title: '三级文本', icon: 'el-icon-menu' }
     },
+    {
+        id: 3,
+        parentId: 0,
+        name: 'Components',
+        path: '/Components',
+        component: 'Layout',
+        redirect: '/Components/OpenWindowTest',
+        meta: { title: '组件测试', icon: 'el-icon-phone' },
+    },
+    {
+        id: 30,
+        parentId: 3,
+        name: 'OpenWindowTest',
+        path: '/Components/OpenWindowTest',
+        component: 'OpenWindowTest',
+        meta: { title: '选择页', icon: 'el-icon-goods' }
+    },
+    {
+        id: 31,
+        parentId: 3,
+        name: 'CardListTest',
+        path: '/Components/CardListTest',
+        component: 'CardListTest',
+        meta: { title: '卡片列表', icon: 'el-icon-question' },
+    },
 ]
 Mock.mock('/getRouterList', 'get', () => {
     return Mock.mock({

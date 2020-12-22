@@ -13,7 +13,7 @@
                     <component
                         :is='Component'
                         :key='key'
-                        class='page'
+                        class='page m-3'
                     />
                 </keep-alive>
             </transition>

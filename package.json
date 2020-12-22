@@ -8,7 +8,7 @@
     "page": "git subtree push --prefix=dist coding gh-pages"
   },
   "dependencies": {
-    "element-plus": "^1.0.1-beta.6",
+    "element-plus": "^1.0.1-beta.10",
     "vue": "^3.0.4"
   },
   "devDependencies": {

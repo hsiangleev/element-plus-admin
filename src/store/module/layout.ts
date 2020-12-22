@@ -76,8 +76,10 @@ const mutations = {
     removeOtherTagNav(state: ILayout, tagsList:ITagsList):void {
         state.tags.tagsList.splice(1, state.tags.tagsList.length - 1)
         state.tags.cachedViews.splice(1, state.tags.cachedViews.length - 1)
-        state.tags.tagsList.push(tagsList)
-        state.tags.cachedViews.push(tagsList.name)
+        if(tagsList.name !== 'Workplace'){
+            state.tags.tagsList.push(tagsList)
+            state.tags.cachedViews.push(tagsList.name)
+        }
         router.push({ path: tagsList.path })
     },
     removeAllTagNav(state: ILayout):void {
