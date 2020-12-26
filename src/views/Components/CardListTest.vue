@@ -22,7 +22,7 @@
             </el-col>
             <el-col :span='12'>
                 <card-list
-                    title='选择页'
+                    title='列表'
                     :list-item='listItem'
                     :show-header='true'
                     :is-nowrap='true'
@@ -31,7 +31,7 @@
             </el-col>
             <el-col :span='12'>
                 <card-list
-                    title='选择页'
+                    title='列表'
                     :list-item='listItem'
                     :show-header='true'
                     :is-nowrap='true'
@@ -58,22 +58,10 @@
             
             <el-col :span='24'>
                 <card-list
-                    :ref='el=>{refForm=el}'
                     type='KeyValue'
+                    title='键值对'
                     :show-header='true'
-                    :form='form'
-                    :rules='rules'
                 >
-                    <template #btn>
-                        <el-button-group>
-                            <el-button
-                                icon='el-icon-edit'
-                                @click='submit'
-                            >
-                                提交
-                            </el-button>
-                        </el-button-group>
-                    </template>
                     <template #KeyValue>
                         <card-list-item width='100px'>
                             <template #key>
@@ -91,16 +79,12 @@
                                 DC2000000373
                             </template>
                         </card-list-item>
-                        <card-list-item
-                            width='100px'
-                            :is-require='true'
-                            prop='Amt'
-                        >
+                        <card-list-item width='100px'>
                             <template #key>
                                 申报金额
                             </template>
                             <template #value>
-                                <el-input v-model='form.Amt' />
+                                ￥0.01
                             </template>
                         </card-list-item>
                         <card-list-item width='100px'>
@@ -109,6 +93,123 @@
                             </template>
                             <template #value>
                                 <span>2020年广西一流学科建设项目（化学）</span>
+                            </template>
+                        </card-list-item>
+                    </template>
+                </card-list>
+            </el-col>
+            <el-col :span='24'>
+                <card-list
+                    :ref='el=>{refForm=el}'
+                    title='表单'
+                    type='KeyValue'
+                    :show-header='true'
+                    :form='form'
+                    :rules='rules'
+                >
+                    <template #btn>
+                        <el-button-group>
+                            <el-button
+                                icon='el-icon-edit'
+                                @click='submit'
+                            >
+                                提交
+                            </el-button>
+                        </el-button-group>
+                    </template>
+                    <template #KeyValue>
+                        <card-list-item
+                            width='100px'
+                            :is-require='true'
+                            prop='name'
+                        >
+                            <template #key>
+                                姓名
+                            </template>
+                            <template #value>
+                                <el-input
+                                    v-model='form.name'
+                                    placeholder='请输入姓名'
+                                />
+                            </template>
+                        </card-list-item>
+                        <card-list-item
+                            width='100px'
+                            :is-require='true'
+                            prop='region'
+                        >
+                            <template #key>
+                                活动区域
+                            </template>
+                            <template #value>
+                                <el-select
+                                    v-model='form.region'
+                                    placeholder='请选择活动区域'
+                                >
+                                    <el-option
+                                        label='区域一'
+                                        value='shanghai'
+                                    />
+                                    <el-option
+                                        label='区域二'
+                                        value='beijing'
+                                    />
+                                </el-select>
+                            </template>
+                        </card-list-item>
+                        <card-list-item
+                            width='100px'
+                            prop='delivery'
+                        >
+                            <template #key>
+                                即时配送
+                            </template>
+                            <template #value>
+                                <el-switch v-model='form.delivery' />
+                            </template>
+                        </card-list-item>
+                        <card-list-item
+                            width='100px'
+                            :is-require='true'
+                            prop='type'
+                        >
+                            <template #key>
+                                活动性质
+                            </template>
+                            <template #value>
+                                <el-checkbox-group v-model='form.type'>
+                                    <el-checkbox
+                                        label='美食'
+                                        name='type'
+                                    />
+                                    <el-checkbox
+                                        label='地推'
+                                        name='type'
+                                    />
+                                    <el-checkbox
+                                        label='线下'
+                                        name='type'
+                                    />
+                                    <el-checkbox
+                                        label='品牌'
+                                        name='type'
+                                    />
+                                </el-checkbox-group>
+                            </template>
+                        </card-list-item>
+                        <card-list-item
+                            width='100px'
+                            :is-require='true'
+                            prop='resource'
+                        >
+                            <template #key>
+                                特殊资源
+                            </template>
+                            <template #value>
+                                <el-radio-group v-model='form.resource'>
+                                    <el-radio label='线上品牌商赞助' />
+                                    <el-radio label='线下场地免费' />
+                                </el-radio-group>
                             </template>
                         </card-list-item>
                     </template>
@@ -127,11 +228,24 @@ import { validate } from '/@/components/CardList.vue'
 // 键值对样式，及表单校验
 const keyValue = () => {
     const form = reactive({
-        Amt: ''
+        name: '',
+        region: '',
+        delivery: false,
+        resource: '',
+        type: [],
     })
     const rules = reactive({
-        Amt: [
-            { required: true, message: '请输入申报金额', trigger: 'blur' },
+        name: [
+            { required: true, message: '请输入姓名', trigger: 'blur' },
+        ],
+        region: [
+            { required: true, message: '请选择活动区域', trigger: 'blur' },
+        ],
+        resource: [
+            { required: true, message: '请选择活动性质', trigger: 'blur' },
+        ],
+        type: [
+            { required: true, message: '请选择特殊资源', trigger: 'blur' },
         ]
     })
     const refForm = ref(null)

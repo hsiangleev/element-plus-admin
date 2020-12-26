@@ -4,9 +4,11 @@
         @keyup='enterSubmit'
     >
         <el-form
+            ref='ruleForm'
             label-position='right'
             label-width='80px'
             :model='form'
+            :rules='rules'
         >
             <el-form-item
                 label='用户名'
@@ -31,7 +33,7 @@
                 >
                     登录
                 </el-button>
-                <el-button>
+                <el-button @click='reset'>
                     重置
                 </el-button>
             </el-form-item>
@@ -40,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { store } from '/@/store/index'
 import router from '/@/router/index'
 import { ElNotification } from 'element-plus'
@@ -50,13 +52,19 @@ const formRender = () => {
         name: 'admin',
         pwd: 'admin',
     })
+    const ruleForm = ref(null)
     const enterSubmit = e => {
         if(e.keyCode === 13){
             onSubmit()
         }
     }
+    const validate = function():Promise<boolean>{
+        return new Promise(resolve=>ruleForm.value.validate((valid: boolean)=>resolve(valid)))
+    }
     const onSubmit = async() => {
         let { name, pwd } = form
+        console.log(ruleForm)
+        if(!await validate()) return
         await store.dispatch('layout/login', { username: name, password: pwd })
         router.replace({ path: '/' })
         ElNotification({
@@ -65,6 +73,7 @@ const formRender = () => {
             type: 'success'
         })
     }
+    const reset = () => ruleForm.value.resetFields()
     const rules = reactive({
         name: [
             { validator: (rule, value, callback) => {
@@ -89,21 +98,19 @@ const formRender = () => {
         form, 
         onSubmit,
         enterSubmit,
-        rules
+        rules,
+        ruleForm,
+        reset
     }
 }
 export default defineComponent({
     name: 'Login',
     setup() {
-        const { form, onSubmit, enterSubmit, rules } = formRender()
         
         return {
             labelCol: { span: 4 },
             wrapperCol: { span: 14 },
-            form,
-            onSubmit,
-            enterSubmit,
-            rules
+            ...formRender()
         }
     }
 })

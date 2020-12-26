@@ -4,10 +4,10 @@
         :sm='12'
         :xl='8'
     >
-        <div class='card-list-item flex mb-5 text-sm'>
+        <div class='card-list-item flex mb-3 text-sm'>
             <div
                 class='text-right pr-3'
-                :style='{"width": width}'
+                :style='{"line-height": "28px","width": width, "min-width": width}'
             >
                 <span
                     v-if='isRequire'
@@ -19,6 +19,7 @@
             <div
                 class='flex-1 font-semibold'
                 :class='{"truncate": !prop}'
+                :style='{"line-height": !prop ? "28px" : "inherit"}'
             >
                 <el-form-item
                     v-if='prop'
@@ -63,14 +64,13 @@ export default defineComponent({
 </script>
 
 <style>
-    .card-list-item,
-    .card-list-item .el-form-item__content,
-    .card-list-item .el-input .el-input__inner {
-        height: 28px;
-        line-height: 28px;
+    .card-list-item .el-form-item--mini.el-form-item, .el-form-item--small.el-form-item{
+        margin-bottom: 0;
     }
-    .card-list-item .el-form-item__content{
-        font-size: 0.875rem;
+    .card-list-item .el-select,
+    .card-list-item .el-date-editor.el-input, 
+    .card-list-item .el-date-editor.el-input__inner{
+        width: 100%;
     }
 </style>
     

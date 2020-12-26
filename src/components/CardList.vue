@@ -49,6 +49,7 @@
                 class='card-list-form'
                 :model='form'
                 :rules='rules'
+                size='mini'
             >
                 <el-row :gutter='15'>
                     <slot name='KeyValue' />

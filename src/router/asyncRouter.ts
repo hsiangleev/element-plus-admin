@@ -14,6 +14,7 @@ const components = {
     ThirdText: () => import('/@/views/Nav/SecondText/ThirdText/Index.vue'),
     OpenWindowTest: () => import('/@/views/Components/OpenWindowTest.vue'),
     CardListTest: () => import('/@/views/Components/CardListTest.vue'),
+    TableSearchTest: () => import('/@/views/Components/TableSearchTest.vue'),
 }
 
 const asyncRouter:Array<IMenubarList> = [

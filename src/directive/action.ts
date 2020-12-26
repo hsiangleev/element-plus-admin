@@ -1,5 +1,6 @@
-import { App } from 'vue'
+import { App, nextTick } from 'vue'
 import router from '/@/router/index'
+import { format, unformat } from '/@/utils/tools'
 export default (app:App<Element>):void => {
     app.directive('action', {
         mounted(el, binding) {
@@ -9,6 +10,17 @@ export default (app:App<Element>):void => {
             const isShow = roles.some(v=>arg.includes(v))
             if(!isShow){
                 el.parentNode && el.parentNode.removeChild(el)
+            }
+        }
+    })
+    app.directive('format', {
+        mounted(el, binding) {
+            const { arg } = binding
+            if(arg === 'money'){
+                const elem = el.firstElementChild
+                nextTick(()=>elem.value = format(elem.value))
+                elem.addEventListener('focus', ()=>elem.value = unformat(elem.value), true)
+                elem.addEventListener('blur', ()=>elem.value = format(elem.value), true)
             }
         }
     })
