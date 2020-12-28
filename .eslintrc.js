@@ -43,6 +43,7 @@ module.exports = {
         'newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],       // 要求方法链中每个调用都有一个换行符
         // 路径别名设置
         'no-submodule-imports': ['off', '/@'],
-        'no-implicit-dependencies': ['off', ['/@']]
+        'no-implicit-dependencies': ['off', ['/@']],
+        '@typescript-eslint/no-explicit-any': 'off',            // 类型可以使用any  
     }
 }

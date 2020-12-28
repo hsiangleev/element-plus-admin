@@ -84,7 +84,7 @@
                                 申报金额
                             </template>
                             <template #value>
-                                ￥0.01
+                                {{ format(0.01) }}
                             </template>
                         </card-list-item>
                         <card-list-item width='100px'>
@@ -100,7 +100,7 @@
             </el-col>
             <el-col :span='24'>
                 <card-list
-                    :ref='el=>{refForm=el}'
+                    ref='refForm'
                     title='表单'
                     type='KeyValue'
                     :show-header='true'
@@ -224,6 +224,7 @@ import { defineComponent, reactive, ref } from 'vue'
 import CardList from '/@/components/CardList.vue'
 import CardListItem from '/@/components/CardListItem.vue'
 import { validate } from '/@/components/CardList.vue'
+import { format } from '/@/utils/tools'
 
 // 键值对样式，及表单校验
 const keyValue = () => {
@@ -284,6 +285,7 @@ export default defineComponent({
             listItem,
             remove,
             edit,
+            format,
             ...keyValue()
         }
     }

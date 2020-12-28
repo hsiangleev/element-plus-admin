@@ -15,12 +15,19 @@ export default (app:App<Element>):void => {
     })
     app.directive('format', {
         mounted(el, binding) {
-            const { arg } = binding
+            const { arg, value } = binding
             if(arg === 'money'){
                 const elem = el.firstElementChild
                 nextTick(()=>elem.value = format(elem.value))
-                elem.addEventListener('focus', ()=>elem.value = unformat(elem.value), true)
-                elem.addEventListener('blur', ()=>elem.value = format(elem.value), true)
+                elem.addEventListener('focus', (event)=>{
+                    event.target.value = unformat(event.target.value)
+                    value[0][value[1]] = event.target.value
+                }, true)
+                elem.addEventListener('blur', (event)=>{
+                    const val = unformat(format(event.target.value))
+                    value[0][value[1]] = val === '' ? 0 : val
+                    nextTick(()=>event.target.value = format(val))
+                }, true)
             }
         }
     })

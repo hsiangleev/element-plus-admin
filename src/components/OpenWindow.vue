@@ -1,5 +1,5 @@
 <template>
-    <transition name='el-zoom-in-center'>
+    <transition name='el-fade-in'>
         <div
             v-show='show'
             class='open-select-mask w-full h-full bg-black bg-opacity-30 z-50 fixed top-0 left-0 flex flex-center'

@@ -1,4 +1,4 @@
-import {  } from 'element-plus'
+import {  } from 'vue'
 /**
  * 睡眠函数
  * @param time 
@@ -30,12 +30,12 @@ export function unformat (str:string):number|string{
  * 表格合计行
  * @param str 金额
  */
-export function tableSummaries (param):Array<unknown>{
+export function tableSummaries (param: { columns: any; data: any }):Array<string>{
     const { columns, data } = param
     const sums = []
     columns.forEach((column, index) => {
         if (index === 0) {
-            sums[index] = '总价'
+            sums[index] = '合计'
             return
         }
         const values = data.map(item => Number(item[column.property]))
@@ -55,4 +55,11 @@ export function tableSummaries (param):Array<unknown>{
     })
 
     return sums
+}
+
+export function isInput(el: HTMLElement): boolean {
+    return el.nodeName.toLocaleLowerCase() === 'input' 
+}
+export function isTextarea(el: HTMLElement): boolean {
+    return el.nodeName.toLocaleLowerCase() === 'textarea' 
 }

@@ -45,8 +45,6 @@
                                         range-separator='至'
                                         start-placeholder='开始日期'
                                         end-placeholder='结束日期'
-                                        format='yyyy-MM-dd'
-                                        value-format='yyyy-MM-dd'
                                     />
                                 </template>
                             </card-list-item>
@@ -111,6 +109,7 @@
         >
             <el-table-column
                 type='index'
+                width='50'
                 :index='indexMethod'
             />
             <el-table-column
@@ -135,8 +134,8 @@
             >
                 <template #default='scope'>
                     <el-input
-                        v-model='scope.row.amt'
-                        v-format:money
+                        v-model.number='scope.row.amt'
+                        v-format:money='[scope.row, "amt"]'
                     />
                 </template>
             </el-table-column>

@@ -63,7 +63,6 @@ const formRender = () => {
     }
     const onSubmit = async() => {
         let { name, pwd } = form
-        console.log(ruleForm)
         if(!await validate()) return
         await store.dispatch('layout/login', { username: name, password: pwd })
         router.replace({ path: '/' })

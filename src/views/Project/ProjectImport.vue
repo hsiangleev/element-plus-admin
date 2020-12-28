@@ -1,5 +1,5 @@
 <template>
-    <div style='height: 1500px;width:100%'>
+    <div style='height: 1500px;'>
         <p v-action:add>
             add
         </p>
