@@ -121,60 +121,70 @@ export default defineComponent({
 </script>
 
 <style>
-    .card-list .el-card__header{
+    .card-list .el-card__header {
         padding: 10px 15px;
     }
-    .card-list .el-button{
+
+    .card-list .el-button {
         padding: 4px 6px;
         border-radius: 3px;
     }
 </style>
-<style scoped>
-    .card-list-body{
+<style lang="postcss" scoped>
+    .card-list-body {
         list-style: square;
-    }
-    .card-list-body>li{
-        list-style: square;
-        display: flex;
-        padding: 3px 0;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .card-list-body>li>.card-list-mark{
-        color: #888;
-    }
-    .card-list-body>li>.card-list-text{
-        padding-right: 10px;
-        color: #666;
-    }
-    .card-list-body>li>.card-list-text>a:hover{
-        color: #409eff;
-    }
-    .card-list-body>li>.card-list-text.nowrap{
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .card-list-body>li>.card-list-text.wrap{
-        display: flex;
-        align-items: center;
-    }
-    .card-list-body>li>.card-list-text>span.card-list-item-circle{
-        display: inline-block;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background-color: #666;
-        margin-right: 10px;
-    }
-    .card-list-body>li>.card-list-text.nowrap>span.card-list-item-circle{
-        transform: translateY(-50%);
-    }
-    .card-list-body>li>.card-list-text.wrap>span.card-list-item-circle{
-        min-width: 5px;
-        min-height: 5px;
-        max-width: 5px;
-        max-height: 5px;
+
+        & > li {
+            list-style: square;
+            display: flex;
+            padding: 3px 0;
+            align-items: center;
+            justify-content: space-between;
+
+            & > .card-list-mark {
+                color: #888;
+            }
+
+            & > .card-list-text {
+                padding-right: 10px;
+                color: #666;
+
+                & > a:hover {
+                    color: #409eff;
+                }
+
+                & > span.card-list-item-circle {
+                    display: inline-block;
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 50%;
+                    background-color: #666;
+                    margin-right: 10px;
+                }
+
+                &.nowrap {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    & > span.card-list-item-circle {
+                        transform: translateY(-50%);
+                    }
+                }
+
+                &.wrap {
+                    display: flex;
+                    align-items: center;
+
+                    & > span.card-list-item-circle {
+                        min-width: 5px;
+                        min-height: 5px;
+                        max-width: 5px;
+                        max-height: 5px;
+                    }
+                }
+            }
+        }
     }
 </style>
     

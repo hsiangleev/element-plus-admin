@@ -116,7 +116,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.layout-login{
+.layout-login {
     padding-top: 200px;
     width: 400px;
     margin: 0 auto;

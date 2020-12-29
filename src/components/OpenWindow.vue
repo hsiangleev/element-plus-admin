@@ -55,16 +55,19 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-    .open-select-btn .el-button + .el-button{
-        margin-left: -1px;
-    }
-    .open-select-btn .el-button{
+<style lang="postcss" scoped>
+    .open-select-btn .el-button {
         border-radius: 0;
         flex: 1;
+
+        & + .el-button {
+            margin-left: -1px;
+        }
+
+        &:hover {
+            z-index: 1;
+        }
     }
-    .open-select-btn .el-button:hover{
-        z-index: 1;
-    }
+
 </style>
     

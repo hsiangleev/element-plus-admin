@@ -103,7 +103,7 @@
             row-key='date'
             border
             :data='table.data'
-            style='width: 100%'
+            style='width: 100%;'
             :summary-method='getSummaries'
             show-summary
         >

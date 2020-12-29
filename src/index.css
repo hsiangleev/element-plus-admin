@@ -3,27 +3,34 @@
 @tailwind components;
 @tailwind utilities;
 
-html,body{
+html,
+body {
     overflow: hidden;
 }
-button:focus{
+
+button:focus {
     outline: none;
 }
-@responsive{
-    .transition-width{
+
+@responsive {
+    .transition-width {
         transition-property: width;
     }
-    .bg-menubar{
+
+    .bg-menubar {
         background-color: #001529;
     }
-    .bg-logo{
+
+    .bg-logo {
         background-color: #001529;
     }
-    .flex-center{
+
+    .flex-center {
         justify-content: center;
         align-items: center;
     }
-    .min-height-10{
+
+    .min-height-10 {
         min-height: 2.5rem;
     }
 }

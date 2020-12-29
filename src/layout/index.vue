@@ -74,15 +74,17 @@ export default defineComponent ({
 </script>
 
 <style>
-.layout-sidebar-menubar .el-menu{
+.layout-sidebar-menubar .el-menu {
     border-right: 0;
 }
+
 .layout-sidebar-menubar .el-scrollbar,
-.layout-main-content .el-scrollbar{
+.layout-main-content .el-scrollbar {
     height: 100%;
 }
+
 .layout-sidebar-menubar .el-scrollbar .el-scrollbar__wrap,
-.layout-main-content .el-scrollbar .el-scrollbar__wrap{
+.layout-main-content .el-scrollbar .el-scrollbar__wrap {
     overflow-y: scroll;
     overflow-x: hidden;
 }

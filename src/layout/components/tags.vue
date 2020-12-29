@@ -147,7 +147,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-    .tags-bg{
+    .tags-bg {
         background-color: #409eff;
     }
 </style>

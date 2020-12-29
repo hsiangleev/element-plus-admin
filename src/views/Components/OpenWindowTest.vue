@@ -8,7 +8,7 @@
             :show='show'
             title='选择页'
         >
-            <p style='height: 1500px'>
+            <p style='height: 1500px;'>
                 aaa
             </p>
             <template #btn>
