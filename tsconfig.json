@@ -4,13 +4,14 @@
         "sourceMap": true,
         // "noImplicitAny": true,
         "module": "commonjs",
-        "target": "ESNext",
+        "target": "es6",
         "baseUrl": ".",
         "paths": {
             "/@/*": ["src/*"]
         }
     },
     "include": [
-        "./src/**/*"
+        "./src/**/*",
+        "./test/**/*"
     ]
 }

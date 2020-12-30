@@ -162,9 +162,9 @@ import { defineComponent, reactive, ref } from 'vue'
 import TableSearch from '/@/components/TableSearch.vue'
 import CardList from '/@/components/CardList.vue'
 import CardListItem from '/@/components/CardListItem.vue'
-import { validate } from '/@/components/CardList.vue'
 import { getTableList, ITag } from '/@/api/components/index'
 import { format, tableSummaries } from '/@/utils/tools'
+import { validate } from '/@/utils/formExtend'
 
 interface ISearchForm {
     date: string
@@ -184,8 +184,7 @@ const search = (table: ITable, form: ISearchForm) => {
     const rules = reactive({})
     const refForm = ref(null)
     const submit = async() => {
-        const data = await validate(refForm)
-        if(!data) return
+        if(!await validate(refForm)) return
         table.page = 1
         renderTableList(table, form)
     }

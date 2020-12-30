@@ -115,6 +115,12 @@
                             >
                                 提交
                             </el-button>
+                            <el-button
+                                icon='el-icon-edit'
+                                @click='resetFields(refForm)'
+                            >
+                                重置
+                            </el-button>
                         </el-button-group>
                     </template>
                     <template #KeyValue>
@@ -223,8 +229,8 @@
 import { defineComponent, reactive, ref } from 'vue'
 import CardList from '/@/components/CardList.vue'
 import CardListItem from '/@/components/CardListItem.vue'
-import { validate } from '/@/components/CardList.vue'
 import { format } from '/@/utils/tools'
+import { validate, resetFields } from '/@/utils/formExtend'
 
 // 键值对样式，及表单校验
 const keyValue = () => {
@@ -251,16 +257,15 @@ const keyValue = () => {
     })
     const refForm = ref(null)
     const submit = async() => {
-        const data = await validate(refForm)
-        if(data){
-            console.log(form)
-        }
+        if(!await validate(refForm)) return
+        console.log(form)
     }
     return {
         form,
         rules,
         submit,
-        refForm
+        refForm,
+        resetFields
     }
 }
 

@@ -1,4 +1,4 @@
-import {  } from 'vue'
+
 /**
  * 睡眠函数
  * @param time 

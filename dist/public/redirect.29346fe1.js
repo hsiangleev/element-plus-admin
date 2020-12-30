@@ -1,0 +1,1 @@
+import{d as e,u as a,k as t,z as r}from"./index.e88ef7e9.js";var s=e({name:"Redirect",setup(){const e=a(),r=t(),{pathMatch:s}=e.params;r.replace({path:"string"==typeof s?`/${s}`:`/${s.join("/")}`})},render:()=>r("div")});export default s;

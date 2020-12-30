@@ -60,12 +60,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext, ref, Ref } from 'vue'
-
-// 表单校验
-export async function validate(ref: Ref):Promise<boolean> {
-    return new Promise(resolve=>ref.value.ref.value.validate((valid:boolean)=>resolve(valid)))
-}
+import { defineComponent, SetupContext, ref } from 'vue'
 
 export default defineComponent({
     name: 'CardList',

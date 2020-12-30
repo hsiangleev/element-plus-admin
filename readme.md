@@ -28,3 +28,4 @@
 5. js类型: typescript
 6. 模拟数据: mockjs
 7. http请求: axios
+8. 单元测试: jest

@@ -33,7 +33,7 @@
                 >
                     登录
                 </el-button>
-                <el-button @click='reset'>
+                <el-button @click='resetFields(ruleForm)'>
                     重置
                 </el-button>
             </el-form-item>
@@ -46,6 +46,7 @@ import { defineComponent, reactive, ref } from 'vue'
 import { store } from '/@/store/index'
 import router from '/@/router/index'
 import { ElNotification } from 'element-plus'
+import { validate, resetFields } from '/@/utils/formExtend'
 
 const formRender = () => {
     let form = reactive({
@@ -58,12 +59,9 @@ const formRender = () => {
             onSubmit()
         }
     }
-    const validate = function():Promise<boolean>{
-        return new Promise(resolve=>ruleForm.value.validate((valid: boolean)=>resolve(valid)))
-    }
     const onSubmit = async() => {
         let { name, pwd } = form
-        if(!await validate()) return
+        if(!await validate(ruleForm)) return
         await store.dispatch('layout/login', { username: name, password: pwd })
         router.replace({ path: '/' })
         ElNotification({
@@ -72,7 +70,6 @@ const formRender = () => {
             type: 'success'
         })
     }
-    const reset = () => ruleForm.value.resetFields()
     const rules = reactive({
         name: [
             { validator: (rule, value, callback) => {
@@ -98,8 +95,8 @@ const formRender = () => {
         onSubmit,
         enterSubmit,
         rules,
-        ruleForm,
-        reset
+        resetFields,
+        ruleForm
     }
 }
 export default defineComponent({
