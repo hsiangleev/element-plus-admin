@@ -1,14 +1,12 @@
 # element-plus-admin
 
+[测试地址](https://element-plus-admin.hsianglee.cn)
 
 ## 简介
 
----
-
-基于vite开发的管理系统框架，使用的技术栈包括vite,vue3,element-plus,typescript,postcss
+**基于vite开发的管理系统框架，使用的技术栈包括vite,vue3,element-plus,typescript,postcss**
 
 ## 开发
----
 
 1. 启动本地测试`npm run dev`
 2. 发布`npm run build`
