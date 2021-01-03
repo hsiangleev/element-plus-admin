@@ -3,7 +3,7 @@ import { listToTree } from '/@/utils/listToTree'
 import { store } from '/@/store/index'
 const components = {
     Layout: () => import('/@/layout/index.vue'),
-    404: () => import('/@/views/404.vue'),
+    404: () => import('/@/views/ErrorPage/404.vue'),
     Workplace: () => import('/@/views/Dashboard/Workplace.vue'),
     ProjectList: () => import('/@/views/Project/ProjectList.vue'),
     ProjectDetail: () => import('/@/views/Project/ProjectDetail.vue'),
@@ -15,6 +15,7 @@ const components = {
     OpenWindowTest: () => import('/@/views/Components/OpenWindowTest.vue'),
     CardListTest: () => import('/@/views/Components/CardListTest.vue'),
     TableSearchTest: () => import('/@/views/Components/TableSearchTest.vue'),
+    Directive: () => import('/@/views/Permission/Directive.vue'),
 }
 
 const asyncRouter:Array<IMenubarList> = [
@@ -26,7 +27,9 @@ const asyncRouter:Array<IMenubarList> = [
             title: 'NotFound',
             icon: ''
         }, 
-        redirect: '/404',
+        redirect: {
+            name: '404'
+        },
         hidden: true
     }
 ]

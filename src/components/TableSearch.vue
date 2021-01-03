@@ -1,10 +1,11 @@
 <template>
     <div class='table-search flex flex-col'>
-        <transition name='el-zoom-in-top'>
-            <div v-show='isShow'>
-                <slot name='search' />
-            </div>
-        </transition>
+        <div
+            ref='searchEl'
+            class='table-search-form'
+        >
+            <slot name='search' />
+        </div>
         
         <div class='flex justify-between items-center mb-2'>
             <div>
@@ -25,7 +26,7 @@
             </div>
             <el-button
                 type='text'
-                @click='isShow=!isShow'
+                @click='toggleSearch'
             >
                 高级搜索<i :class='{"el-icon-arrow-down": !isShow, "el-icon-arrow-up": isShow}' />
             </el-button>
@@ -45,6 +46,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, SetupContext } from 'vue'
+import { slide } from '/@/utils/animate'
 export default defineComponent({
     name: 'TableSearch',
     props: {
@@ -66,12 +68,26 @@ export default defineComponent({
         const isShow = ref(false)
         const handleSizeChange = (v) => context.emit('size-change', v)
         const handleCurrentChange = (v) => context.emit('current-change', v)
+        const toggleSearch = () => {
+            isShow.value = !isShow.value
+            slide(searchEl, isShow.value)
+        }
+        const searchEl = ref(null)
         return {
             isShow,
             handleSizeChange,
-            handleCurrentChange
+            handleCurrentChange,
+            searchEl,
+            toggleSearch,
         }
     }
         
 })
 </script>
+
+<style lang="postcss" scoped>
+.table-search-form {
+    overflow: hidden;
+    height: 0;
+}
+</style>

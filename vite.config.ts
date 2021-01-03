@@ -1,14 +1,6 @@
 import path from 'path'
 import { UserConfig } from 'vite'
 
-// const env = loadEnv(
-//     'mock', // mode
-//     process.cwd(), // root
-//     '' // prefix (defaults to "VITE_")
-// )
-
-// console.log(env)
-
 const config:UserConfig = {
     // base: '/element-plus-admin',
     alias: {

@@ -1,4 +1,4 @@
-import { login, loginParam, getRouterList } from '/@/api/layout/index'
+import { login, loginParam, getRouterList, getUser } from '/@/api/layout/index'
 import { ILayout, IMenubarStatus, ITagsList, IMenubarList } from '/@/type/store/layout'
 import { IState } from '/@/type/store/index'
 import { ActionContext } from 'vuex'
@@ -14,7 +14,8 @@ const state:ILayout = {
     },
     // 用户信息
     userInfo: {
-        name: ''
+        name: '',
+        role: []
     },
     // 标签栏
     tags: {
@@ -107,12 +108,12 @@ const mutations = {
     login(state: ILayout, token = ''):void {
         state.ACCESS_TOKEN = token
         localStorage.setItem('ACCESS_TOKEN', token)
+        router.push({ path: '/' })
     },
     logout(state: ILayout):void {
         state.ACCESS_TOKEN = ''
         localStorage.removeItem('ACCESS_TOKEN')
-        router.push({ path: '/Login' })
-        // history.go(0)
+        history.go(0)
     },
     setRoutes(state: ILayout, data: Array<IMenubarList>):void {
         state.menubar.menuList = data
@@ -120,12 +121,21 @@ const mutations = {
     concatAllowRoutes(state: ILayout):void {
         allowRouter.reverse().forEach(v=>state.menubar.menuList.unshift(v))
     },
+    getUser(state: ILayout, userInfo:{name:string, role: Array<string>}):void {
+        state.userInfo.name = userInfo.name
+        state.userInfo.role = userInfo.role
+    },
 }
 const actions = {
     async login(context:ActionContext<ILayout,IState>, param: loginParam):Promise<void> {
         const res = await login(param)
         const token = res.data.Data
         context.commit('login', token)
+    },
+    async getUser(context:ActionContext<ILayout,IState>):Promise<void> {
+        const res = await getUser()
+        const userInfo = res.data.Data
+        context.commit('getUser', userInfo)
     },
     async GenerateRoutes():Promise<void> {
         const res = await getRouterList()

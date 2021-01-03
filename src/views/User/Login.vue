@@ -37,6 +37,17 @@
                     重置
                 </el-button>
             </el-form-item>
+            <el-form-item>
+                <p class='leading-5'>
+                    账号: admin 密码: admin
+                </p>
+                <p class='leading-5'>
+                    账号: dev 密码: dev
+                </p>
+                <p class='leading-5'>
+                    账号: test 密码: test
+                </p>
+            </el-form-item>
         </el-form>
     </div>
 </template>
@@ -63,7 +74,6 @@ const formRender = () => {
         let { name, pwd } = form
         if(!await validate(ruleForm)) return
         await store.dispatch('layout/login', { username: name, password: pwd })
-        router.replace({ path: '/' })
         ElNotification({
             title: '欢迎',
             message: '欢迎回来',

@@ -24,7 +24,7 @@
     <div class='flex items-center px-4'>
         <el-dropdown>
             <span class='el-dropdown-link'>
-                admin<i class='el-icon-arrow-down el-icon--right' />
+                {{ userInfo.name }}<i class='el-icon-arrow-down el-icon--right' />
             </span>
             <template #dropdown>
                 <el-dropdown-menu>
@@ -82,6 +82,7 @@ export default defineComponent ({
         const data = breadcrumb(route)
         return {
             menubar: store.state.layout.menubar,
+            userInfo: store.state.layout.userInfo,
             changeCollapsed,
             logout,
             data

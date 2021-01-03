@@ -13,7 +13,8 @@ export interface ILayout {
     }
     // 用户信息
     userInfo: {
-        name: string
+        name: string,
+        role: Array<string>
     }
     // 标签栏
     tags: {
@@ -23,14 +24,12 @@ export interface ILayout {
     ACCESS_TOKEN: string
     isLoading: boolean
 }
-export interface IMenubarList {
+interface IMenubar {
     parentId?: number | string
     id?: number | string
     name: string
     path: string
-    component: () => Promise<typeof import('*.vue')> | string
-    redirect?: string
-    children?: Array<IMenubarList>
+    redirect?: string | {name: string}
     meta: {
         icon: string
         title: string
@@ -41,6 +40,15 @@ export interface IMenubarList {
     }
     hidden?: boolean
 }
+export interface IMenubarList extends IMenubar {
+    component: (() => Promise<typeof import('*.vue')>)
+    children?: Array<IMenubarList>
+}
+export interface IMenubarRoute extends IMenubar {
+    component: string
+    children?: Array<IMenubarRoute>
+}
+
 export interface ITagsList {
     name: string
     title: string

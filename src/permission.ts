@@ -24,9 +24,11 @@ router.beforeEach(async(to, from)=>{
     if(!layout.ACCESS_TOKEN) {
         return loginRoutePath
     }
+    document.title = document.title ? document.title.split(' |')[0] + ' | ' + to.meta.title : to.meta.title
     // 判断是否还没添加过路由
     if(layout.menubar.menuList.length === 0){
         await store.dispatch('layout/GenerateRoutes')
+        await store.dispatch('layout/getUser')
         for(let i = 0;i < layout.menubar.menuList.length;i++){
             router.addRoute(layout.menubar.menuList[i])
         }

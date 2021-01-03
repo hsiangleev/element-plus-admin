@@ -1,17 +1,9 @@
 <template>
-    <div style='height: 1500px;'>
-        <p v-action:add>
-            add
+    <div>
+        <p style='height: 1500px;'>
+            高度超出，滚动条测试
         </p>
-        <p v-action:update>
-            update
-        </p>
-        <p v-action:delete>
-            delete
-        </p>
-        <el-input
-            v-model='input'
-        />
+        <span>aa</span>
     </div>
 </template>
 
