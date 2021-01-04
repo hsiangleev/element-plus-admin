@@ -36,7 +36,6 @@ interface IMenubar {
         permission?: Array<string>
         activeMenu?: string
         noCache?: boolean
-        affix?:boolean
     }
     hidden?: boolean
 }

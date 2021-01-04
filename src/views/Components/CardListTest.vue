@@ -58,54 +58,53 @@
             
             <el-col :span='24'>
                 <card-list
-                    type='KeyValue'
+                    type='keyvalue'
                     title='键值对'
                     :show-header='true'
                 >
-                    <template #KeyValue>
-                        <card-list-item width='100px'>
-                            <template #key>
-                                申请单号
-                            </template>
-                            <template #value>
-                                2020001686
-                            </template>
-                        </card-list-item>
-                        <card-list-item width='100px'>
-                            <template #key>
-                                项目编码
-                            </template>
-                            <template #value>
-                                DC2000000373
-                            </template>
-                        </card-list-item>
-                        <card-list-item width='100px'>
-                            <template #key>
-                                申报金额
-                            </template>
-                            <template #value>
-                                {{ format(0.01) }}
-                            </template>
-                        </card-list-item>
-                        <card-list-item width='100px'>
-                            <template #key>
-                                项目名称
-                            </template>
-                            <template #value>
-                                <span>2020年广西一流学科建设项目（化学）</span>
-                            </template>
-                        </card-list-item>
+                    <template #keyvalue>
+                        <el-row :gutter='15'>
+                            <card-list-item width='100px'>
+                                <template #key>
+                                    申请单号
+                                </template>
+                                <template #value>
+                                    2020001686
+                                </template>
+                            </card-list-item>
+                            <card-list-item width='100px'>
+                                <template #key>
+                                    项目编码
+                                </template>
+                                <template #value>
+                                    DC2000000373
+                                </template>
+                            </card-list-item>
+                            <card-list-item width='100px'>
+                                <template #key>
+                                    申报金额
+                                </template>
+                                <template #value>
+                                    {{ format(0.01) }}
+                                </template>
+                            </card-list-item>
+                            <card-list-item width='100px'>
+                                <template #key>
+                                    项目名称
+                                </template>
+                                <template #value>
+                                    <span>2020年广西一流学科建设项目（化学）</span>
+                                </template>
+                            </card-list-item>
+                        </el-row>
                     </template>
                 </card-list>
             </el-col>
             <el-col :span='24'>
                 <card-list
-                    ref='refForm'
                     title='表单'
-                    type='KeyValue'
+                    type='keyvalue'
                     :show-header='true'
-                    :form='form'
-                    :rules='rules'
                 >
                     <template #btn>
                         <el-button-group>
@@ -123,101 +122,112 @@
                             </el-button>
                         </el-button-group>
                     </template>
-                    <template #KeyValue>
-                        <card-list-item
-                            width='100px'
-                            :is-require='true'
-                            prop='name'
+
+                    <template #keyvalue>
+                        <el-form
+                            ref='refForm'
+                            class='card-list-form'
+                            :model='form'
+                            :rules='rules'
+                            size='mini'
                         >
-                            <template #key>
-                                姓名
-                            </template>
-                            <template #value>
-                                <el-input
-                                    v-model='form.name'
-                                    placeholder='请输入姓名'
-                                />
-                            </template>
-                        </card-list-item>
-                        <card-list-item
-                            width='100px'
-                            :is-require='true'
-                            prop='region'
-                        >
-                            <template #key>
-                                活动区域
-                            </template>
-                            <template #value>
-                                <el-select
-                                    v-model='form.region'
-                                    placeholder='请选择活动区域'
+                            <el-row :gutter='15'>
+                                <card-list-item
+                                    width='100px'
+                                    :is-require='true'
+                                    prop='name'
                                 >
-                                    <el-option
-                                        label='区域一'
-                                        value='shanghai'
-                                    />
-                                    <el-option
-                                        label='区域二'
-                                        value='beijing'
-                                    />
-                                </el-select>
-                            </template>
-                        </card-list-item>
-                        <card-list-item
-                            width='100px'
-                            prop='delivery'
-                        >
-                            <template #key>
-                                即时配送
-                            </template>
-                            <template #value>
-                                <el-switch v-model='form.delivery' />
-                            </template>
-                        </card-list-item>
-                        <card-list-item
-                            width='100px'
-                            :is-require='true'
-                            prop='type'
-                        >
-                            <template #key>
-                                活动性质
-                            </template>
-                            <template #value>
-                                <el-checkbox-group v-model='form.type'>
-                                    <el-checkbox
-                                        label='美食'
-                                        name='type'
-                                    />
-                                    <el-checkbox
-                                        label='地推'
-                                        name='type'
-                                    />
-                                    <el-checkbox
-                                        label='线下'
-                                        name='type'
-                                    />
-                                    <el-checkbox
-                                        label='品牌'
-                                        name='type'
-                                    />
-                                </el-checkbox-group>
-                            </template>
-                        </card-list-item>
-                        <card-list-item
-                            width='100px'
-                            :is-require='true'
-                            prop='resource'
-                        >
-                            <template #key>
-                                特殊资源
-                            </template>
-                            <template #value>
-                                <el-radio-group v-model='form.resource'>
-                                    <el-radio label='线上品牌商赞助' />
-                                    <el-radio label='线下场地免费' />
-                                </el-radio-group>
-                            </template>
-                        </card-list-item>
+                                    <template #key>
+                                        姓名
+                                    </template>
+                                    <template #value>
+                                        <el-input
+                                            v-model='form.name'
+                                            placeholder='请输入姓名'
+                                        />
+                                    </template>
+                                </card-list-item>
+                                <card-list-item
+                                    width='100px'
+                                    :is-require='true'
+                                    prop='region'
+                                >
+                                    <template #key>
+                                        活动区域
+                                    </template>
+                                    <template #value>
+                                        <el-select
+                                            v-model='form.region'
+                                            placeholder='请选择活动区域'
+                                        >
+                                            <el-option
+                                                label='区域一'
+                                                value='shanghai'
+                                            />
+                                            <el-option
+                                                label='区域二'
+                                                value='beijing'
+                                            />
+                                        </el-select>
+                                    </template>
+                                </card-list-item>
+                                <card-list-item
+                                    width='100px'
+                                    prop='delivery'
+                                >
+                                    <template #key>
+                                        即时配送
+                                    </template>
+                                    <template #value>
+                                        <el-switch v-model='form.delivery' />
+                                    </template>
+                                </card-list-item>
+                                <card-list-item
+                                    width='100px'
+                                    :is-require='true'
+                                    prop='type'
+                                >
+                                    <template #key>
+                                        活动性质
+                                    </template>
+                                    <template #value>
+                                        <el-checkbox-group v-model='form.type'>
+                                            <el-checkbox
+                                                label='美食'
+                                                name='type'
+                                            />
+                                            <el-checkbox
+                                                label='地推'
+                                                name='type'
+                                            />
+                                            <el-checkbox
+                                                label='线下'
+                                                name='type'
+                                            />
+                                            <el-checkbox
+                                                label='品牌'
+                                                name='type'
+                                            />
+                                        </el-checkbox-group>
+                                    </template>
+                                </card-list-item>
+                                <card-list-item
+                                    width='100px'
+                                    :is-require='true'
+                                    prop='resource'
+                                >
+                                    <template #key>
+                                        特殊资源
+                                    </template>
+                                    <template #value>
+                                        <el-radio-group v-model='form.resource'>
+                                            <el-radio label='线上品牌商赞助' />
+                                            <el-radio label='线下场地免费' />
+                                        </el-radio-group>
+                                    </template>
+                                </card-list-item>
+                            </el-row>
+                        </el-form>
                     </template>
                 </card-list>
             </el-col>

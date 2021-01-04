@@ -29,9 +29,19 @@ export function animate(param:IAnimate):void {
  * @param duration 持续时间
  */
 export async function slide(el:Ref<HTMLDivElement>, isShow:boolean, duration = 200):Promise<void> {
-    isShow && (el.value.style.height = 'auto')
+    const { position, zIndex } = getComputedStyle(el.value)
+    if(isShow){
+        el.value.style.position = 'absolute'
+        el.value.style.zIndex = '-100000'
+        el.value.style.height = 'auto'
+    }
     await nextTick()
     const height = el.value.offsetHeight
+    if(isShow){
+        el.value.style.position = position
+        el.value.style.zIndex = zIndex
+        el.value.style.height = '0px'
+    }
     animate({
         timing: timing.linear,
         draw: function(progress) {

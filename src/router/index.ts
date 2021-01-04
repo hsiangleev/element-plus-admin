@@ -10,7 +10,7 @@ const components = {
     Login: () => import('/@/views/User/Login.vue'),
 }
 
-// 免登录页面
+// 静态路由页面
 export const allowRouter:Array<IMenubarList> = [
     {
         name: 'Dashboard',

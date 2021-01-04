@@ -44,23 +44,16 @@
                     </div>
                 </li>
             </ul>
-            <el-form
-                :ref='ref'
-                class='card-list-form'
-                :model='form'
-                :rules='rules'
-                size='mini'
-            >
-                <el-row :gutter='15'>
-                    <slot name='KeyValue' />
-                </el-row>
-            </el-form>
+            <slot
+                v-if='type === "keyvalue"'
+                name='keyvalue'
+            />
         </el-card>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext, ref } from 'vue'
+import { defineComponent, SetupContext } from 'vue'
 
 export default defineComponent({
     name: 'CardList',
@@ -69,20 +62,8 @@ export default defineComponent({
             type: String,
             default: 'default',
             validator: function(value: string) {
-                return ['default', 'KeyValue'].indexOf(value) !== -1
+                return ['default', 'keyvalue'].indexOf(value) !== -1
             }
-        },
-        ref: {
-            type: Object,
-            default: ref(null)
-        },
-        form: {
-            type: Object,
-            default: ()=>{return {}}
-        },
-        rules: {
-            type: Object,
-            default: ()=>{return {}}
         },
         listItem: {
             type: Array,

@@ -1,0 +1,1 @@
+function e(e,n){return e[n]?e[n]:e.value[n]}async function n(n,t=!1){const r=e(n,"validate");return new Promise((e=>r(((n,r)=>e(t?{valid:n,object:r}:n)))))}function t(n){e(n,"resetFields")()}export{t as r,n as v};

@@ -1,12 +1,8 @@
 import router from '/@/router'
 import { store } from '/@/store/index'
-import NProgress from 'nprogress' // progress bar
-// import { notification } from 'ant-design-vue'
-// import { setDocumentTitle, domTitle } from '@/utils/domUtil'
-// import { ACCESS_TOKEN } from '@/store/mutation-types'
-// import { i18nRender } from '@/locales'
+import NProgress from 'nprogress'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+NProgress.configure({ showSpinner: false })
 
 const loginRoutePath = '/Login'
 const defaultRoutePath = '/'
@@ -35,8 +31,9 @@ router.beforeEach(async(to, from)=>{
         store.commit('layout/concatAllowRoutes')
         return to.fullPath
     }
-    store.commit('layout/changeTagNavList', to)         // 切换导航，记录打开的导航
+    store.commit('layout/changeTagNavList', to)         // 切换导航，记录打开的导航(标签页)
 
+    // 离开当前页面时是否需要添加当前页面缓存
     !new RegExp(/^\/redirect\//).test(from.path) 
         && store.state.layout.tags.tagsList.some(v=>v.name === from.name) 
         && !store.state.layout.tags.cachedViews.some(v=>v === from.name)
@@ -45,5 +42,5 @@ router.beforeEach(async(to, from)=>{
 })
 
 router.afterEach(() => {
-    NProgress.done() // finish progress bar
+    NProgress.done()
 })

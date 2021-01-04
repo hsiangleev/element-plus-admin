@@ -5,15 +5,9 @@ interface IFormFn {
 }
 
 function formFn(ref: Ref|any, attr: string): IFormFn {
-    return ref.value 
-        ? ref.value[attr]
-            ? ref.value[attr]
-            : ref.value.ref.value[attr]
-        : ref[attr]
-            ? ref[attr]
-            : ref.ref[attr]
-                ? ref.ref[attr]
-                : ref.ref.value[attr]
+    return ref[attr] 
+        ? ref[attr]
+        : ref.value[attr]
 }
 
 /**

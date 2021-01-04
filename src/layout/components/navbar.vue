@@ -21,15 +21,31 @@
             </el-breadcrumb>
         </div>
     </div>
-    <div class='flex items-center px-4'>
+    <div class='flex items-center flex-row-reverse px-4 min-width-32'>
         <el-dropdown>
             <span class='el-dropdown-link'>
                 {{ userInfo.name }}<i class='el-icon-arrow-down el-icon--right' />
             </span>
             <template #dropdown>
                 <el-dropdown-menu>
-                    <el-dropdown-item>个人中心</el-dropdown-item>
-                    <el-dropdown-item>项目地址</el-dropdown-item>
+                    <el-dropdown-item>
+                        <el-link
+                            href='https://github.com/hsiangleev'
+                            target='_blank'
+                            :underline='false'
+                        >
+                            个人中心
+                        </el-link>
+                    </el-dropdown-item>
+                    <el-dropdown-item>
+                        <el-link
+                            href='https://github.com/hsiangleev/element-plus-admin'
+                            target='_blank'
+                            :underline='false'
+                        >
+                            项目地址
+                        </el-link>
+                    </el-dropdown-item>
                     <el-dropdown-item
                         divided
                         @click='logout'

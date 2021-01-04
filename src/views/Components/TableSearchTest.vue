@@ -13,12 +13,9 @@
             >
                 <el-col :span='24'>
                     <card-list
-                        :ref='el=>{refForm=el}'
                         title='高级搜索'
-                        type='KeyValue'
+                        type='keyvalue'
                         :show-header='true'
-                        :form='form'
-                        :rules='rules'
                     >
                         <template #btn>
                             <el-button-group>
@@ -30,69 +27,79 @@
                                 </el-button>
                             </el-button-group>
                         </template>
-                        <template #KeyValue>
-                            <card-list-item
-                                width='100px'
-                                prop='name'
+                        <template #keyvalue>
+                            <el-form
+                                ref='refForm'
+                                class='card-list-form'
+                                :model='form'
+                                :rules='rules'
+                                size='mini'
                             >
-                                <template #key>
-                                    日期
-                                </template>
-                                <template #value>
-                                    <el-date-picker
-                                        v-model='form.date'
-                                        type='daterange'
-                                        range-separator='至'
-                                        start-placeholder='开始日期'
-                                        end-placeholder='结束日期'
-                                    />
-                                </template>
-                            </card-list-item>
-                            <card-list-item
-                                width='100px'
-                                prop='name'
-                            >
-                                <template #key>
-                                    姓名
-                                </template>
-                                <template #value>
-                                    <el-input
-                                        v-model='form.name'
-                                        placeholder='请输入姓名'
-                                    />
-                                </template>
-                            </card-list-item>
-                            <card-list-item
-                                width='100px'
-                                prop='address'
-                            >
-                                <template #key>
-                                    地址
-                                </template>
-                                <template #value>
-                                    <el-input
-                                        v-model='form.address'
-                                        placeholder='请输入地址'
-                                    />
-                                </template>
-                            </card-list-item>
-                            <card-list-item
-                                width='100px'
-                                prop='tag'
-                            >
-                                <template #key>
-                                    标签
-                                </template>
-                                <template #value>
-                                    <el-radio-group v-model='form.tag'>
-                                        <el-radio label='所有' />
-                                        <el-radio label='家' />
-                                        <el-radio label='学校' />
-                                        <el-radio label='超市' />
-                                        <el-radio label='公司' />
-                                    </el-radio-group>
-                                </template>
-                            </card-list-item>
+                                <el-row :gutter='15'>
+                                    <card-list-item
+                                        width='100px'
+                                        prop='name'
+                                    >
+                                        <template #key>
+                                            日期
+                                        </template>
+                                        <template #value>
+                                            <el-date-picker
+                                                v-model='form.date'
+                                                type='daterange'
+                                                range-separator='至'
+                                                start-placeholder='开始日期'
+                                                end-placeholder='结束日期'
+                                            />
+                                        </template>
+                                    </card-list-item>
+                                    <card-list-item
+                                        width='100px'
+                                        prop='name'
+                                    >
+                                        <template #key>
+                                            姓名
+                                        </template>
+                                        <template #value>
+                                            <el-input
+                                                v-model='form.name'
+                                                placeholder='请输入姓名'
+                                            />
+                                        </template>
+                                    </card-list-item>
+                                    <card-list-item
+                                        width='100px'
+                                        prop='address'
+                                    >
+                                        <template #key>
+                                            地址
+                                        </template>
+                                        <template #value>
+                                            <el-input
+                                                v-model='form.address'
+                                                placeholder='请输入地址'
+                                            />
+                                        </template>
+                                    </card-list-item>
+                                    <card-list-item
+                                        width='100px'
+                                        prop='tag'
+                                    >
+                                        <template #key>
+                                            标签
+                                        </template>
+                                        <template #value>
+                                            <el-radio-group v-model='form.tag'>
+                                                <el-radio label='所有' />
+                                                <el-radio label='家' />
+                                                <el-radio label='学校' />
+                                                <el-radio label='超市' />
+                                                <el-radio label='公司' />
+                                            </el-radio-group>
+                                        </template>
+                                    </card-list-item>
+                                </el-row>
+                            </el-form>
                         </template>
                     </card-list>
                 </el-col>

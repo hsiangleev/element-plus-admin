@@ -2,7 +2,7 @@
  * 函数节流
  * @param time 间隔时间
  */
-export default function (time = 500):()=>void {
+export default function (time = 500):()=>Promise<void> {
     let timer = null
     let firstTime = true
     return ()=>{

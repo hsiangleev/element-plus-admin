@@ -1,6 +1,15 @@
 <template>
     <div class='content'>
-        主页
+        <el-tag>
+            <el-link
+                type='primary'
+                href='https://github.com/hsiangleev/element-plus-admin'
+                target='_blank'
+                :underline='false'
+            >
+                github仓库地址
+            </el-link>
+        </el-tag>
     </div>
 </template>
 

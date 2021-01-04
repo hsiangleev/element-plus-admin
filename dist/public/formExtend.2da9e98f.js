@@ -1,1 +1,0 @@
-function e(e,a){return e.value?e.value[a]?e.value[a]:e.value.ref.value[a]:e[a]?e[a]:e.ref[a]?e.ref[a]:e.ref.value[a]}async function a(a,r=!1){const n=e(a,"validate");return new Promise((e=>n(((a,n)=>e(r?{valid:a,object:n}:a)))))}function r(a){e(a,"resetFields")()}export{r,a as v};

@@ -33,4 +33,8 @@ button:focus {
     .min-height-10 {
         min-height: 2.5rem;
     }
+
+    .min-width-32 {
+        min-width: 8rem;
+    }
 }

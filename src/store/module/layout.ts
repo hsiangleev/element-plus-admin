@@ -19,10 +19,8 @@ const state:ILayout = {
     },
     // 标签栏
     tags: {
-        tagsList: [
-            { name: 'Workplace',title: '主页', path: '/Dashboard/Workplace', isActive: true },
-        ],
-        cachedViews: ['Workplace']
+        tagsList: [],
+        cachedViews: []
     },
     ACCESS_TOKEN: localStorage.getItem('ACCESS_TOKEN') || '',
     isLoading: false
@@ -52,41 +50,41 @@ const mutations = {
         // 判断页面是否打开过
         if(index !== -1){
             state.tags.tagsList[index].isActive = true
-        }else{
-            const tagsList:ITagsList = {
-                name: cRouter.name,
-                title: cRouter.meta.title,
-                path: cRouter.path,
-                isActive: true
-            }
-            state.tags.tagsList.push(tagsList)
+            return
         }
+        const tagsList:ITagsList = {
+            name: cRouter.name,
+            title: cRouter.meta.title,
+            path: cRouter.path,
+            isActive: true
+        }
+        state.tags.tagsList.push(tagsList)
     },
     removeTagNav(state: ILayout, obj:{tagsList:ITagsList, cPath: string}):void {
         const index = state.tags.tagsList.findIndex(v=>v.path === obj.tagsList.path)
-        if(state.tags.tagsList[index].path === obj.cPath && state.tags.tagsList.length > 1){
-            state.tags.tagsList[index - 1].isActive = true
+        if(state.tags.tagsList[index].path === obj.cPath){
             state.tags.tagsList.splice(index, 1)
-            mutations.removeCachedViews(state, obj.tagsList.name)
-            router.push({ path: state.tags.tagsList[index - 1].path })
+            const i = index === state.tags.tagsList.length ? index - 1 : index
+            state.tags.tagsList[i].isActive = true
+            mutations.removeCachedViews(state, { name: obj.tagsList.name, index })
+            router.push({ path: state.tags.tagsList[i].path })
         }else{
             state.tags.tagsList.splice(index, 1)
-            mutations.removeCachedViews(state, obj.tagsList.name)
+            mutations.removeCachedViews(state, { name: obj.tagsList.name, index })
         }
     },
     removeOtherTagNav(state: ILayout, tagsList:ITagsList):void {
-        state.tags.tagsList.splice(1, state.tags.tagsList.length - 1)
-        state.tags.cachedViews.splice(1, state.tags.cachedViews.length - 1)
-        if(tagsList.name !== 'Workplace'){
-            state.tags.tagsList.push(tagsList)
-            state.tags.cachedViews.push(tagsList.name)
-        }
+        const index = state.tags.tagsList.findIndex(v=>v.path === tagsList.path)
+        state.tags.tagsList.splice(index + 1)
+        state.tags.tagsList.splice(0, index)
+        state.tags.cachedViews.splice(index + 1)
+        state.tags.cachedViews.splice(0, index)
         router.push({ path: tagsList.path })
     },
     removeAllTagNav(state: ILayout):void {
-        state.tags.tagsList.splice(1, state.tags.tagsList.length - 1)
-        state.tags.cachedViews.splice(1, state.tags.cachedViews.length - 1)
-        router.push({ path: state.tags.tagsList[0].path })
+        state.tags.tagsList.splice(0)
+        state.tags.cachedViews.splice(0)
+        router.push({ path: '/redirect/' })
     },
     // 添加缓存页面
     addCachedViews(state: ILayout, obj: {name: string, noCache: boolean}):void{
@@ -94,16 +92,10 @@ const mutations = {
         state.tags.cachedViews.push(obj.name)
     },
     // 删除缓存页面
-    removeCachedViews(state: ILayout, name: string):void{
+    removeCachedViews(state: ILayout, obj: { name: string, index: number }):void{
         // 判断标签页是否还有该页面
-        if(state.tags.tagsList.map(v=>v.name).includes(name)) return
-        const { cachedViews } = state.tags
-        for(let i = 0;i < cachedViews.length;i++){
-            if(name === cachedViews[i]){
-                cachedViews.splice(i, 1)
-                break
-            }
-        }
+        if(state.tags.tagsList.map(v=>v.name).includes(obj.name)) return
+        state.tags.cachedViews.splice(obj.index, 1)
     },
     login(state: ILayout, token = ''):void {
         state.ACCESS_TOKEN = token

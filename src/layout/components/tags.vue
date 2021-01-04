@@ -19,7 +19,7 @@
                     />
                     <router-link :to='v.path'>{{ v.title }}</router-link>
                     <i
-                        v-if='i!==0'
+                        v-if='tagsList.length>1'
                         class='el-icon-close text-xs hover:bg-gray-300 hover:text-white rounded-full p-0.5 ml-1 -mr-1'
                         @click='removeTagNav(v)'
                     />
@@ -97,7 +97,7 @@ const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNorm
 
 // 标签页滚动
 const tagScroll = (store:Store<IState>) => {
-    const { tagsList } = store.state.layout.tags
+    const { tagsList, cachedViews } = store.state.layout.tags
     const scrollbar = ref(null)
     const layoutTagsItem = ref([])
     // 监听标签页导航
@@ -118,7 +118,7 @@ const tagScroll = (store:Store<IState>) => {
     onBeforeUpdate(() => {
         layoutTagsItem.value = []
     })
-    return { tagsList, scrollbar, layoutTagsItem }
+    return { tagsList, scrollbar, layoutTagsItem, cachedViews }
 }
 export default defineComponent({
     name: 'LayoutTags',
