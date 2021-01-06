@@ -20,7 +20,7 @@
                     <router-link :to='v.path'>{{ v.title }}</router-link>
                     <i
                         v-if='tagsList.length>1'
-                        class='el-icon-close text-xs hover:bg-gray-300 hover:text-white rounded-full p-0.5 ml-1 -mr-1'
+                        class='el-icon-close text-xs hover:bg-gray-300 hover:text-white rounded-full leading-3 p-0.5 ml-1 -mr-1'
                         @click='removeTagNav(v)'
                     />
                 </span>

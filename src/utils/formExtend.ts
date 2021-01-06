@@ -1,14 +1,4 @@
-import { Ref } from 'vue'
-
-interface IFormFn {
-    (...any): void;
-}
-
-function formFn(ref: Ref|any, attr: string): IFormFn {
-    return ref[attr] 
-        ? ref[attr]
-        : ref.value[attr]
-}
+import { Ref, unref } from 'vue'
 
 /**
  * 表单校验
@@ -16,7 +6,7 @@ function formFn(ref: Ref|any, attr: string): IFormFn {
  * @param isGetError 是否获取错误项
  */
 export async function validate(ref: Ref|any, isGetError = false):Promise<boolean | {valid: boolean, object: any}> {
-    const validateFn = formFn(ref, 'validate')
+    const validateFn = unref(ref).validate
     return new Promise(resolve=>validateFn((valid:boolean, object)=>isGetError ? resolve({ valid, object }) : resolve(valid)))
 }
 
@@ -26,7 +16,7 @@ export async function validate(ref: Ref|any, isGetError = false):Promise<boolean
  * @param props 字段属性
  */
 export async function validateField(ref: Ref|any, props: Array<string> | string):Promise<string> {
-    const validateFieldFn = formFn(ref, 'validateField')
+    const validateFieldFn = unref(ref).validateField
     return new Promise(resolve=>validateFieldFn(props, (errorMessage: string)=>resolve(errorMessage)))
 }
 
@@ -35,7 +25,7 @@ export async function validateField(ref: Ref|any, props: Array<string> | string)
  * @param ref 节点
  */
 export function resetFields(ref: Ref|any):void {
-    const resetFieldsFn = formFn(ref, 'resetFields')
+    const resetFieldsFn = unref(ref).resetFields
     resetFieldsFn()
 }
 
@@ -45,6 +35,6 @@ export function resetFields(ref: Ref|any):void {
  * @param props 字段属性
  */
 export function clearValidate(ref: Ref|any, props?: Array<string> | string):void {
-    const clearValidateFn = formFn(ref, 'clearValidate')
+    const clearValidateFn = unref(ref).clearValidate
     props ? clearValidateFn(props) : clearValidateFn()
 }

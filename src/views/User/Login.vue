@@ -55,7 +55,6 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { store } from '/@/store/index'
-import router from '/@/router/index'
 import { ElNotification } from 'element-plus'
 import { validate, resetFields } from '/@/utils/formExtend'
 
