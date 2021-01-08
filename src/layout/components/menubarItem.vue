@@ -32,6 +32,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
+import { IMenubarList } from '/@/type/store/layout'
 export default defineComponent({
     name: 'MenubarItem',
     props: {
@@ -41,7 +42,7 @@ export default defineComponent({
         }
     },
     setup(context) {
-        const cMenuList = computed(()=>context.menuList.children.filter(v=>!v.hidden))
+        const cMenuList = computed(()=>context.menuList.children.filter((v:IMenubarList)=>!v.hidden))
         return {
             haChild: context.menuList.children && context.menuList.children.length > 0,
             cMenuList

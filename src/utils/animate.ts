@@ -28,7 +28,8 @@ export function animate(param:IAnimate):void {
  * @param isShow 是否显示
  * @param duration 持续时间
  */
-export async function slide(el:Ref<HTMLDivElement>, isShow:boolean, duration = 200):Promise<void> {
+export async function slide(el:Ref<HTMLDivElement | null>, isShow:boolean, duration = 200):Promise<void> {
+    if(!el.value) return
     const { position, zIndex } = getComputedStyle(el.value)
     if(isShow){
         el.value.style.position = 'absolute'
@@ -45,7 +46,7 @@ export async function slide(el:Ref<HTMLDivElement>, isShow:boolean, duration = 2
     animate({
         timing: timing.linear,
         draw: function(progress) {
-            el.value.style.height = isShow ? (progress * height + 'px') : ((1 - progress) * height + 'px')
+            el.value && (el.value.style.height = isShow ? (progress * height + 'px') : ((1 - progress) * height + 'px'))
         },
         duration: duration
     })

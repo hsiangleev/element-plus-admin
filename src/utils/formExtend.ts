@@ -7,7 +7,7 @@ import { Ref, unref } from 'vue'
  */
 export async function validate(ref: Ref|any, isGetError = false):Promise<boolean | {valid: boolean, object: any}> {
     const validateFn = unref(ref).validate
-    return new Promise(resolve=>validateFn((valid:boolean, object)=>isGetError ? resolve({ valid, object }) : resolve(valid)))
+    return new Promise(resolve=>validateFn((valid:boolean, object: any)=>isGetError ? resolve({ valid, object }) : resolve(valid)))
 }
 
 /**

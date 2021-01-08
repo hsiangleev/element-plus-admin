@@ -30,17 +30,17 @@ export function unformat (str:string):number|string{
  * 表格合计行
  * @param str 金额
  */
-export function tableSummaries (param: { columns: any; data: any }):Array<string>{
+export function tableSummaries (param: { columns: any; data: any }):Array<string | number>{
     const { columns, data } = param
-    const sums = []
-    columns.forEach((column, index) => {
+    const sums:Array<string | number> = []
+    columns.forEach((column: { property: string | number }, index:number) => {
         if (index === 0) {
             sums[index] = '合计'
             return
         }
-        const values = data.map(item => Number(item[column.property]))
-        if (!values.every(value => isNaN(value))) {
-            sums[index] = values.reduce((prev, curr) => {
+        const values = data.map((item: { [x: string]: any }) => Number(item[column.property]))
+        if (!values.every((value: number) => isNaN(value))) {
+            sums[index] = values.reduce((prev: number, curr: number) => {
                 const value = Number(curr)
                 if (!isNaN(value)) {
                     return prev + curr
@@ -48,7 +48,10 @@ export function tableSummaries (param: { columns: any; data: any }):Array<string
                     return prev
                 }
             }, 0)
-            sums[index] = format(sums[index].toFixed(2))
+            const sum = sums[index]
+            if(typeof sum === 'number'){
+                sums[index] = format(sum.toFixed(2))
+            }
         } else {
             sums[index] = 'N/A'
         }

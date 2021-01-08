@@ -109,7 +109,7 @@
             ref='filterTable'
             row-key='date'
             border
-            :data='table.data'
+            :data='tableData.data'
             style='width: 100%;'
             :summary-method='getSummaries'
             show-summary
@@ -209,9 +209,9 @@ const renderTableList = async(table: ITable, form: ISearchForm) => {
 }
 const tableRender = (table: ITable, form: ISearchForm) => {
     renderTableList(table, form)
-    const handleSizeChange = (v) => (table.size = v) && renderTableList(table, form)
-    const handleCurrentChange = (v) => (table.page = v) && renderTableList(table, form)
-    const indexMethod = (index) => (table.page - 1) * table.size + index + 1
+    const handleSizeChange = (v: number) => (table.size = v) && renderTableList(table, form)
+    const handleCurrentChange = (v: number) => (table.page = v) && renderTableList(table, form)
+    const indexMethod = (index: number) => (table.page - 1) * table.size + index + 1
     const getSummaries = tableSummaries
     return { table, handleSizeChange, handleCurrentChange, indexMethod, getSummaries }
 }
@@ -232,7 +232,7 @@ export default defineComponent({
         })
 
         // const 
-        const table: ITable = reactive({
+        const tableData: ITable = reactive({
             data : [],
             total: 0,
             page: 1,
@@ -240,10 +240,10 @@ export default defineComponent({
         })
         return {
             form,
-            table,
+            tableData,
             format,
-            ...tableRender(table, form),
-            ...search(table, form)
+            ...tableRender(tableData, form),
+            ...search(tableData, form)
         }
     },
 })

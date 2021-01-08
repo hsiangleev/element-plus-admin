@@ -66,8 +66,8 @@ export default defineComponent({
     emits: ['size-change', 'current-change'],
     setup(props, context: SetupContext) {
         const isShow = ref(false)
-        const handleSizeChange = (v) => context.emit('size-change', v)
-        const handleCurrentChange = (v) => context.emit('current-change', v)
+        const handleSizeChange = (v:any) => context.emit('size-change', v)
+        const handleCurrentChange = (v: any) => context.emit('current-change', v)
         const toggleSearch = () => {
             isShow.value = !isShow.value
             slide(searchEl, isShow.value)

@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref, watch, onBeforeUpdate, onMounted, reactive } from 'vue'
+import { defineComponent, nextTick, ref, watch, onBeforeUpdate, onMounted, reactive, Ref } from 'vue'
 import { useStore } from '/@/store/index'
 import { Store } from 'vuex'
 import { IState } from '/@/type/store/index'
@@ -68,14 +68,15 @@ const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNorm
         top: '0px',
         display: 'none'
     })
-    const rightMenuEl = ref(null)
+    const rightMenuEl:Ref<HTMLElement | null> = ref(null)
     // 当前右键的那个标签
-    let currentRightTags:ITagsList = null
-    const contextRightMenu = (v, event) => {
+    let currentRightTags:ITagsList
+    const contextRightMenu = (v:ITagsList, event:MouseEvent) => {
         currentRightTags = v
         menuPos.display = 'block'
         nextTick(()=>{
             let left = event.clientX - 5
+            if(!rightMenuEl.value) return
             if(event.clientX + rightMenuEl.value.offsetWidth > document.body.offsetWidth){
                 left = event.clientX - rightMenuEl.value.offsetWidth
             }
@@ -98,17 +99,19 @@ const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNorm
 // 标签页滚动
 const tagScroll = (store:Store<IState>) => {
     const { tagsList, cachedViews } = store.state.layout.tags
-    const scrollbar = ref(null)
-    const layoutTagsItem = ref([])
+    const scrollbar:Ref<{wrap:HTMLElement, update():void} | null> = ref(null)
+    const layoutTagsItem:Ref<Array<HTMLElement>> = ref([])
     // 监听标签页导航
     watch(
         () => tagsList.length,
         () => nextTick(()=>{
+            if(!scrollbar.value) return
             scrollbar.value.update()
             nextTick(()=>{
                 const itemWidth = layoutTagsItem.value.filter(v=>v).reduce((acc, v)=>{
                     return acc + v.offsetWidth + 6
                 }, 0)
+                if(!scrollbar.value) return
                 const scrollLeft = itemWidth - scrollbar.value.wrap.offsetWidth + 70
                 if(scrollLeft > 0) scrollbar.value.wrap.scrollLeft = scrollLeft
             })
@@ -126,7 +129,7 @@ export default defineComponent({
         const store = useStore()
         const route = useRoute()
         const router = useRouter()
-        const removeTagNav = (v) => store.commit('layout/removeTagNav', { cPath: route.path, tagsList: v })
+        const removeTagNav = (v: any) => store.commit('layout/removeTagNav', { cPath: route.path, tagsList: v })
         const closeAll = () => store.commit('layout/removeAllTagNav')
         
         onMounted(()=>{

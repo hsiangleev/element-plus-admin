@@ -1,18 +1,18 @@
 import router from '/@/router'
 import { store } from '/@/store/index'
-import NProgress from 'nprogress'
+import { configure, start, done } from 'nprogress'
 
-NProgress.configure({ showSpinner: false })
+configure({ showSpinner: false })
 
 const loginRoutePath = '/Login'
 const defaultRoutePath = '/'
 
 router.beforeEach(async(to, from)=>{
-    NProgress.start()
+    start()
     const { layout } = store.state
     // 判断当前是否在登陆页面
     if (to.path.toLocaleLowerCase() === loginRoutePath.toLocaleLowerCase()) {
-        NProgress.done()
+        done()
         if(layout.ACCESS_TOKEN) return defaultRoutePath
         return
     }
@@ -42,5 +42,5 @@ router.beforeEach(async(to, from)=>{
 })
 
 router.afterEach(() => {
-    NProgress.done()
+    done()
 })

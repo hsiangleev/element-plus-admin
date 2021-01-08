@@ -64,7 +64,7 @@ const formRender = () => {
         pwd: 'admin',
     })
     const ruleForm = ref(null)
-    const enterSubmit = e => {
+    const enterSubmit = (e:KeyboardEvent) => {
         if(e.keyCode === 13){
             onSubmit()
         }
@@ -81,7 +81,7 @@ const formRender = () => {
     }
     const rules = reactive({
         name: [
-            { validator: (rule, value, callback) => {
+            { validator: (rule: any, value: any, callback: (arg0?: Error|undefined) => void) => {
                 if (!value) {
                     return callback(new Error('用户名不能为空'))
                 }
@@ -90,7 +90,7 @@ const formRender = () => {
             }
         ],
         pwd: [
-            { validator: (rule, value, callback) => {
+            { validator: (rule: any, value: any, callback: (arg0?: Error|undefined) => void) => {
                 if (!value) {
                     return callback(new Error('密码不能为空'))
                 }

@@ -1,22 +1,28 @@
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import { UserConfig } from 'vite'
 
-const config:UserConfig = {
-    // base: '/element-plus-admin',
-    alias: {
-        '/@/': path.resolve(__dirname, 'src')
+export default defineConfig({
+    alias: [
+        { find: '/@', replacement: path.resolve(__dirname, 'src') }
+    ],
+    assetsInclude: 'public',
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3001/',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, '')
+            }
+        },
+        port: 3002,
     },
-    assetsDir: 'public',
-    proxy: {
-        '/api': {
-            target: 'http://localhost:3001/',
-            changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, '')
-        }
+    build: {
+        sourcemap: true,
+        // cssCodeSplit: true
     },
-    port: 3002,
     optimizeDeps: {
-        include: ['axios', 'NProgress', 'mockjs']
-    }
-}
-export default config
+        include: ['axios', 'nprogress', 'mockjs']
+    },
+    plugins: [vue()]
+})

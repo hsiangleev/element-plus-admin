@@ -3,7 +3,7 @@ import { listToTree } from '/@/utils/listToTree'
 import { store } from '/@/store/index'
 const components = {
     Layout: () => import('/@/layout/index.vue'),
-    404: () => import('/@/views/ErrorPage/404.vue'),
+    NotFound: () => import('/@/views/ErrorPage/404.vue'),
     Workplace: () => import('/@/views/Dashboard/Workplace.vue'),
     ProjectList: () => import('/@/views/Project/ProjectList.vue'),
     ProjectDetail: () => import('/@/views/Project/ProjectDetail.vue'),
@@ -22,7 +22,7 @@ const asyncRouter:Array<IMenubarList> = [
     {
         path: '/:pathMatch(.*)*', 
         name: 'NotFound', 
-        component: components['404'],
+        component: components['NotFound'],
         meta: {
             title: 'NotFound',
             icon: ''
@@ -40,7 +40,7 @@ export const generatorDynamicRouter = (data:Array<IMenubarList>):void => {
     const f = (data:Array<IMenubarList>, pData:IMenubarList|null) => {
         for(let i = 0,len = data.length;i < len;i++){
             const v:IMenubarList = data[i]
-            v.component = components[typeof v.component === 'string' && v.component]
+            if(typeof v.component === 'string') v.component = components[v.component]
             // v.component = components[v.component] || (() => import(`../view${path}.vue`))
             // v.component = () => import(`../view${data[i].path}.vue`)
             if(!v.meta.permission || pData && v.meta.permission.length === 0){

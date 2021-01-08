@@ -292,8 +292,8 @@ export default defineComponent({
             { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21' },
             { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21' },
         ])
-        const remove = (v) => console.log(v)
-        const edit = (v) => console.log(v)
+        const remove = (v:MouseEvent) => console.log(v)
+        const edit = (v:MouseEvent) => console.log(v)
 
         return {
             show,

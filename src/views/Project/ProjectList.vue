@@ -70,7 +70,7 @@ export default defineComponent({
                 projName: '005'
             }]
         })
-        const handleClick = (row) => {
+        const handleClick = (row: any) => {
             console.log(row)
         }
         return {

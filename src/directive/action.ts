@@ -22,14 +22,18 @@ export default (app:App<Element>):void => {
             if(arg === 'money'){
                 const elem = el.firstElementChild
                 nextTick(()=>elem.value = format(elem.value))
-                elem.addEventListener('focus', (event)=>{
-                    event.target.value = unformat(event.target.value)
-                    value[0][value[1]] = event.target.value
+                elem.addEventListener('focus', (event:MouseEvent)=>{
+                    if(!event.target) return
+                    const target = event.target as HTMLInputElement
+                    target.value = unformat(target.value) + ''
+                    value[0][value[1]] = target.value
                 }, true)
-                elem.addEventListener('blur', (event)=>{
-                    const val = unformat(format(event.target.value))
+                elem.addEventListener('blur', (event: MouseEvent)=>{
+                    if(!event.target) return
+                    const target = event.target as HTMLInputElement
+                    const val = unformat(format(target.value))
                     value[0][value[1]] = val === '' ? 0 : val
-                    nextTick(()=>event.target.value = format(val))
+                    nextTick(()=>target.value = format(val))
                 }, true)
             }
         }

@@ -46,7 +46,7 @@ export default defineComponent ({
             if(route.meta.activeMenu) return route.meta.activeMenu
             return route.path
         })
-        const onOpenChange = d => router.push({ path: d })
+        const onOpenChange = (d: any) => router.push({ path: d })
         return {
             menubar,
             menuList,

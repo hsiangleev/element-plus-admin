@@ -2,7 +2,7 @@ import { store } from '/@/store/index'
 import axios from 'axios'
 import { ElLoading, ElNotification } from 'element-plus'
 
-let loading = null
+let loading:{close():void}
 // 创建 axios 实例
 const request = axios.create({
     // API 请求的默认前缀
@@ -11,7 +11,7 @@ const request = axios.create({
 })
 
 // 异常拦截处理器
-const errorHandler = (error) => {
+const errorHandler = (error:{message:string}) => {
     loading.close()
     console.log('err' + error)
     ElNotification({
