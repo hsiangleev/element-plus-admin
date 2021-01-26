@@ -6,7 +6,7 @@ export default defineConfig({
     alias: [
         { find: '/@', replacement: path.resolve(__dirname, 'src') }
     ],
-    assetsInclude: 'public',
+    // assetsInclude: 'public',
     server: {
         proxy: {
             '/api': {

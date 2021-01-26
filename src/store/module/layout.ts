@@ -5,6 +5,7 @@ import { ActionContext } from 'vuex'
 import router from '/@/router/index'
 import { allowRouter } from '/@/router/index'
 import { generatorDynamicRouter } from '/@/router/asyncRouter'
+import changeTheme from '../../utils/changeTheme'
 
 const state:ILayout = {
     menubar: {
@@ -23,6 +24,7 @@ const state:ILayout = {
         cachedViews: []
     },
     ACCESS_TOKEN: localStorage.getItem('ACCESS_TOKEN') || '',
+    theme: localStorage.getItem('theme') ? Number(localStorage.getItem('theme')) : 0,
     isLoading: false
 }
 const mutations = {
@@ -117,6 +119,14 @@ const mutations = {
         state.userInfo.name = userInfo.name
         state.userInfo.role = userInfo.role
     },
+    // 修改主题
+    changeTheme(state: ILayout, num?:number):void {
+        if(num === state.theme) return
+        if(typeof num !== 'number') num = state.theme
+        changeTheme(num)
+        state.theme = num
+        localStorage.setItem('theme', String(num))
+    }
 }
 const actions = {
     async login(context:ActionContext<ILayout,IState>, param: loginParam):Promise<void> {

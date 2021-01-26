@@ -11,12 +11,15 @@
         },
         "lib": ["esnext", "dom"],
         "types": ["vite/client"],
+        "esModuleInterop": true,
         "plugins": [
-            // { "name": "@vuedx/typescript-plugin-vue" }
+            { "name": "@vuedx/typescript-plugin-vue" }
         ]
     },
     "include": [
-        "src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue",
-        "test/**/*.ts", "test/**/*.d.ts", "test/**/*.vue"
+        "**/*.ts", "**/*.d.ts", "**/*.vue"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }

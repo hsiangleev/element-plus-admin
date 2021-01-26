@@ -17,14 +17,6 @@ button:focus {
         transition-property: width;
     }
 
-    .bg-menubar {
-        background-color: #001529;
-    }
-
-    .bg-logo {
-        background-color: #001529;
-    }
-
     .flex-center {
         justify-content: center;
         align-items: center;

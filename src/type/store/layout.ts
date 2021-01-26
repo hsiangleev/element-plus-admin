@@ -22,6 +22,7 @@ export interface ILayout {
         cachedViews: Array<string>
     }
     ACCESS_TOKEN: string
+    theme: number
     isLoading: boolean
 }
 interface IMenubar {

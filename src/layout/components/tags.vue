@@ -10,7 +10,7 @@
                     :key='v.path'
                     :ref='el => { layoutTagsItem[i] = el }'
                     class='border border-gray-200 px-2 py-1 mx-1 cursor-pointer'
-                    :class='{"tags-bg": v.isActive, "text-white": v.isActive}'
+                    :class='{"layout-tags-active": v.isActive}'
                     @contextmenu.prevent='contextRightMenu(v,$event)'
                 >
                     <i
@@ -148,9 +148,3 @@ export default defineComponent({
     }
 })
 </script>
-
-<style scoped>
-    .tags-bg {
-        background-color: #409eff;
-    }
-</style>

@@ -6,15 +6,15 @@
             @click='changeCollapsed'
         />
         <div
-            class='layout-sidebar flex flex-col bg-menubar h-screen transition-width duration-200 z-30'
+            class='layout-sidebar flex flex-col h-screen transition-width duration-200 shadow'
             :class='{ 
                 "w-64": menubar.status === 0 || menubar.status === 2, 
                 "w-0": menubar.status === 3, 
                 "w-16": menubar.status === 1, 
-                "absolute": menubar.status === 2, 
+                "absolute z-30": menubar.status === 2, 
             }'
         >
-            <div class='layout-sidebar-logo flex h-12 bg-logo text-white relative z-10 flex-center'>
+            <div class='layout-sidebar-logo flex h-12 relative flex-center'>
                 {{ menubar.status === 0 || menubar.status === 2 ? 'hsianglee' : (menubar.status === 1 ? 'lee' : '') }}
             </div>
             <div class='layout-sidebar-menubar flex flex-1 overflow-hidden'>
@@ -25,12 +25,15 @@
             <div class='layout-main-navbar flex justify-between items-center h-12 shadow-sm border-b border-gray-100'>
                 <layout-navbar />
             </div>
-            <div class='layout-main-tags h-10 leading-10 overflow-hidden shadow text-sm text-gray-600 px-3 position z-10'>
+            <div class='layout-main-tags h-10 leading-10 overflow-hidden shadow text-sm text-gray-600 px-3 position'>
                 <layout-tags />
             </div>
             <div class='layout-main-content flex-1 overflow-hidden'>
                 <layout-content />
             </div>
+        </div>
+        <div class='layout-sidebar-theme fixed right-0 top-64 z-10'>
+            <layout-Theme />
         </div>
     </div>
 </template>
@@ -41,6 +44,7 @@ import LayoutContent from '/@/layout/components/content.vue'
 import LayoutMenubar from '/@/layout/components/menubar.vue'
 import LayoutNavbar from '/@/layout/components/navbar.vue'
 import LayoutTags from '/@/layout/components/tags.vue'
+import LayoutTheme from '/@/layout/components/theme.vue'
 import { useStore } from '/@/store/index'
 import throttle from '/@/utils/throttle'
 
@@ -50,12 +54,16 @@ export default defineComponent ({
         LayoutContent,
         LayoutMenubar,
         LayoutNavbar,
-        LayoutTags
+        LayoutTags,
+        LayoutTheme
     },
     setup() {
         const store = useStore()
         const changeDeviceWidth = ()=>store.commit('layout/changeDeviceWidth')
         const changeCollapsed = ()=>store.commit('layout/changeCollapsed')
+
+        store.commit('layout/changeTheme')
+
         onMounted(()=>{
             changeDeviceWidth()
             const throttleFn = throttle(300)
@@ -72,9 +80,3 @@ export default defineComponent ({
     }
 })
 </script>
-
-<style>
-.layout-sidebar-menubar .el-menu {
-    border-right: 0;
-}
-</style>

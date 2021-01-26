@@ -5,5 +5,6 @@ module.exports = {
         require('tailwindcss'),
         require('postcss-nested'),
         require('postcss-simple-vars'),
+        require('postcss-import'),
     ]
 }
