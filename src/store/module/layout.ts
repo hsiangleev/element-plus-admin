@@ -102,7 +102,8 @@ const mutations = {
     login(state: ILayout, token = ''):void {
         state.ACCESS_TOKEN = token
         localStorage.setItem('ACCESS_TOKEN', token)
-        router.push({ path: '/' })
+        const { query } = router.currentRoute.value
+        router.push(typeof query.from === 'string' ? decodeURIComponent(decodeURIComponent(query.from)) : '/')
     },
     logout(state: ILayout):void {
         state.ACCESS_TOKEN = ''
