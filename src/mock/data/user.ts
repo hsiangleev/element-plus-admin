@@ -39,6 +39,7 @@ export const role_route = [
     { roleName: 'admin', id: 40, permission: [] },
     { roleName: 'admin', id: 41, permission: [] },
     { roleName: 'admin', id: 42, permission: [] },
+    { roleName: 'admin', id: 43, permission: [] },
     { roleName: 'admin', id: 5, permission: [] },
     { roleName: 'admin', id: 50, permission: ['add', 'update', 'remove'] },
 
@@ -163,6 +164,14 @@ export const route:Array<IMenubarRoute> = [
         path: '/Components/TableSearchTest',
         component: 'TableSearchTest',
         meta: { title: '表格搜索', icon: 'el-icon-question' },
+    },
+    {
+        id: 43,
+        parentId: 4,
+        name: 'ListTest',
+        path: '/Components/ListTest',
+        component: 'ListTest',
+        meta: { title: '标签页列表', icon: 'el-icon-question' },
     },
     {
         id: 5,

@@ -5,7 +5,7 @@ import { ActionContext } from 'vuex'
 import router from '/@/router/index'
 import { allowRouter } from '/@/router/index'
 import { generatorDynamicRouter } from '/@/router/asyncRouter'
-import changeTheme from '../../utils/changeTheme'
+import changeTheme from '/@/utils/changeTheme'
 
 const state:ILayout = {
     menubar: {

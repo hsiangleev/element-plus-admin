@@ -22,9 +22,15 @@
         </div>
     </div>
     <div class='flex items-center flex-row-reverse px-4 min-width-32'>
+        <!-- 用户下拉 -->
         <el-dropdown>
-            <span class='el-dropdown-link'>
-                {{ userInfo.name }}<i class='el-icon-arrow-down el-icon--right' />
+            <span class='el-dropdown-link flex flex-center mx-2'>
+                <el-avatar
+                    :size='30'
+                    src='https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+                />
+                <span class='ml-2'>{{ userInfo.name }}</span>
+                <i class='el-icon-arrow-down el-icon--right' />
             </span>
             <template #dropdown>
                 <el-dropdown-menu>
@@ -55,6 +61,8 @@
                 </el-dropdown-menu>
             </template>
         </el-dropdown>
+        
+        <Notice />
     </div>
 </template>
 
@@ -62,6 +70,7 @@
 import { defineComponent, reactive, watch } from 'vue'
 import { useStore } from '/@/store/index'
 import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router'
+import Notice from '/@/layout/components/notice.vue'
 
 interface IBreadcrumbList {
     path: string
@@ -85,23 +94,25 @@ const breadcrumb = (route: RouteLocationNormalizedLoaded) => {
         breadcrumbList: fn()
     })
     watch(()=>route.path, ()=>data.breadcrumbList = fn())
-    return data
+    return { data }
 }
 
 export default defineComponent ({
     name: 'LayoutNavbar',
+    components: {
+        Notice
+    },
     setup() {
         const store = useStore()
         const route = useRoute()
         const changeCollapsed = ()=>store.commit('layout/changeCollapsed')
         const logout = ()=>store.commit('layout/logout')
-        const data = breadcrumb(route)
         return {
             menubar: store.state.layout.menubar,
             userInfo: store.state.layout.userInfo,
             changeCollapsed,
             logout,
-            data
+            ...breadcrumb(route),
         }
     }
 })

@@ -15,6 +15,7 @@ const components = {
     OpenWindowTest: () => import('/@/views/Components/OpenWindowTest.vue'),
     CardListTest: () => import('/@/views/Components/CardListTest.vue'),
     TableSearchTest: () => import('/@/views/Components/TableSearchTest.vue'),
+    ListTest: () => import('/@/views/Components/ListTest.vue'),
     Directive: () => import('/@/views/Permission/Directive.vue'),
 }
 
