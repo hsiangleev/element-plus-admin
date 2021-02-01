@@ -24,5 +24,16 @@ export default defineConfig({
     optimizeDeps: {
         include: ['axios', 'nprogress', 'mockjs']
     },
-    plugins: [vue()]
+    plugins: [vue()],
+    css: {
+        postcss: {
+            plugins: [
+                require('autoprefixer'),
+                require('tailwindcss'),
+                require('postcss-nested'),
+                require('postcss-simple-vars'),
+                require('postcss-import'),
+            ]
+        }
+    }
 })

@@ -3,7 +3,7 @@
         <el-badge
             :value='6'
             type='danger'
-            class='el-dropdown-link item mx-2 cursor-pointer'
+            class='el-dropdown-link item mx-2 cursor-pointer leading-none'
         >
             <i class='el-icon-bell text-xl' />
         </el-badge>
