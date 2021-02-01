@@ -13,11 +13,11 @@ router.beforeEach(async(to, from)=>{
     // 判断当前是否在登陆页面
     if (to.path.toLocaleLowerCase() === loginRoutePath.toLocaleLowerCase()) {
         done()
-        if(layout.ACCESS_TOKEN) return typeof to.query.from === 'string' ? decodeURIComponent(decodeURIComponent(to.query.from)) : defaultRoutePath
+        if(layout.token.ACCESS_TOKEN) return typeof to.query.from === 'string' ? decodeURIComponent(decodeURIComponent(to.query.from)) : defaultRoutePath
         return
     }
     // // 判断是否登录
-    if(!layout.ACCESS_TOKEN) {
+    if(!layout.token.ACCESS_TOKEN) {
         return loginRoutePath + (to.fullPath ? '?from=' + encodeURIComponent(encodeURIComponent(to.fullPath)) : '')
     }
     document.title = document.title ? document.title.split(' |')[0] + ' | ' + to.meta.title : to.meta.title

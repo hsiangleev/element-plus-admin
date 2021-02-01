@@ -1,15 +1,20 @@
 import { login, loginParam, getRouterList, getUser } from '/@/api/layout/index'
-import { ILayout, IMenubarStatus, ITagsList, IMenubarList, ISetting } from '/@/type/store/layout'
-import { IState } from '/@/type/store/index'
+import { ILayout, IMenubarStatus, ITagsList, IMenubarList, ISetting, IToken } from '/@/type/store/layout'
 import { ActionContext } from 'vuex'
 import router from '/@/router/index'
 import { allowRouter } from '/@/router/index'
 import { generatorDynamicRouter } from '/@/router/asyncRouter'
 import changeTheme from '/@/utils/changeTheme'
+import { setLocal, useLocal, getLocal } from '/@/utils/tools'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
+import { IState } from '/@/global'
 
-const storeSetting = localStorage.getItem('setting')
-const setting = JSON.parse(storeSetting !== null ? storeSetting : '{}') as unknown as  ISetting
+const setting = getLocal<ISetting>('setting')
+const token = getLocal<IToken>('token')
+// 前端检查token是否失效
+useLocal('token')
+    .then(d=>token.ACCESS_TOKEN = d.ACCESS_TOKEN)
+    .catch(()=>mutations.logout(state))
 
 const state:ILayout = {
     menubar: {
@@ -27,7 +32,9 @@ const state:ILayout = {
         tagsList: [],
         cachedViews: []
     },
-    ACCESS_TOKEN: localStorage.getItem('ACCESS_TOKEN') || '',
+    token: {
+        ACCESS_TOKEN: token.ACCESS_TOKEN || ''
+    },
     setting: {
         theme: setting.theme !== undefined ? setting.theme : 0,
         showTags: setting.showTags !== undefined ? setting.showTags : true,
@@ -109,14 +116,14 @@ const mutations = {
         state.tags.cachedViews.splice(obj.index, 1)
     },
     login(state: ILayout, token = ''):void {
-        state.ACCESS_TOKEN = token
-        localStorage.setItem('ACCESS_TOKEN', token)
+        state.token.ACCESS_TOKEN = token
+        setLocal('token', state.token, 1000 * 60 * 60)
         const { query } = router.currentRoute.value
         router.push(typeof query.from === 'string' ? decodeURIComponent(decodeURIComponent(query.from)) : '/')
     },
     logout(state: ILayout):void {
-        state.ACCESS_TOKEN = ''
-        localStorage.removeItem('ACCESS_TOKEN')
+        state.token.ACCESS_TOKEN = ''
+        localStorage.removeItem('token')
         history.go(0)
     },
     setRoutes(state: ILayout, data: Array<IMenubarList>):void {

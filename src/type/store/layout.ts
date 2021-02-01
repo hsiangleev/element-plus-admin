@@ -8,6 +8,9 @@ export interface ISetting {
     theme: number
     showTags: boolean
 }
+export interface IToken {
+    ACCESS_TOKEN: string
+}
 export interface ILayout {
     // 左侧导航栏
     menubar: {
@@ -25,7 +28,7 @@ export interface ILayout {
         tagsList: Array<ITagsList>
         cachedViews: Array<string>
     }
-    ACCESS_TOKEN: string
+    token: IToken
     setting: ISetting
     isLoading: boolean
 }

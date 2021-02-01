@@ -30,7 +30,7 @@ request.interceptors.request.use(config => {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.4)'
     })
-    const token = store.state.layout.ACCESS_TOKEN
+    const token = store.state.layout.token.ACCESS_TOKEN
     // 如果 token 存在
     // 让每个请求携带自定义 token 请根据实际情况自行修改
     if (token) {
@@ -46,7 +46,7 @@ request.interceptors.response.use((response) => {
     if(data.Code !== 200){
         let title = '请求失败'
         if(data.Code === 401){
-            if (store.state.layout.ACCESS_TOKEN) {
+            if (store.state.layout.token.ACCESS_TOKEN) {
                 store.commit('layout/logout')
             }
             title = '身份认证失败'

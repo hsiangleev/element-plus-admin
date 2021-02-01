@@ -22,13 +22,13 @@ export function getUser (): AxiosPromise {
     return request({
         url: api.getUser,
         method: 'get',
-        data: { token: store.state.layout.ACCESS_TOKEN }
+        data: { token: store.state.layout.token.ACCESS_TOKEN }
     })
 }
 export function getRouterList (): AxiosPromise {
     return request({
         url: api.getRouterList,
         method: 'get',
-        data: { token: store.state.layout.ACCESS_TOKEN }
+        data: { token: store.state.layout.token.ACCESS_TOKEN }
     })
 }
