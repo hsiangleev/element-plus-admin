@@ -2,30 +2,33 @@
     <div class='layout flex h-screen'>
         <div
             class='layout-sidebar-mask fixed w-screen h-screen bg-black bg-opacity-25 z-20'
-            :class='{"hidden": menubar.status !== 2 }'
+            :class='{"hidden": layout.menubar.status !== 2 }'
             @click='changeCollapsed'
         />
         <div
             class='layout-sidebar flex flex-col h-screen transition-width duration-200 shadow'
             :class='{ 
-                "w-64": menubar.status === 0 || menubar.status === 2, 
-                "w-0": menubar.status === 3, 
-                "w-16": menubar.status === 1, 
-                "absolute z-30": menubar.status === 2, 
+                "w-64": layout.menubar.status === 0 || layout.menubar.status === 2, 
+                "w-0": layout.menubar.status === 3, 
+                "w-16": layout.menubar.status === 1, 
+                "absolute z-30": layout.menubar.status === 2, 
             }'
         >
             <div class='layout-sidebar-logo flex h-12 relative flex-center'>
-                {{ menubar.status === 0 || menubar.status === 2 ? 'hsianglee' : (menubar.status === 1 ? 'lee' : '') }}
+                {{ layout.menubar.status === 0 || layout.menubar.status === 2 ? 'hsianglee' : (layout.menubar.status === 1 ? 'lee' : '') }}
             </div>
             <div class='layout-sidebar-menubar flex flex-1 overflow-hidden'>
                 <layout-menubar />
             </div>
         </div>
         <div class='layout-main flex flex-1 flex-col overflow-x-hidden overflow-y-auto'>
-            <div class='layout-main-navbar flex justify-between items-center h-12 shadow-sm border-b border-gray-100'>
+            <div class='layout-main-navbar flex justify-between items-center h-12 shadow-sm border-b border-gray-100 overflow-hidden'>
                 <layout-navbar />
             </div>
-            <div class='layout-main-tags h-10 leading-10 overflow-hidden shadow text-sm text-gray-600 px-3 position'>
+            <div
+                v-if='layout.setting.showTags'
+                class='layout-main-tags h-10 leading-10 overflow-hidden shadow text-sm text-gray-600 px-3 position'
+            >
                 <layout-tags />
             </div>
             <div class='layout-main-content flex-1 overflow-hidden'>
@@ -63,6 +66,7 @@ export default defineComponent ({
         const changeCollapsed = ()=>store.commit('layout/changeCollapsed')
 
         store.commit('layout/changeTheme')
+        
 
         onMounted(()=>{
             changeDeviceWidth()
@@ -74,7 +78,7 @@ export default defineComponent ({
             window.addEventListener('resize', throttleF, true)
         })
         return {
-            menubar: store.state.layout.menubar,
+            layout: store.state.layout,
             changeCollapsed
         }
     }

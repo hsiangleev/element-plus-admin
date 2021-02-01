@@ -6,7 +6,7 @@
             @click='changeCollapsed'
         />
         <!-- 面包屑导航 -->
-        <div class='px-4'>
+        <div class='px-4 hidden-xs-only'>
             <el-breadcrumb separator='/'>
                 <el-breadcrumb-item :to='{ path: "/" }'>
                     主页

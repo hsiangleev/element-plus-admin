@@ -4,6 +4,10 @@ export enum IMenubarStatus {
     PHE,    // 手机展开
     PHN     // 手机合并
 }
+export interface ISetting {
+    theme: number
+    showTags: boolean
+}
 export interface ILayout {
     // 左侧导航栏
     menubar: {
@@ -22,7 +26,7 @@ export interface ILayout {
         cachedViews: Array<string>
     }
     ACCESS_TOKEN: string
-    theme: number
+    setting: ISetting
     isLoading: boolean
 }
 interface IMenubar {

@@ -1,11 +1,15 @@
 import { login, loginParam, getRouterList, getUser } from '/@/api/layout/index'
-import { ILayout, IMenubarStatus, ITagsList, IMenubarList } from '/@/type/store/layout'
+import { ILayout, IMenubarStatus, ITagsList, IMenubarList, ISetting } from '/@/type/store/layout'
 import { IState } from '/@/type/store/index'
 import { ActionContext } from 'vuex'
 import router from '/@/router/index'
 import { allowRouter } from '/@/router/index'
 import { generatorDynamicRouter } from '/@/router/asyncRouter'
 import changeTheme from '/@/utils/changeTheme'
+import { RouteLocationNormalizedLoaded } from 'vue-router'
+
+const storeSetting = localStorage.getItem('setting')
+const setting = JSON.parse(storeSetting !== null ? storeSetting : '{}') as unknown as  ISetting
 
 const state:ILayout = {
     menubar: {
@@ -24,7 +28,10 @@ const state:ILayout = {
         cachedViews: []
     },
     ACCESS_TOKEN: localStorage.getItem('ACCESS_TOKEN') || '',
-    theme: localStorage.getItem('theme') ? Number(localStorage.getItem('theme')) : 0,
+    setting: {
+        theme: setting.theme !== undefined ? setting.theme : 0,
+        showTags: setting.showTags !== undefined ? setting.showTags : true,
+    },
     isLoading: false
 }
 const mutations = {
@@ -45,8 +52,9 @@ const mutations = {
         }
     },
     // 切换导航，记录打开的导航
-    changeTagNavList(state: ILayout, cRouter:IMenubarList):void {
-        if(new RegExp(/\/redirect\//).test(cRouter.path)) return       // 判断是否是重定向页面
+    changeTagNavList(state: ILayout, cRouter:RouteLocationNormalizedLoaded):void {
+        if(new RegExp(/\/redirect\//).test(cRouter.path)) return        // 判断是否是重定向页面
+        if(!state.setting.showTags) return                              // 判断是否开启多标签页
         const index = state.tags.tagsList.findIndex(v=>v.path === cRouter.path)
         state.tags.tagsList.forEach(v=>v.isActive = false)
         // 判断页面是否打开过
@@ -55,7 +63,7 @@ const mutations = {
             return
         }
         const tagsList:ITagsList = {
-            name: cRouter.name,
+            name: cRouter.name as string,
             title: cRouter.meta.title,
             path: cRouter.path,
             isActive: true
@@ -90,6 +98,7 @@ const mutations = {
     },
     // 添加缓存页面
     addCachedViews(state: ILayout, obj: {name: string, noCache: boolean}):void{
+        if(!state.setting.showTags) return                              // 判断是否开启多标签页
         if(obj.noCache || state.tags.cachedViews.includes(obj.name)) return
         state.tags.cachedViews.push(obj.name)
     },
@@ -121,12 +130,26 @@ const mutations = {
         state.userInfo.role = userInfo.role
     },
     // 修改主题
-    changeTheme(state: ILayout, num?:number):void {
-        if(num === state.theme) return
-        if(typeof num !== 'number') num = state.theme
+    changeTheme(state: ILayout, num:number):void {
+        if(num === state.setting.theme) return
+        if(typeof num !== 'number') num = state.setting.theme
         changeTheme(num)
-        state.theme = num
-        localStorage.setItem('theme', String(num))
+        state.setting.theme = num
+        localStorage.setItem('setting', JSON.stringify(state.setting))
+    },
+    changeTagsSetting(state: ILayout, showTags:boolean):void {
+        state.setting.showTags = showTags
+        localStorage.setItem('setting', JSON.stringify(state.setting))
+
+        if(showTags){
+            const index = state.tags.tagsList.findIndex(v=>v.path === router.currentRoute.value.path)
+            if(index !== -1) {
+                state.tags.tagsList.forEach(v=>v.isActive = false)
+                state.tags.tagsList[index].isActive = true
+            }else{
+                mutations.changeTagNavList(state, router.currentRoute.value)
+            }
+        }
     }
 }
 const actions = {

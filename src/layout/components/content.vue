@@ -8,7 +8,7 @@
                 mode='out-in'
             >  
                 <keep-alive
-                    :include='data.cachedViews'
+                    :include='layout.setting.showTags ? data.cachedViews : []'
                 >
                     <component
                         :is='Component'
@@ -44,7 +44,8 @@ export default defineComponent ({
         )
         return {
             key,
-            data
+            data,
+            layout: store.state.layout
         }
     }
 })
