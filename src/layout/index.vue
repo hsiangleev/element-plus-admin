@@ -14,7 +14,7 @@
                 "absolute z-30": layout.menubar.status === 2, 
             }'
         >
-            <div class='layout-sidebar-logo flex h-12 relative flex-center'>
+            <div class='layout-sidebar-logo flex h-12 relative flex-center shadow-lg'>
                 {{ layout.menubar.status === 0 || layout.menubar.status === 2 ? 'hsianglee' : (layout.menubar.status === 1 ? 'lee' : '') }}
             </div>
             <div class='layout-sidebar-menubar flex flex-1 overflow-hidden'>

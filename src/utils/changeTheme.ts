@@ -1,10 +1,10 @@
 import theme from '/@/config/theme'
 import { ITheme } from '/@/type/config/theme'
 export default function(num:number):HTMLStyleElement {
-    const themeStyle:ITheme = theme[num]
+    const themeStyle:ITheme = num >= theme.length ? theme[0] : theme[num]
     
     const themeDom = document.createElement('style')
-    themeDom.className = 'layout-system'
+    themeDom.className = 'layout-theme-setting'
     themeDom.innerText = `
     .layout-sidebar-logo {
         background-color: ${themeStyle.logoBg || themeStyle.sidebarBg};
@@ -86,8 +86,8 @@ export default function(num:number):HTMLStyleElement {
         background-color: ${themeStyle.sidebarActiveBg};
         color: ${themeStyle.sidebarColor};
     }
-    `
-    const prevTheme = document.querySelector('style.layout-system')
+    `.replace(/\n/g, '').replace(/ {4}/g, '')
+    const prevTheme = document.querySelector('style.layout-theme-setting')
     prevTheme && prevTheme.remove()
     document.head.appendChild(themeDom)
     return themeDom
