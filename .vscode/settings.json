@@ -6,6 +6,8 @@
     },
     "editor.tabSize": 4,
     "vetur.validation.template": false,
+    "vetur.experimental.templateInterpolationService": true,
+    "vetur.validation.interpolation": false,
     "scss.lint.unknownAtRules": "ignore",
     "css.validate": true,
     "scss.validate": true,
