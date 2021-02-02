@@ -13,14 +13,14 @@ const setting = getLocal<ISetting>('setting')
 const token = getLocal<IToken>('token')
 // 前端检查token是否失效
 useLocal('token')
-    .then(d=>token.ACCESS_TOKEN = d.ACCESS_TOKEN)
-    .catch(()=>mutations.logout(state))
+    .then(d => token.ACCESS_TOKEN = d.ACCESS_TOKEN)
+    .catch(() => mutations.logout(state))
 
 const state:ILayout = {
     menubar: {
         status: document.body.offsetWidth < 768 ? IMenubarStatus.PHN : IMenubarStatus.PCE,
         menuList: [],
-        isPhone: document.body.offsetWidth < 768,
+        isPhone: document.body.offsetWidth < 768
     },
     // 用户信息
     userInfo: {
@@ -37,20 +37,20 @@ const state:ILayout = {
     },
     setting: {
         theme: setting.theme !== undefined ? setting.theme : 0,
-        showTags: setting.showTags !== undefined ? setting.showTags : true,
+        showTags: setting.showTags !== undefined ? setting.showTags : true
     },
     isLoading: false
 }
 const mutations = {
     changeCollapsed(state: ILayout):void {
-        if(state.menubar.isPhone){
+        if(state.menubar.isPhone) {
             state.menubar.status = state.menubar.status === IMenubarStatus.PHN ? IMenubarStatus.PHE : IMenubarStatus.PHN
         }else{
             state.menubar.status = state.menubar.status === IMenubarStatus.PCN ? IMenubarStatus.PCE : IMenubarStatus.PCN
         }
     },
     changeDeviceWidth(state: ILayout):void {
-        if(document.body.offsetWidth < 768){
+        if(document.body.offsetWidth < 768) {
             state.menubar.isPhone = true
             state.menubar.status = IMenubarStatus.PHN
         }else{
@@ -60,12 +60,12 @@ const mutations = {
     },
     // 切换导航，记录打开的导航
     changeTagNavList(state: ILayout, cRouter:RouteLocationNormalizedLoaded):void {
-        if(new RegExp(/\/redirect\//).test(cRouter.path)) return        // 判断是否是重定向页面
-        if(!state.setting.showTags) return                              // 判断是否开启多标签页
-        const index = state.tags.tagsList.findIndex(v=>v.path === cRouter.path)
-        state.tags.tagsList.forEach(v=>v.isActive = false)
+        if(new RegExp(/\/redirect\//).test(cRouter.path)) return // 判断是否是重定向页面
+        if(!state.setting.showTags) return // 判断是否开启多标签页
+        const index = state.tags.tagsList.findIndex(v => v.path === cRouter.path)
+        state.tags.tagsList.forEach(v => v.isActive = false)
         // 判断页面是否打开过
-        if(index !== -1){
+        if(index !== -1) {
             state.tags.tagsList[index].isActive = true
             return
         }
@@ -78,8 +78,8 @@ const mutations = {
         state.tags.tagsList.push(tagsList)
     },
     removeTagNav(state: ILayout, obj:{tagsList:ITagsList, cPath: string}):void {
-        const index = state.tags.tagsList.findIndex(v=>v.path === obj.tagsList.path)
-        if(state.tags.tagsList[index].path === obj.cPath){
+        const index = state.tags.tagsList.findIndex(v => v.path === obj.tagsList.path)
+        if(state.tags.tagsList[index].path === obj.cPath) {
             state.tags.tagsList.splice(index, 1)
             const i = index === state.tags.tagsList.length ? index - 1 : index
             state.tags.tagsList[i].isActive = true
@@ -91,7 +91,7 @@ const mutations = {
         }
     },
     removeOtherTagNav(state: ILayout, tagsList:ITagsList):void {
-        const index = state.tags.tagsList.findIndex(v=>v.path === tagsList.path)
+        const index = state.tags.tagsList.findIndex(v => v.path === tagsList.path)
         state.tags.tagsList.splice(index + 1)
         state.tags.tagsList.splice(0, index)
         state.tags.cachedViews.splice(index + 1)
@@ -104,15 +104,15 @@ const mutations = {
         router.push({ path: '/redirect/' })
     },
     // 添加缓存页面
-    addCachedViews(state: ILayout, obj: {name: string, noCache: boolean}):void{
-        if(!state.setting.showTags) return                              // 判断是否开启多标签页
+    addCachedViews(state: ILayout, obj: {name: string, noCache: boolean}):void {
+        if(!state.setting.showTags) return // 判断是否开启多标签页
         if(obj.noCache || state.tags.cachedViews.includes(obj.name)) return
         state.tags.cachedViews.push(obj.name)
     },
     // 删除缓存页面
-    removeCachedViews(state: ILayout, obj: { name: string, index: number }):void{
+    removeCachedViews(state: ILayout, obj: { name: string, index: number }):void {
         // 判断标签页是否还有该页面
-        if(state.tags.tagsList.map(v=>v.name).includes(obj.name)) return
+        if(state.tags.tagsList.map(v => v.name).includes(obj.name)) return
         state.tags.cachedViews.splice(obj.index, 1)
     },
     login(state: ILayout, token = ''):void {
@@ -130,7 +130,7 @@ const mutations = {
         state.menubar.menuList = data
     },
     concatAllowRoutes(state: ILayout):void {
-        allowRouter.reverse().forEach(v=>state.menubar.menuList.unshift(v))
+        allowRouter.reverse().forEach(v => state.menubar.menuList.unshift(v))
     },
     getUser(state: ILayout, userInfo:{name:string, role: Array<string>}):void {
         state.userInfo.name = userInfo.name
@@ -148,10 +148,10 @@ const mutations = {
         state.setting.showTags = showTags
         localStorage.setItem('setting', JSON.stringify(state.setting))
 
-        if(showTags){
-            const index = state.tags.tagsList.findIndex(v=>v.path === router.currentRoute.value.path)
+        if(showTags) {
+            const index = state.tags.tagsList.findIndex(v => v.path === router.currentRoute.value.path)
             if(index !== -1) {
-                state.tags.tagsList.forEach(v=>v.isActive = false)
+                state.tags.tagsList.forEach(v => v.isActive = false)
                 state.tags.tagsList[index].isActive = true
             }else{
                 mutations.changeTagNavList(state, router.currentRoute.value)

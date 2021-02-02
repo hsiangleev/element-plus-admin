@@ -81,7 +81,7 @@ const breadcrumb = (route: RouteLocationNormalizedLoaded) => {
     const fn = () => {
         const breadcrumbList:Array<IBreadcrumbList> = []
         if(route.matched[0] && route.matched[0].name === 'Dashboard') return breadcrumbList
-        route.matched.forEach(v=>{
+        route.matched.forEach(v => {
             const obj:IBreadcrumbList = {
                 title: v.meta.title,
                 path: v.path
@@ -93,7 +93,7 @@ const breadcrumb = (route: RouteLocationNormalizedLoaded) => {
     let data = reactive({
         breadcrumbList: fn()
     })
-    watch(()=>route.path, ()=>data.breadcrumbList = fn())
+    watch(() => route.path, () => data.breadcrumbList = fn())
     return { data }
 }
 
@@ -105,14 +105,14 @@ export default defineComponent ({
     setup() {
         const store = useStore()
         const route = useRoute()
-        const changeCollapsed = ()=>store.commit('layout/changeCollapsed')
-        const logout = ()=>store.commit('layout/logout')
+        const changeCollapsed = () => store.commit('layout/changeCollapsed')
+        const logout = () => store.commit('layout/logout')
         return {
             menubar: store.state.layout.menubar,
             userInfo: store.state.layout.userInfo,
             changeCollapsed,
             logout,
-            ...breadcrumb(route),
+            ...breadcrumb(route)
         }
     }
 })

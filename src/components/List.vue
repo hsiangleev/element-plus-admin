@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType  } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 interface IList {
     imgUrl: string
@@ -60,8 +60,8 @@ export default defineComponent({
     props: {
         data: {
             type: Array as PropType<Array<IList>>,
-            default: ()=>{[]}
-        },
+            default: () => []
+        }
     },
     setup() {
         return {}

@@ -57,8 +57,8 @@
 import { defineComponent, nextTick, ref, watch, onBeforeUpdate, onMounted, reactive, Ref } from 'vue'
 import { useStore } from '/@/store/index'
 import { Store } from 'vuex'
-import { IState } from '/@/type/store/index'
-import { useRoute, useRouter, Router, RouteLocationNormalizedLoaded, } from 'vue-router'
+import { IState } from '/@/global'
+import { useRoute, useRouter, Router, RouteLocationNormalizedLoaded } from 'vue-router'
 import { ITagsList } from '/@/type/store/layout'
 
 // 右键菜单
@@ -74,21 +74,21 @@ const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNorm
     const contextRightMenu = (v:ITagsList, event:MouseEvent) => {
         currentRightTags = v
         menuPos.display = 'block'
-        nextTick(()=>{
+        nextTick(() => {
             let left = event.clientX - 5
             if(!rightMenuEl.value) return
-            if(event.clientX + rightMenuEl.value.offsetWidth > document.body.offsetWidth){
+            if(event.clientX + rightMenuEl.value.offsetWidth > document.body.offsetWidth) {
                 left = event.clientX - rightMenuEl.value.offsetWidth
             }
-            menuPos.left = left + 'px'
-            menuPos.top = event.clientY + 10 + 'px'
+            menuPos.left = `${left}px`
+            menuPos.top = `${event.clientY + 10}px`
         })
     }
     const refresh = () => {
-        if(currentRightTags.path === route.path){
-            router.replace('/redirect' + currentRightTags.path)
+        if(currentRightTags.path === route.path) {
+            router.replace(`/redirect${currentRightTags.path}`)
         }else{
-            router.push('/redirect' + currentRightTags.path)
+            router.push(`/redirect${currentRightTags.path}`)
         }
     }
     const closeOther = () => store.commit('layout/removeOtherTagNav', currentRightTags)
@@ -104,11 +104,11 @@ const tagScroll = (store:Store<IState>) => {
     // 监听标签页导航
     watch(
         () => tagsList.length,
-        () => nextTick(()=>{
+        () => nextTick(() => {
             if(!scrollbar.value) return
             scrollbar.value.update()
-            nextTick(()=>{
-                const itemWidth = layoutTagsItem.value.filter(v=>v).reduce((acc, v)=>{
+            nextTick(() => {
+                const itemWidth = layoutTagsItem.value.filter(v => v).reduce((acc, v) => {
                     return acc + v.offsetWidth + 6
                 }, 0)
                 if(!scrollbar.value) return
@@ -132,7 +132,7 @@ export default defineComponent({
         const removeTagNav = (v: any) => store.commit('layout/removeTagNav', { cPath: route.path, tagsList: v })
         const closeAll = () => store.commit('layout/removeAllTagNav')
         
-        onMounted(()=>{
+        onMounted(() => {
             store.commit('layout/addCachedViews', { name: route.name, noCache: route.meta.noCache })
         })
         

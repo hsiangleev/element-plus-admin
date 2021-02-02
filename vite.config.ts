@@ -15,10 +15,10 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, '')
             }
         },
-        port: 3002,
+        port: 3002
     },
     build: {
-        sourcemap: true,
+        sourcemap: true
         // cssCodeSplit: true
     },
     optimizeDeps: {
@@ -32,7 +32,7 @@ export default defineConfig({
                 require('tailwindcss'),
                 require('postcss-nested'),
                 require('postcss-simple-vars'),
-                require('postcss-import'),
+                require('postcss-import')
             ]
         }
     }

@@ -10,23 +10,23 @@ export const checkToken = function(token: string):string {
 }
 
 export const login = function(name: string, pwd: string):boolean {
-    return user.findIndex(v=>v.name === name && v.pwd === pwd) !== -1
+    return user.findIndex(v => v.name === name && v.pwd === pwd) !== -1
 }
 
 export const getUser = function(name: string):{name:string, role: Array<string>} {
     return {
         name,
-        role: user_role.filter(v=>v.userName === name).map(v=>v.roleName)
+        role: user_role.filter(v => v.userName === name).map(v => v.roleName)
     }
 }
 
 export const getRoute = function(name: string):Array<IMenubarRoute> {
     const { role } = getUser(name)
-    const arr = role_route.filter(v=>role.findIndex(val=>val === v.roleName) !== -1)
+    const arr = role_route.filter(v => role.findIndex(val => val === v.roleName) !== -1)
     const filterRoute:Array<IMenubarRoute> = []
-    route.forEach(v=>{
-        arr.forEach(val=>{
-            if(val.id === v.id){
+    route.forEach(v => {
+        arr.forEach(val => {
+            if(val.id === v.id) {
                 const obj = Object.assign({},v)
                 obj.meta.permission = val.permission
                 filterRoute.push(obj)

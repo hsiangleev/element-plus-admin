@@ -40,12 +40,14 @@
                     <template #btn>
                         <el-button-group>
                             <el-button
+                                size='mini'
                                 icon='el-icon-delete'
                                 @click='remove'
                             >
                                 删除
                             </el-button>
                             <el-button
+                                size='mini'
                                 icon='el-icon-edit'
                                 @click='edit'
                             >
@@ -110,11 +112,13 @@
                         <el-button-group>
                             <el-button
                                 icon='el-icon-edit'
+                                size='mini'
                                 @click='submit'
                             >
                                 提交
                             </el-button>
                             <el-button
+                                size='mini'
                                 icon='el-icon-edit'
                                 @click='resetFields(refForm)'
                             >
@@ -249,20 +253,20 @@ const keyValue = () => {
         region: '',
         delivery: false,
         resource: '',
-        type: [],
+        type: []
     })
     const rules = reactive({
         name: [
-            { required: true, message: '请输入姓名', trigger: 'blur' },
+            { required: true, message: '请输入姓名', trigger: 'blur' }
         ],
         region: [
-            { required: true, message: '请选择活动区域', trigger: 'blur' },
+            { required: true, message: '请选择活动区域', trigger: 'blur' }
         ],
         resource: [
-            { required: true, message: '请选择活动性质', trigger: 'blur' },
+            { required: true, message: '请选择活动性质', trigger: 'blur' }
         ],
         type: [
-            { required: true, message: '请选择特殊资源', trigger: 'blur' },
+            { required: true, message: '请选择特殊资源', trigger: 'blur' }
         ]
     })
     const refForm = ref(null)
@@ -290,7 +294,7 @@ export default defineComponent({
         const listItem = ref([
             { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21', url: 'http://baidu.com', target: '_blank' },
             { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21' },
-            { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21' },
+            { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21' }
         ])
         const remove = (v:MouseEvent) => console.log(v)
         const edit = (v:MouseEvent) => console.log(v)

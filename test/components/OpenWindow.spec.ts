@@ -1,4 +1,4 @@
-import { mount, VueWrapper  } from '@vue/test-utils'
+import { mount, VueWrapper } from '@vue/test-utils'
 import { nextTick, ComponentPublicInstance, ref } from 'vue'
 import OpenWindow from '/@/components/OpenWindow.vue'
 import ElementPlus from 'element-plus'
@@ -6,7 +6,7 @@ import ElementPlus from 'element-plus'
 describe('OpenWindow.vue', () => {
     const wrapper: VueWrapper<ComponentPublicInstance> = mount({
         components: {
-            OpenWindow,
+            OpenWindow
         },
         template: `
             <div class='content'>
@@ -47,11 +47,11 @@ describe('OpenWindow.vue', () => {
             plugins: [ElementPlus]
         }
     })
-    it('hide', async () => {
+    it('hide', async() => {
         await nextTick()
         expect(wrapper.find('.open-select').exists()).toBe(false)
     })
-    it('click show', async () => {
+    it('click show', async() => {
         await nextTick()
         const btn = wrapper.find('.content .el-button')
         btn.trigger('click')
@@ -59,7 +59,7 @@ describe('OpenWindow.vue', () => {
         expect(wrapper.find('.open-select').exists()).toBe(true)
     })
     
-    it('attr title', async () => {
+    it('attr title', async() => {
         await nextTick()
         const btn = wrapper.find('.content .el-button')
         btn.trigger('click')

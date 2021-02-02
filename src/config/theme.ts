@@ -39,7 +39,7 @@ const theme:Array<ITheme> = [
         sidebarActiveColor: '#409EFF',
         sidebarActiveBg: '#1f2d3d',
         sidebarActiveBorderRightBG: '#409EFF'
-    },
+    }
 ]
 
 export default theme

@@ -1,21 +1,22 @@
-import { mount, VueWrapper  } from '@vue/test-utils'
+import { mount, VueWrapper } from '@vue/test-utils'
 import { nextTick, ComponentPublicInstance, ref } from 'vue'
 import CardList from '/@/components/CardList.vue'
 import CardListItem from '/@/components/CardListItem.vue'
 import ElementPlus from 'element-plus'
+import { IObject } from '/@/global'
 
 describe('CardList.vue', () => {
-    const createCardList = function(props, opts?, slot?): VueWrapper<ComponentPublicInstance> {
+    const createCardList = function(props:string, opts:IObject<any> | null, slot?:string): VueWrapper<ComponentPublicInstance> {
         return mount(Object.assign({
             components: {
                 CardList,
-                CardListItem,
+                CardListItem
             },
             template: `
                 <card-list
                     ${props}
                 >${slot}</card-list>
-            `,
+            `
         }, opts), {
             global: {
                 plugins: [ElementPlus]
@@ -25,9 +26,9 @@ describe('CardList.vue', () => {
     const listItem = ref([
         { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21', url: 'http://baidu.com', target: '_blank' },
         { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21' },
-        { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21' },
+        { text: '标题标题标题标题标题标题标题标题标题标题', mark: '2020/12/21' }
     ])
-    it('show title', async () => {
+    it('show title', async() => {
         const wrapper: VueWrapper<ComponentPublicInstance> = createCardList(
             ':list-item="listItem" :show-header="true" title="显示标题"',
             {
@@ -39,7 +40,7 @@ describe('CardList.vue', () => {
         await nextTick()
         expect(wrapper.find('.card-list .el-card__header>div>span').text()).toEqual('显示标题')
     })
-    it('hide liststyle', async () => {
+    it('hide liststyle', async() => {
         const wrapper: VueWrapper<ComponentPublicInstance> = createCardList(
             ':list-item="listItem" :show-liststyle="false"',
             {
@@ -51,7 +52,7 @@ describe('CardList.vue', () => {
         await nextTick()
         expect(wrapper.find('.card-list .card-list-body .card-list-item-circle').exists()).toBe(false)
     })
-    it('wrap', async () => {
+    it('wrap', async() => {
         const wrapper: VueWrapper<ComponentPublicInstance> = createCardList(
             ':list-item="listItem" :is-nowrap="false"',
             {
@@ -63,7 +64,7 @@ describe('CardList.vue', () => {
         await nextTick()
         expect(wrapper.find('.card-list .card-list-body .card-list-text').classes()).toContain('wrap')
     })
-    it('hide liststyle', async () => {
+    it('hide liststyle', async() => {
         const wrapper: VueWrapper<ComponentPublicInstance> = createCardList(
             ':list-item="listItem" :show-liststyle="false"',
             {
@@ -75,12 +76,12 @@ describe('CardList.vue', () => {
         await nextTick()
         expect(wrapper.find('.card-list .card-list-body .card-list-item-circle').exists()).toBe(false)
     })
-    it('keyvalue', async () => {
+    it('keyvalue', async() => {
         const wrapper: VueWrapper<ComponentPublicInstance> = createCardList(
             'type="KeyValue"',
             {
                 setup() {
-                    return {  }
+                    return { }
                 }
             },
             `

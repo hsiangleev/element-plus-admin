@@ -32,15 +32,15 @@ export default defineComponent ({
         const route = useRoute()
         const store = useStore()
 
-        const key = computed(()=>route.path)
+        const key = computed(() => route.path)
 
         let data = reactive({
             cachedViews: [...store.state.layout.tags.cachedViews]
         })
         // keep-alive的include重新赋值，解决bug https://github.com/vuejs/vue-next/issues/2550
         watch(
-            ()=>store.state.layout.tags.cachedViews.length,
-            ()=>data.cachedViews = [...store.state.layout.tags.cachedViews]
+            () => store.state.layout.tags.cachedViews.length,
+            () => data.cachedViews = [...store.state.layout.tags.cachedViews]
         )
         return {
             key,

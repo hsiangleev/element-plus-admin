@@ -62,13 +62,13 @@ export default defineComponent ({
     },
     setup() {
         const store = useStore()
-        const changeDeviceWidth = ()=>store.commit('layout/changeDeviceWidth')
-        const changeCollapsed = ()=>store.commit('layout/changeCollapsed')
+        const changeDeviceWidth = () => store.commit('layout/changeDeviceWidth')
+        const changeCollapsed = () => store.commit('layout/changeCollapsed')
 
         store.commit('layout/changeTheme')
         
 
-        onMounted(()=>{
+        onMounted(() => {
             changeDeviceWidth()
             const throttleFn = throttle(300)
             let throttleF = async function() {

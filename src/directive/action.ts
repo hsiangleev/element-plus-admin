@@ -9,9 +9,9 @@ export default (app:App<Element>):void => {
             const currentRoute = router.currentRoute.value
             const roles:Array<string> = currentRoute.meta.permission || []
             const isShow = arg === 'and' 
-                ? value.every(v=>roles.includes(v))
-                : value.some(v=>roles.includes(v))
-            if(!isShow){
+                ? value.every(v => roles.includes(v))
+                : value.some(v => roles.includes(v))
+            if(!isShow) {
                 el.parentNode && el.parentNode.removeChild(el)
             }
         }
@@ -19,21 +19,21 @@ export default (app:App<Element>):void => {
     app.directive('format', {
         mounted(el, binding) {
             const { arg, value } = binding
-            if(arg === 'money'){
+            if(arg === 'money') {
                 const elem = el.firstElementChild
-                nextTick(()=>elem.value = format(elem.value))
-                elem.addEventListener('focus', (event:MouseEvent)=>{
+                nextTick(() => elem.value = format(elem.value))
+                elem.addEventListener('focus', (event:MouseEvent) => {
                     if(!event.target) return
                     const target = event.target as HTMLInputElement
-                    target.value = unformat(target.value) + ''
+                    target.value = String(unformat(target.value))
                     value[0][value[1]] = target.value
                 }, true)
-                elem.addEventListener('blur', (event: MouseEvent)=>{
+                elem.addEventListener('blur', (event: MouseEvent) => {
                     if(!event.target) return
                     const target = event.target as HTMLInputElement
                     const val = unformat(format(target.value))
                     value[0][value[1]] = val === '' ? 0 : val
-                    nextTick(()=>target.value = format(val))
+                    nextTick(() => target.value = format(val))
                 }, true)
             }
         }

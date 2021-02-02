@@ -14,7 +14,7 @@ export default defineComponent({
     setup() {
         const input = ref('')
         return {
-            input,
+            input
         }
     }
 })

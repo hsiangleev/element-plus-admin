@@ -75,7 +75,7 @@ export default defineComponent ({
         const changeTheme = (index:number) => store.commit('layout/changeTheme', index)
         const showTags = ref(store.state.layout.setting.showTags)
 
-        watch(()=>showTags.value, ()=>store.commit('layout/changeTagsSetting', showTags.value))
+        watch(() => showTags.value, () => store.commit('layout/changeTagsSetting', showTags.value))
 
         return {
             drawer,

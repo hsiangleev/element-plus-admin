@@ -7,7 +7,7 @@ const components = {
     404: () => import('/@/views/ErrorPage/404.vue'),
     Workplace: () => import('/@/views/Dashboard/Workplace.vue'),
 
-    Login: () => import('/@/views/User/Login.vue'),
+    Login: () => import('/@/views/User/Login.vue')
 }
 
 // 静态路由页面
@@ -59,12 +59,12 @@ export const allowRouter:Array<IMenubarList> = [
         component: components.Login,
         meta: { title: '登录', icon: 'el-icon-eleme' },
         hidden: true
-    },
+    }
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(),        // createWebHistory
-    routes: allowRouter,
+    history: createWebHashHistory(), // createWebHistory
+    routes: allowRouter
 })
 
 export default router

@@ -16,7 +16,7 @@ const components = {
     CardListTest: () => import('/@/views/Components/CardListTest.vue'),
     TableSearchTest: () => import('/@/views/Components/TableSearchTest.vue'),
     ListTest: () => import('/@/views/Components/ListTest.vue'),
-    Directive: () => import('/@/views/Permission/Directive.vue'),
+    Directive: () => import('/@/views/Permission/Directive.vue')
 }
 
 const asyncRouter:Array<IMenubarList> = [
@@ -37,14 +37,14 @@ const asyncRouter:Array<IMenubarList> = [
 
 export const generatorDynamicRouter = (data:Array<IMenubarList>):void => {
     const routerList:Array<IMenubarList> = listToTree(data, 0)
-    asyncRouter.forEach(v=>routerList.push(v))
+    asyncRouter.forEach(v => routerList.push(v))
     const f = (data:Array<IMenubarList>, pData:IMenubarList|null) => {
-        for(let i = 0,len = data.length;i < len;i++){
+        for(let i = 0,len = data.length;i < len;i++) {
             const v:IMenubarList = data[i]
             if(typeof v.component === 'string') v.component = components[v.component]
             // v.component = components[v.component] || (() => import(`../view${path}.vue`))
             // v.component = () => import(`../view${data[i].path}.vue`)
-            if(!v.meta.permission || pData && v.meta.permission.length === 0){
+            if(!v.meta.permission || pData && v.meta.permission.length === 0) {
                 v.meta.permission = pData && pData.meta && pData.meta.permission ? pData.meta.permission : []
             }
             if(v.children && v.children.length > 0) {

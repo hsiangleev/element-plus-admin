@@ -57,7 +57,7 @@ export default defineComponent({
     emits: ['update:show'],
     setup(props, context: SetupContext) {
         return {
-            slots: context.slots,
+            slots: context.slots
         }
     }
 })

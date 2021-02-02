@@ -61,7 +61,7 @@ export default defineComponent({
         total: {
             type: Number,
             default: 0
-        },
+        }
     },
     emits: ['size-change', 'current-change'],
     setup(props, context: SetupContext) {
@@ -78,7 +78,7 @@ export default defineComponent({
             handleSizeChange,
             handleCurrentChange,
             searchEl,
-            toggleSearch,
+            toggleSearch
         }
     }
         

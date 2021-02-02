@@ -61,11 +61,11 @@ import { validate, resetFields } from '/@/utils/formExtend'
 const formRender = () => {
     let form = reactive({
         name: 'admin',
-        pwd: 'admin',
+        pwd: 'admin'
     })
     const ruleForm = ref(null)
     const enterSubmit = (e:KeyboardEvent) => {
-        if(e.key === 'Enter'){
+        if(e.key === 'Enter') {
             onSubmit()
         }
     }
@@ -97,7 +97,7 @@ const formRender = () => {
                 callback()
             }, trigger: 'blur' 
             }
-        ],
+        ]
     })
     return {
         form, 

@@ -38,11 +38,11 @@ export default defineComponent({
     props: {
         menuList: {
             type: Object,
-            default: ()=>{return {}}
+            default: () => {return {}}
         }
     },
     setup(context) {
-        const cMenuList = computed(()=>context.menuList.children.filter((v:IMenubarList)=>!v.hidden))
+        const cMenuList = computed(() => context.menuList.children.filter((v:IMenubarList) => !v.hidden))
         return {
             haChild: context.menuList.children && context.menuList.children.length > 0,
             cMenuList

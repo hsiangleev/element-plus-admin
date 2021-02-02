@@ -5,7 +5,7 @@ export default function(num:number):HTMLStyleElement {
     
     const themeDom = document.createElement('style')
     themeDom.className = 'layout-system'
-    themeDom.innerText =  `
+    themeDom.innerText = `
     .layout-sidebar-logo {
         background-color: ${themeStyle.logoBg || themeStyle.sidebarBg};
         color: ${themeStyle.logoColor || themeStyle.sidebarColor};
@@ -46,12 +46,12 @@ export default function(num:number):HTMLStyleElement {
     }
     ${(function() {
         let s = ''
-        if(themeStyle.navbarBg){
+        if(themeStyle.navbarBg) {
             s += `.layout-main-navbar {
                 background-color: ${themeStyle.navbarBg};
             }`
         }
-        if(themeStyle.navbarColor){
+        if(themeStyle.navbarColor) {
             s += `.layout-main-navbar {
                 color: ${themeStyle.navbarColor};
             }
@@ -63,12 +63,12 @@ export default function(num:number):HTMLStyleElement {
                 color: ${themeStyle.navbarColor};
             }`
         }
-        if(themeStyle.tagsBg){
+        if(themeStyle.tagsBg) {
             s += `.layout-main-tags {
                 background-color: ${themeStyle.tagsBg};
             }`
         }
-        if(themeStyle.tagsColor){
+        if(themeStyle.tagsColor) {
             s += `.layout-main-tags {
                 color: ${themeStyle.tagsColor};
             }`

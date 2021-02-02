@@ -75,7 +75,7 @@ export default defineComponent({
     name: 'Directive',
     setup() {
         const store = useStore()
-        const logout = ()=>store.commit('layout/logout')
+        const logout = () => store.commit('layout/logout')
         return {
             logout
         }

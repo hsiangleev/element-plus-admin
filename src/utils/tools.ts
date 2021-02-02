@@ -4,8 +4,8 @@ import { ILocalStore } from '/@/type/utils/tools'
  * 睡眠函数
  * @param time 
  */
-export async function sleep (time:number):Promise<void> {
-    await new Promise(resolve=>{
+export async function sleep(time:number):Promise<void> {
+    await new Promise(resolve => {
         setTimeout(() => resolve, time)
     })
 }
@@ -14,7 +14,7 @@ export async function sleep (time:number):Promise<void> {
  * @param num 金额
  * @param symbol 金额前面修饰符号，如$,￥
  */
-export function format (num:number|string, symbol = '￥'):string{
+export function format(num:number|string, symbol = '￥'):string {
     if(Number.isNaN(Number(num))) return `${symbol}0.00`
     return symbol + (Number(num).toFixed(2))
         .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -23,7 +23,7 @@ export function format (num:number|string, symbol = '￥'):string{
  * 取消金额格式化
  * @param str 金额
  */
-export function unformat (str:string):number|string{
+export function unformat(str:string):number|string {
     const s = str.substr(1).replace(/\,/g, '')
     return Number.isNaN(Number(s)) || Number(s) === 0 ? '' : Number(s)
 }
@@ -31,7 +31,7 @@ export function unformat (str:string):number|string{
  * 表格合计行
  * @param str 金额
  */
-export function tableSummaries (param: { columns: any; data: any }):Array<string | number>{
+export function tableSummaries(param: { columns: any; data: any }):Array<string | number> {
     const { columns, data } = param
     const sums:Array<string | number> = []
     columns.forEach((column: { property: string | number }, index:number) => {
@@ -50,7 +50,7 @@ export function tableSummaries (param: { columns: any; data: any }):Array<string
                 }
             }, 0)
             const sum = sums[index]
-            if(typeof sum === 'number'){
+            if(typeof sum === 'number') {
                 sums[index] = format(sum.toFixed(2))
             }
         } else {
@@ -85,7 +85,7 @@ export function setLocal(name:string, data:IObject<any>, pExpires = 1000 * 60 * 
  * @param name localStorage设置名称
  */
 export async function useLocal(name: string):Promise<ILocalStore> {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         const local = getLocal<ILocalStore>(name)
         if(local.startTime + local.expires < Date.now()) reject(`${name}已超过有效期`)
         resolve(local)
@@ -97,6 +97,6 @@ export async function useLocal(name: string):Promise<ILocalStore> {
  */
 export function getLocal<T>(name:string):T {
     const l = localStorage.getItem(name)
-    const local = JSON.parse(l !== null ? l : '{}') as unknown as  T
+    const local = JSON.parse(l !== null ? l : '{}') as unknown as T
     return local
 }

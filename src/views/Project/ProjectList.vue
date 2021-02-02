@@ -75,7 +75,7 @@ export default defineComponent({
         }
         return {
             list,
-            handleClick,
+            handleClick
         }
     }
 })

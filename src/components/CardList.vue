@@ -67,7 +67,7 @@ export default defineComponent({
         },
         listItem: {
             type: Array,
-            default: ()=>[]
+            default: () => []
         },
         title: {
             type: String,
@@ -85,12 +85,12 @@ export default defineComponent({
         showListstyle: {
             type: Boolean,
             default: true
-        },
+        }
     },
     emits: ['update:show'],
     setup(props, context: SetupContext) {
         return {
-            slots: context.slots,
+            slots: context.slots
         }
     }
 })

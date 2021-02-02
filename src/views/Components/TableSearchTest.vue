@@ -21,6 +21,7 @@
                             <el-button-group>
                                 <el-button
                                     icon='el-icon-search'
+                                    size='mini'
                                     @click='submit'
                                 >
                                     搜索
@@ -228,7 +229,7 @@ export default defineComponent({
             date: '',
             name: '',
             address: '',
-            tag: '所有',
+            tag: '所有'
         })
 
         // const 
@@ -245,6 +246,6 @@ export default defineComponent({
             ...tableRender(tableData, form),
             ...search(tableData, form)
         }
-    },
+    }
 })
 </script>

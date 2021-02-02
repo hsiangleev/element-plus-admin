@@ -31,14 +31,14 @@ export function animate(param:IAnimate):void {
 export async function slide(el:Ref<HTMLDivElement | null>, isShow:boolean, duration = 200):Promise<void> {
     if(!el.value) return
     const { position, zIndex } = getComputedStyle(el.value)
-    if(isShow){
+    if(isShow) {
         el.value.style.position = 'absolute'
         el.value.style.zIndex = '-100000'
         el.value.style.height = 'auto'
     }
     await nextTick()
     const height = el.value.offsetHeight
-    if(isShow){
+    if(isShow) {
         el.value.style.position = position
         el.value.style.zIndex = zIndex
         el.value.style.height = '0px'
@@ -46,7 +46,7 @@ export async function slide(el:Ref<HTMLDivElement | null>, isShow:boolean, durat
     animate({
         timing: timing.linear,
         draw: function(progress) {
-            el.value && (el.value.style.height = isShow ? (progress * height + 'px') : ((1 - progress) * height + 'px'))
+            el.value && (el.value.style.height = isShow ? (`${progress * height}px`) : (`${(1 - progress) * height}px`))
         },
         duration: duration
     })
@@ -64,5 +64,5 @@ const timing = {
     // 圆弧
     circle(timeFraction: number): number {
         return 1 - Math.sin(Math.acos(timeFraction))
-    },
+    }
 }
