@@ -11,7 +11,7 @@
                 "w-64": layout.menubar.status === 0 || layout.menubar.status === 2, 
                 "w-0": layout.menubar.status === 3, 
                 "w-16": layout.menubar.status === 1, 
-                "absolute z-30": layout.menubar.status === 2, 
+                "absolute z-30": layout.menubar.status === 2 || layout.menubar.status === 3, 
             }'
         >
             <div class='layout-sidebar-logo flex h-12 relative flex-center shadow-lg'>

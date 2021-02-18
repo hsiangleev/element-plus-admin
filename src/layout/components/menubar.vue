@@ -45,7 +45,10 @@ export default defineComponent ({
             if(route.meta.activeMenu) return route.meta.activeMenu
             return route.path
         })
-        const onOpenChange = (d: any) => router.push({ path: d })
+        const onOpenChange = (d: any) => {
+            router.push({ path: d })
+            menubar.status === 2 && store.commit('layout/changeCollapsed')
+        }
         return {
             menubar,
             menuList,
