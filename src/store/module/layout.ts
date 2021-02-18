@@ -60,8 +60,8 @@ const mutations = {
     },
     // 切换导航，记录打开的导航
     changeTagNavList(state: ILayout, cRouter:RouteLocationNormalizedLoaded):void {
-        if(new RegExp(/\/redirect\//).test(cRouter.path)) return // 判断是否是重定向页面
         if(!state.setting.showTags) return // 判断是否开启多标签页
+        if(cRouter.meta.hidden && !cRouter.meta.activeMenu) return // 隐藏的菜单如果不是子菜单则不添加到标签
         const index = state.tags.tagsList.findIndex(v => v.path === cRouter.path)
         state.tags.tagsList.forEach(v => v.isActive = false)
         // 判断页面是否打开过

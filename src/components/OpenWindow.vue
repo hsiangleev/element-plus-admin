@@ -1,7 +1,7 @@
 <template>
     <transition name='el-fade-in'>
         <div
-            v-if='show'
+            v-if='isShow'
             class='open-select-mask w-full h-full bg-black bg-opacity-30 z-50 fixed top-0 left-0 flex flex-center'
         >
             <div class='open-select w-11/12 max-w-screen-xl h-5/6 bg-white flex flex-col overflow-x-hidden overflow-y-auto'>
@@ -35,7 +35,7 @@ import { defineComponent, SetupContext } from 'vue'
 export default defineComponent({
     name: 'SelectPage',
     props: {
-        show: {
+        isShow: {
             type: Boolean,
             default: false
         },
@@ -46,7 +46,7 @@ export default defineComponent({
     },
     emits: ['update:show'],
     setup(props, context: SetupContext) {
-        const close = () => context.emit('update:show', !props.show)
+        const close = () => context.emit('update:show', !props.isShow)
         return {
             close,
             slots: context.slots

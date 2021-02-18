@@ -31,18 +31,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, PropType } from 'vue'
 import { IMenubarList } from '/@/type/store/layout'
 export default defineComponent({
     name: 'MenubarItem',
     props: {
         menuList: {
-            type: Object,
+            type: Object as PropType<IMenubarList>,
             default: () => {return {}}
         }
     },
     setup(context) {
-        const cMenuList = computed(() => context.menuList.children.filter((v:IMenubarList) => !v.hidden))
+        const cMenuList = computed(() => {
+            if(context.menuList.children) return context.menuList.children.filter(v => !v.meta.hidden)
+            return []
+        })
         return {
             haChild: context.menuList.children && context.menuList.children.length > 0,
             cMenuList

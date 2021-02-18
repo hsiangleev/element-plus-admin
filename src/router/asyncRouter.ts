@@ -1,37 +1,40 @@
 import { IMenubarList } from '/@/type/store/layout'
 import { listToTree } from '/@/utils/listToTree'
 import { store } from '/@/store/index'
-const components = {
-    Layout: () => import('/@/layout/index.vue'),
-    NotFound: () => import('/@/views/ErrorPage/404.vue'),
-    Workplace: () => import('/@/views/Dashboard/Workplace.vue'),
-    ProjectList: () => import('/@/views/Project/ProjectList.vue'),
-    ProjectDetail: () => import('/@/views/Project/ProjectDetail.vue'),
-    ProjectImport: () => import('/@/views/Project/ProjectImport.vue'),
-    SecondNav: () => import('/@/views/Nav/SecondNav/Index.vue'),
-    ThirdNav: () => import('/@/views/Nav/SecondNav/ThirdNav/Index.vue'),
-    SecondText: () => import('/@/views/Nav/SecondText/Index.vue'),
-    ThirdText: () => import('/@/views/Nav/SecondText/ThirdText/Index.vue'),
-    OpenWindowTest: () => import('/@/views/Components/OpenWindowTest.vue'),
-    CardListTest: () => import('/@/views/Components/CardListTest.vue'),
-    TableSearchTest: () => import('/@/views/Components/TableSearchTest.vue'),
-    ListTest: () => import('/@/views/Components/ListTest.vue'),
-    Directive: () => import('/@/views/Permission/Directive.vue')
+import { IObject } from '../global'
+// 引入动态路由页面
+const modules = import.meta.glob('../views/**/**.vue')
+const components:IObject<() => Promise<typeof import('*.vue')>> = {
+    Layout: () => import('/@/layout/index.vue')
 }
+const componentsIngore:Array<string> = ['login', 'Workplace'] // 忽略的页面
+Object.keys(modules).forEach(key => {
+    const nameMatch = key.match(/^\.\.\/views\/(.*)\/(.*)\.vue/)
+    if(!nameMatch) return
+    let [,,name] = nameMatch
+    // 如果页面以Index命名，则使用父文件夹作为name
+    if(nameMatch[2] === 'Index') {
+        const nameSplit = nameMatch[1].split('/')
+        name = nameSplit[nameSplit.length - 1]
+    }
+    if(!componentsIngore.includes(name)) {
+        components[name] = modules[key] as () => Promise<typeof import('*.vue')>
+    }
+})
 
 const asyncRouter:Array<IMenubarList> = [
     {
         path: '/:pathMatch(.*)*', 
         name: 'NotFound', 
-        component: components['NotFound'],
+        component: components['404'],
         meta: {
             title: 'NotFound',
-            icon: ''
+            icon: '',
+            hidden: true
         }, 
         redirect: {
             name: '404'
-        },
-        hidden: true
+        }
     }
 ]
 
@@ -42,8 +45,6 @@ export const generatorDynamicRouter = (data:Array<IMenubarList>):void => {
         for(let i = 0,len = data.length;i < len;i++) {
             const v:IMenubarList = data[i]
             if(typeof v.component === 'string') v.component = components[v.component]
-            // v.component = components[v.component] || (() => import(`../view${path}.vue`))
-            // v.component = () => import(`../view${data[i].path}.vue`)
             if(!v.meta.permission || pData && v.meta.permission.length === 0) {
                 v.meta.permission = pData && pData.meta && pData.meta.permission ? pData.meta.permission : []
             }

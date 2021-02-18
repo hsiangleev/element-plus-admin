@@ -13,5 +13,6 @@
     "scss.validate": true,
     "files.associations": {
         "*.css": "scss"
-    }
+    },
+    "volar.tsPlugin": true
 }

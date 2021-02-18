@@ -27,3 +27,7 @@
 6. 模拟数据: mockjs
 7. http请求: axios
 8. 单元测试: jest
+
+## vscode扩展
+
+1. 使用johnsoncodehk.volar，并禁用vetur，支持template代码里面的数据类型提示

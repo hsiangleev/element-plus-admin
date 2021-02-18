@@ -39,7 +39,7 @@ export default defineComponent ({
         const route = useRoute()
         const router = useRouter()
         const { menubar } = store.state.layout
-        const menuList = menubar.menuList.filter(v => !v.hidden)
+        const menuList = menubar.menuList.filter(v => !v.meta.hidden)
 
         const activeMenu = computed(() => {
             if(route.meta.activeMenu) return route.meta.activeMenu

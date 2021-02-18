@@ -44,8 +44,8 @@ interface IMenubar {
         permission?: Array<string>
         activeMenu?: string
         noCache?: boolean
+        hidden?: boolean
     }
-    hidden?: boolean
 }
 export interface IMenubarList extends IMenubar {
     component: (() => Promise<typeof import('*.vue')>)

@@ -21,26 +21,26 @@
                     <div class='flex flex-col w-4 h-16'>
                         <div
                             class='h-3'
-                            :style='{"background-color": val.logoBg || val.sidebarBg}'
+                            :style='{"backgroundColor": (val.logoBg || val.sidebarBg)}'
                         />
                         <div
                             class='flex-1'
-                            :style='{"background-color": val.sidebarBg}'
+                            :style='{"backgroundColor": val.sidebarBg}'
                         />
                     </div>
                     <div class='flex flex-col flex-1'>
                         <div
                             class='h-3'
-                            :style='{"background-color": val.navbarBg || "#fff"}'
+                            :style='{"backgroundColor": val.navbarBg || "#fff"}'
                         />
                         <div
                             v-if='layout.setting.showTags'
                             class='h-2'
-                            :style='{"background-color": val.tagsBg || "#fff"}'
+                            :style='{"backgroundColor": val.tagsBg || "#fff"}'
                         />
                         <div
                             class='flex-1 relative'
-                            :style='{"background-color": val.mainBg}'
+                            :style='{"backgroundColor": val.mainBg}'
                         >
                             <i
                                 v-if='layout.setting.theme===index'

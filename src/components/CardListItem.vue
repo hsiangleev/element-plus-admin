@@ -7,7 +7,7 @@
         <div class='card-list-item flex mb-3 text-sm'>
             <div
                 class='text-right pr-3'
-                :style='{"line-height": "28px","width": width, "min-width": width}'
+                :style='{"lineHeight": "28px","width": width, "minWidth": width}'
             >
                 <span
                     v-if='isRequire'
@@ -19,7 +19,7 @@
             <div
                 class='flex-1 font-semibold'
                 :class='{"truncate": !prop}'
-                :style='{"line-height": !prop ? "28px" : "inherit"}'
+                :style='{"lineHeight": !prop ? "28px" : "inherit"}'
             >
                 <el-form-item
                     v-if='prop'

@@ -5,7 +5,7 @@
         </el-button>
         <open-window
             v-model:show='show'
-            :show='show'
+            :is-show='show'
             title='选择页'
         >
             <p style='height: 1500px;'>

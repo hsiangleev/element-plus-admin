@@ -53,20 +53,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext } from 'vue'
+import { defineComponent, SetupContext, PropType } from 'vue'
+
+interface IListItem {
+    url?: string
+    target?: string
+    mark: string
+    text: string
+}
+type IType = 'default' | 'keyvalue'
 
 export default defineComponent({
     name: 'CardList',
     props: {
         type: {
-            type: String,
-            default: 'default',
-            validator: function(value: string) {
-                return ['default', 'keyvalue'].indexOf(value) !== -1
-            }
+            type: String as PropType<IType>,
+            default: 'default'
         },
         listItem: {
-            type: Array,
+            type: Array as PropType<Array<IListItem>>,
             default: () => []
         },
         title: {

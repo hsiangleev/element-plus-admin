@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref, watch, onBeforeUpdate, onMounted, reactive, Ref } from 'vue'
+import { defineComponent, nextTick, ref, watch, onBeforeUpdate, onMounted, reactive, Ref, ComponentInternalInstance } from 'vue'
 import { useStore } from '/@/store/index'
 import { Store } from 'vuex'
 import { IState } from '/@/global'
@@ -100,7 +100,7 @@ const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNorm
 const tagScroll = (store:Store<IState>) => {
     const { tagsList, cachedViews } = store.state.layout.tags
     const scrollbar:Ref<{wrap:HTMLElement, update():void} | null> = ref(null)
-    const layoutTagsItem:Ref<Array<HTMLElement>> = ref([])
+    const layoutTagsItem:Ref<Array<ComponentInternalInstance | Element | null>> = ref([])
     // 监听标签页导航
     watch(
         () => tagsList.length,
@@ -109,7 +109,8 @@ const tagScroll = (store:Store<IState>) => {
             scrollbar.value.update()
             nextTick(() => {
                 const itemWidth = layoutTagsItem.value.filter(v => v).reduce((acc, v) => {
-                    return acc + v.offsetWidth + 6
+                    const val = v as HTMLElement
+                    return acc + val.offsetWidth + 6
                 }, 0)
                 if(!scrollbar.value) return
                 const scrollLeft = itemWidth - scrollbar.value.wrap.offsetWidth + 70

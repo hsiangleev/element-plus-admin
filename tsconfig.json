@@ -3,8 +3,9 @@
         "sourceMap": true,
         "strict": true,
         // "noImplicitAny": true,
-        "module": "commonjs",
+        "module": "esnext",
         "target": "es6",
+        "moduleResolution": "Node",
         "baseUrl": ".",
         "paths": {
             "/@/*": ["src/*"]

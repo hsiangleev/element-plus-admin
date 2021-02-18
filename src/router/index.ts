@@ -4,6 +4,7 @@ import { IMenubarList } from '/@/type/store/layout'
 const components = {
     Layout: () => import('/@/layout/index.vue'),
     Redirect: () => import('/@/layout/redirect.vue'),
+    LayoutBlank: () => import('/@/layout/blank.vue'),
     404: () => import('/@/views/ErrorPage/404.vue'),
     Workplace: () => import('/@/views/Dashboard/Workplace.vue'),
 
@@ -30,8 +31,8 @@ export const allowRouter:Array<IMenubarList> = [
     {
         name: 'ErrorPage',
         path: '/ErrorPage',
-        meta: { title: '错误页面', icon: 'el-icon-eleme' },
-        component: components['Layout'],
+        meta: { title: '错误页面', hidden: true, icon: 'el-icon-eleme' },
+        component: components.LayoutBlank,
         redirect: '/ErrorPage/404',
         children: [
             {
@@ -48,17 +49,16 @@ export const allowRouter:Array<IMenubarList> = [
         meta: {
             title: '重定向页面',
             icon: '',
+            hidden: true,
             permission: []
         },
-        hidden: true,
         component: components.Redirect
     },
     {
         name: 'Login',
         path: '/Login',
         component: components.Login,
-        meta: { title: '登录', icon: 'el-icon-eleme' },
-        hidden: true
+        meta: { title: '登录', icon: 'el-icon-eleme', hidden: true }
     }
 ]
 

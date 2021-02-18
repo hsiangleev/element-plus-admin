@@ -78,8 +78,7 @@ export const route:Array<IMenubarRoute> = [
         name: 'ProjectDetail',
         path: '/Project/ProjectDetail/:projName',
         component: 'ProjectDetail',
-        meta: { title: '项目详情', icon: 'el-icon-question', activeMenu: '/Project/ProjectList' },
-        hidden: true
+        meta: { title: '项目详情', icon: 'el-icon-question', activeMenu: '/Project/ProjectList', hidden: true }
     },
     {
         id: 22,
