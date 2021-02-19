@@ -46,7 +46,14 @@ export async function slide(el:Ref<HTMLDivElement | null>, isShow:boolean, durat
     animate({
         timing: timing.linear,
         draw: function(progress) {
-            el.value && (el.value.style.height = isShow ? (`${progress * height}px`) : (`${(1 - progress) * height}px`))
+            if(!el.value) return
+            el.value.style.height = isShow 
+                ? progress === 1
+                    ? 'auto'
+                    : (`${progress * height}px`) 
+                : progress === 0
+                    ? 'auto'
+                    : (`${(1 - progress) * height}px`)
         },
         duration: duration
     })

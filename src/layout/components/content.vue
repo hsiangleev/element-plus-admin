@@ -18,6 +18,13 @@
                 </keep-alive>
             </transition>
         </router-view>
+        <el-backtop
+            target='.layout-main-content>.el-scrollbar>.el-scrollbar__wrap'
+            :bottom='15'
+            :right='15'
+        >
+            <div><i class='el-icon-caret-top' /></div>
+        </el-backtop>
     </el-scrollbar>
 </template>
 
