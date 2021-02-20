@@ -1,14 +1,15 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { IMenubarList } from '/@/type/store/layout'
+import { IObject } from '/@/global'
 
-const components = {
-    Layout: () => import('/@/layout/index.vue'),
-    Redirect: () => import('/@/layout/redirect.vue'),
-    LayoutBlank: () => import('/@/layout/blank.vue'),
-    404: () => import('/@/views/ErrorPage/404.vue'),
-    Workplace: () => import('/@/views/Dashboard/Workplace.vue'),
+const components:IObject<() => Promise<typeof import('*.vue')>> = {
+    Layout: (() => import('/@/layout/index.vue')) as unknown as () => Promise<typeof import('*.vue')>,
+    Redirect: (() => import('/@/layout/redirect.vue')) as unknown as () => Promise<typeof import('*.vue')>,
+    LayoutBlank: (() => import('/@/layout/blank.vue')) as unknown as () => Promise<typeof import('*.vue')>,
+    404: (() => import('/@/views/ErrorPage/404.vue')) as unknown as () => Promise<typeof import('*.vue')>,
+    Workplace: (() => import('/@/views/Dashboard/Workplace.vue')) as unknown as () => Promise<typeof import('*.vue')>,
 
-    Login: () => import('/@/views/User/Login.vue')
+    Login: (() => import('/@/views/User/Login.vue')) as unknown as () => Promise<typeof import('*.vue')>
 }
 
 // 静态路由页面

@@ -1,11 +1,11 @@
 import { IMenubarList } from '/@/type/store/layout'
-import { listToTree } from '/@/utils/listToTree'
+import { listToTree } from '/@/utils/index'
 import { store } from '/@/store/index'
-import { IObject } from '../global'
+import { IObject } from '/@/global'
 // 引入动态路由页面
 const modules = import.meta.glob('../views/**/**.vue')
 const components:IObject<() => Promise<typeof import('*.vue')>> = {
-    Layout: () => import('/@/layout/index.vue')
+    Layout: (() => import('/@/layout/index.vue')) as unknown as () => Promise<typeof import('*.vue')>
 }
 const componentsIngore:Array<string> = ['login', 'Workplace'] // 忽略的页面
 Object.keys(modules).forEach(key => {

@@ -1,17 +1,12 @@
 import { App, nextTick } from 'vue'
-import router from '/@/router/index'
-import { format, unformat } from '/@/utils/tools'
+import { format, unformat } from '/@/utils/index'
+import { checkPermission, IPermissionType } from '/@/utils/permission'
 export default (app:App<Element>):void => {
     app.directive('action', {
         mounted(el, binding) {
             const value:Array<string> = typeof binding.value === 'string' ? [binding.value] : binding.value
-            const arg:string = typeof binding.arg === 'string' ? binding.arg : 'or'
-            const currentRoute = router.currentRoute.value
-            const roles:Array<string> = currentRoute.meta.permission || []
-            const isShow = arg === 'and' 
-                ? value.every(v => roles.includes(v))
-                : value.some(v => roles.includes(v))
-            if(!isShow) {
+            const arg:IPermissionType = binding.arg === 'and' ? 'and' : 'or'
+            if(!checkPermission(value, arg)) {
                 el.parentNode && el.parentNode.removeChild(el)
             }
         }

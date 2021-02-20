@@ -5,7 +5,7 @@ import router from '/@/router/index'
 import { allowRouter } from '/@/router/index'
 import { generatorDynamicRouter } from '/@/router/asyncRouter'
 import changeTheme from '/@/utils/changeTheme'
-import { setLocal, useLocal, getLocal } from '/@/utils/tools'
+import { setLocal, useLocal, getLocal } from '/@/utils/index'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 import { IState } from '/@/global'
 

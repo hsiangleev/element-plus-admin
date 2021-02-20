@@ -171,7 +171,7 @@ import TableSearch from '/@/components/TableSearch.vue'
 import CardList from '/@/components/CardList.vue'
 import CardListItem from '/@/components/CardListItem.vue'
 import { getTableList, ITag } from '/@/api/components/index'
-import { format, tableSummaries } from '/@/utils/tools'
+import { format, tableSummaries } from '/@/utils/index'
 import { validate } from '/@/utils/formExtend'
 
 interface ISearchForm {

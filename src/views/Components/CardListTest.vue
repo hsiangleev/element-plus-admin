@@ -243,7 +243,7 @@
 import { defineComponent, reactive, ref } from 'vue'
 import CardList from '/@/components/CardList.vue'
 import CardListItem from '/@/components/CardListItem.vue'
-import { format } from '/@/utils/tools'
+import { format } from '/@/utils/index'
 import { validate, resetFields } from '/@/utils/formExtend'
 
 // 键值对样式，及表单校验

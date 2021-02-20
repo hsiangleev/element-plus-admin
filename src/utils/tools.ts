@@ -1,5 +1,6 @@
 import { IObject } from '/@/global'
 import { ILocalStore } from '/@/type/utils/tools'
+import { IMenubarList } from '/@/type/store/layout'
 /**
  * 睡眠函数
  * @param time 
@@ -99,4 +100,47 @@ export function getLocal<T>(name:string):T {
     const l = localStorage.getItem(name)
     const local = JSON.parse(l !== null ? l : '{}') as unknown as T
     return local
+}
+
+/**
+ * 函数节流
+ * @param time 间隔时间
+ */
+export function throttle(time = 500):()=>Promise<void> {
+    let timer:NodeJS.Timeout | null = null
+    let firstTime = true
+    return () => {
+        return new Promise(resolve => {
+            if(firstTime) {
+                resolve()
+                return firstTime = false
+            }
+            if(timer) return false
+            timer = setTimeout(() => {
+                if(timer) clearTimeout(timer)
+                timer = null
+                resolve()
+            }, time)
+        })
+    }
+}
+
+/**
+ * list结构转tree
+ * @param data list原始数据
+ * @param pid 最外层pid
+ */
+export function listToTree(data:Array<IMenubarList>, pid: string | number = 1, isChildNull = false):Array<IMenubarList> {
+    const d:Array<IMenubarList> = []
+    data.forEach(val => {
+        if(val.parentId == pid) {
+            const list = listToTree(data, val.id, isChildNull)
+            const obj:IMenubarList = { ...val }
+            if(!isChildNull || list.length !== 0) {
+                obj.children = list
+            }
+            d.push(obj)
+        }
+    })
+    return d
 }

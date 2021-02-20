@@ -5,10 +5,21 @@
             class='mb-1'
         >
             <el-button type='primary'>
-                添加权限
+                添加权限 
             </el-button>
             <el-tag class='ml-1'>
                 v-action='"add"'
+            </el-tag>
+        </el-row>
+        <el-row
+            v-if='checkPermission("add")'
+            class='mb-1'
+        >
+            <el-button type='primary'>
+                添加权限
+            </el-button>
+            <el-tag class='ml-1'>
+                v-if='checkPermission("add")'
             </el-tag>
         </el-row>
         <el-row
@@ -71,13 +82,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useStore } from '/@/store/index'
+import { checkPermission } from '/@/utils/permission'
 export default defineComponent({
     name: 'Directive',
     setup() {
         const store = useStore()
         const logout = () => store.commit('layout/logout')
         return {
-            logout
+            logout,
+            checkPermission
         }
     }
 })
