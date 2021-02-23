@@ -7,7 +7,6 @@ import { generatorDynamicRouter } from '/@/router/asyncRouter'
 import changeTheme from '/@/utils/changeTheme'
 import { setLocal, useLocal, getLocal } from '/@/utils/index'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
-import { IState } from '/@/global'
 
 const setting = getLocal<ISetting>('setting')
 const token = getLocal<IToken>('token')

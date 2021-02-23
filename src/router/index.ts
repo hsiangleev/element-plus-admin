@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { IMenubarList } from '/@/type/store/layout'
-import { IObject } from '/@/global'
 
 const components:IObject<() => Promise<typeof import('*.vue')>> = {
     Layout: (() => import('/@/layout/index.vue')) as unknown as () => Promise<typeof import('*.vue')>,

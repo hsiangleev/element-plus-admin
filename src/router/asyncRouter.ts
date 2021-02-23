@@ -1,7 +1,6 @@
 import { IMenubarList } from '/@/type/store/layout'
 import { listToTree } from '/@/utils/index'
 import { store } from '/@/store/index'
-import { IObject } from '/@/global'
 // 引入动态路由页面
 const modules = import.meta.glob('../views/**/**.vue')
 const components:IObject<() => Promise<typeof import('*.vue')>> = {

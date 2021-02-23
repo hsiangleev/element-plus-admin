@@ -3,7 +3,6 @@ import { nextTick, ComponentPublicInstance, ref } from 'vue'
 import CardList from '/@/components/CardList.vue'
 import CardListItem from '/@/components/CardListItem.vue'
 import ElementPlus from 'element-plus'
-import { IObject } from '/@/global'
 
 describe('CardList.vue', () => {
     const createCardList = function(props:string, opts:IObject<any> | null, slot?:string): VueWrapper<ComponentPublicInstance> {

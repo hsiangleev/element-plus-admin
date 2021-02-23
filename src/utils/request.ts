@@ -1,5 +1,6 @@
 import { store } from '/@/store/index'
 import axios from 'axios'
+import { AxiosResponse } from 'axios'
 import { ElLoading, ElNotification } from 'element-plus'
 
 let loading:{close():void}
@@ -40,7 +41,7 @@ request.interceptors.request.use(config => {
 }, errorHandler)
 
 // response interceptor
-request.interceptors.response.use((response) => {
+request.interceptors.response.use((response:AxiosResponse<IResponse>) => {
     const { data } = response
     loading.close()
     if(data.Code !== 200) {

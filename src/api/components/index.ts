@@ -1,5 +1,5 @@
 import request from '/@/utils/request'
-import { AxiosPromise } from 'axios'
+import { AxiosResponse } from 'axios'
 const api = {
     getTableList: '/getTableList'
 }
@@ -9,7 +9,7 @@ export interface ITableList {
     size: number
     tag: ITag
 }
-export function getTableList(tableList: ITableList): AxiosPromise {
+export function getTableList(tableList: ITableList): Promise<AxiosResponse<IResponse>> {
     return request({
         url: api.getTableList,
         method: 'get',

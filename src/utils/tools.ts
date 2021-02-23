@@ -1,4 +1,3 @@
-import { IObject } from '/@/global'
 import { ILocalStore } from '/@/type/utils/tools'
 import { IMenubarList } from '/@/type/store/layout'
 /**

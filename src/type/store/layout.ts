@@ -32,7 +32,7 @@ export interface ILayout {
     setting: ISetting
     isLoading: boolean
 }
-interface IMenubar {
+export interface IMenubarList {
     parentId?: number | string
     id?: number | string
     name: string
@@ -46,14 +46,8 @@ interface IMenubar {
         noCache?: boolean
         hidden?: boolean
     }
-}
-export interface IMenubarList extends IMenubar {
-    component: (() => Promise<typeof import('*.vue')>)
+    component: (() => Promise<typeof import('*.vue')>) | string
     children?: Array<IMenubarList>
-}
-export interface IMenubarRoute extends IMenubar {
-    component: string
-    children?: Array<IMenubarRoute>
 }
 
 export interface ITagsList {

@@ -173,6 +173,7 @@ import CardListItem from '/@/components/CardListItem.vue'
 import { getTableList, ITag } from '/@/api/components/index'
 import { format, tableSummaries } from '/@/utils/index'
 import { validate } from '/@/utils/formExtend'
+import { IRenderTableList } from '/@/type/views/Components/TableSearchTest'
 
 interface ISearchForm {
     date: string
@@ -180,15 +181,9 @@ interface ISearchForm {
     address: string
     tag: ITag
 }
-interface ITable {
-    data : Array<unknown>
-    total: number
-    page: number
-    size: number
-}
 
 // 键值对样式，及表单校验
-const search = (table: ITable, form: ISearchForm) => {
+const search = (table: ITable<IRenderTableList>, form: ISearchForm) => {
     const rules = reactive({})
     const refForm = ref(null)
     const submit = async() => {
@@ -203,12 +198,12 @@ const search = (table: ITable, form: ISearchForm) => {
     }
 }
 
-const renderTableList = async(table: ITable, form: ISearchForm) => {
+const renderTableList = async(table: ITable<IRenderTableList>, form: ISearchForm) => {
     const d = await getTableList({ page: table.page, size: table.size, tag: form.tag })
     table.data = d.data.Data.data
     table.total = d.data.Data.total
 }
-const tableRender = (table: ITable, form: ISearchForm) => {
+const tableRender = (table: ITable<IRenderTableList>, form: ISearchForm) => {
     renderTableList(table, form)
     const handleSizeChange = (v: number) => (table.size = v) && renderTableList(table, form)
     const handleCurrentChange = (v: number) => (table.page = v) && renderTableList(table, form)
@@ -233,7 +228,7 @@ export default defineComponent({
         })
 
         // const 
-        const tableData: ITable = reactive({
+        const tableData: ITable<IRenderTableList> = reactive({
             data : [],
             total: 0,
             page: 1,

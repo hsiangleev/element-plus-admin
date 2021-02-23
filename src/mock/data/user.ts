@@ -1,4 +1,4 @@
-import { IMenubarRoute } from '/@/type/store/layout'
+import { IMenubarList } from '/@/type/store/layout'
 export const user = [
     { name: 'admin', pwd: 'admin' },
     { name: 'dev', pwd: 'dev' },
@@ -54,7 +54,7 @@ export const role_route = [
     { roleName: 'test', id: 50, permission: ['update'] }
 ]
 
-export const route:Array<IMenubarRoute> = [
+export const route:Array<IMenubarList> = [
     {
         id: 2,
         parentId: 0,
