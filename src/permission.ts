@@ -1,6 +1,7 @@
 import router from '/@/router'
 import { store } from '/@/store/index'
 import { configure, start, done } from 'nprogress'
+import { RouteRecordRaw } from 'vue-router'
 
 configure({ showSpinner: false })
 
@@ -26,7 +27,7 @@ router.beforeEach(async(to, from) => {
         await store.dispatch('layout/GenerateRoutes')
         await store.dispatch('layout/getUser')
         for(let i = 0;i < layout.menubar.menuList.length;i++) {
-            router.addRoute(layout.menubar.menuList[i])
+            router.addRoute(layout.menubar.menuList[i] as RouteRecordRaw)
         }
         store.commit('layout/concatAllowRoutes')
         return to.fullPath

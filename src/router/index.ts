@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { IMenubarList } from '/@/type/store/layout'
 
 const components:IObject<() => Promise<typeof import('*.vue')>> = {
@@ -64,7 +64,7 @@ export const allowRouter:Array<IMenubarList> = [
 
 const router = createRouter({
     history: createWebHashHistory(), // createWebHistory
-    routes: allowRouter
+    routes: allowRouter as RouteRecordRaw[]
 })
 
 export default router
