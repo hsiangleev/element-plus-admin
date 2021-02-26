@@ -18,7 +18,7 @@
                         class='notice-tabs-pane'
                     >
                         <el-scrollbar class='scrollbar-wrapper'>
-                            <list :data='data.notice' />
+                            <list :data='data' />
                             <el-pagination
                                 layout='prev, pager, next'
                                 :total='1000'
@@ -33,7 +33,7 @@
                         class='notice-tabs-pane'
                     >
                         <el-scrollbar class='scrollbar-wrapper'>
-                            <list :data='data.notice' />
+                            <list :data='data' />
                         </el-scrollbar>
                     </el-tab-pane>
                     <el-tab-pane
@@ -41,7 +41,7 @@
                         class='notice-tabs-pane'
                     >
                         <el-scrollbar class='scrollbar-wrapper'>
-                            <list :data='data.notice' />
+                            <list :data='data' />
                         </el-scrollbar>
                     </el-tab-pane>
                 </el-tabs>
@@ -51,8 +51,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import List from '/@/components/List.vue'
+import { defineComponent } from 'vue'
+import List, { IList } from '/@/components/List.vue'
 
 export default defineComponent({
     name: 'Notice',
@@ -60,16 +60,14 @@ export default defineComponent({
         List
     },
     setup() {
-        const data = reactive({
-            notice: [
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领a。', subTitle: '2021/01/28 15:21:32', href: 'javascript:;' },
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领a。', subTitle: '2021/01/28 15:21:32' },
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领a。', subTitle: '2021/01/28 15:21:32' },
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领a。', subTitle: '2021/01/28 15:21:32' },
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领a。', subTitle: '2021/01/28 15:21:32' },
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领a。', subTitle: '2021/01/28 15:21:32' }
-            ]
-        })
+        const data:IList[] = [
+            { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', subTitle: '斗通关无际县军连用知政以该果思快领a。', time: '2021/01/28 15:21:32', href: 'javascript:;' },
+            { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', subTitle: '斗通关无际县军连用知政以该果思快领a。', time: '2021/01/28 15:21:32' },
+            { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', subTitle: '斗通关无际县军连用知政以该果思快领a。', time: '2021/01/28 15:21:32' },
+            { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', subTitle: '斗通关无际县军连用知政以该果思快领a。', time: '2021/01/28 15:21:32' },
+            { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', subTitle: '斗通关无际县军连用知政以该果思快领a。', time: '2021/01/28 15:21:32' },
+            { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', subTitle: '斗通关无际县军连用知政以该果思快领a。', time: '2021/01/28 15:21:32' }
+        ]
         return {
             data
         }

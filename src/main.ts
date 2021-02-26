@@ -11,6 +11,7 @@ import 'element-plus/lib/theme-chalk/index.css'
 import 'element-plus/lib/theme-chalk/display.css'
 import 'nprogress/nprogress.css'
 import '/@/index.css'
+import '/@/element.css'
 
 const app = createApp(App)
 direct(app)

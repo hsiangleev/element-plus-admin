@@ -1,0 +1,13 @@
+.component-list-card {
+    .el-card__body {
+        padding: 0;
+    }
+
+    .el-card__header {
+        margin-bottom: -1px;
+    }
+
+    .el-card {
+        overflow: visible;
+    }
+}

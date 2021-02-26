@@ -1,20 +1,26 @@
 <template>
     <el-tabs type='border-card'>
         <el-tab-pane label='通知'>
-            <list :data='data.list' />
+            <list :data='data'>
+                <template #default='scope'>
+                    <el-button @click='edit(scope.item)'>
+                        操作
+                    </el-button>
+                </template>
+            </list>
         </el-tab-pane>
         <el-tab-pane label='关注'>
-            <list :data='data.list' />
+            <list :data='data' />
         </el-tab-pane>
         <el-tab-pane label='待办'>
-            <list :data='data.list' />
+            <list :data='data' />
         </el-tab-pane>
     </el-tabs>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import List from '/@/components/List.vue'
+import { defineComponent } from 'vue'
+import List, { IList } from '/@/components/List.vue'
 
 export default defineComponent({
     name: 'ListTest',
@@ -22,15 +28,34 @@ export default defineComponent({
         List
     },
     setup() {
-        const data = reactive({
-            list: [
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领a。', subTitle: '2021/01/28 15:21:32', href: 'javascript:;' },
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领b。', subTitle: '2021/01/28 15:21:32' },
-                { imgUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', title: '斗通关无际县军连用知政以该果思快领c。', subTitle: '2021/01/28 15:21:32' }
-            ]
-        })
+        const data:IList[] = [
+            { 
+                iconClass: 'el-icon-goods',
+                subTitle: '斗通关无际县军连用知政以该果思快领c。',
+                tag: '科学搬砖组',
+                time: '2021/01/28 15:21:32',
+                href: 'javascript:;'
+            },
+            { 
+                iconClass: 'el-icon-goods',
+                subTitle: '斗通关无际县军连用知政以该果思快领c。',
+                tag: '科学搬砖组',
+                time: '2021/01/28 15:21:32',
+                href: 'javascript:;'
+            },
+            { 
+                iconClass: 'el-icon-goods',
+                subTitle: '斗通关无际县军连用知政以该果思快领c。',
+                tag: '科学搬砖组',
+                time: '2021/01/28 15:21:32',
+                href: 'javascript:;'
+            }
+        ]
+
+        const edit = (item:IList) => console.log(item)
         return {
-            data
+            data,
+            edit
         }
     }
 })
