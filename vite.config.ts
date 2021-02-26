@@ -19,16 +19,17 @@ export default defineConfig({
         port: 3002
     },
     build: {
-        sourcemap: true
-        // manifest: true
-        // rollupOptions: {
-        //     output: {
-        //         manualChunks(id) {
-        //             if (id.includes('node_modules/element-plus')) return 'element-plus'
-        //         }
-        //     }
-        // },
-        // chunkSizeWarningLimit: 600
+        sourcemap: true,
+        manifest: true,
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    'element-plus': ['element-plus'],
+                    echarts: ['echarts']
+                }
+            }
+        },
+        chunkSizeWarningLimit: 600
     },
     optimizeDeps: {
         // include: ['axios', 'nprogress', 'mockjs']

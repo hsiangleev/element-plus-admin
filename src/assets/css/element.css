@@ -6,7 +6,9 @@
     .el-card__header {
         margin-bottom: -1px;
     }
+}
 
+.page {
     .el-card {
         overflow: visible;
     }

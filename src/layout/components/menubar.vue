@@ -10,7 +10,7 @@
                 "w-16": menubar.status === 1, 
             }'
             :collapse-transition='false'
-            :unique-opened='true'
+            :unique-opened='false'
             @select='onOpenChange'
         >
             <menubar-item

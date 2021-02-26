@@ -11,6 +11,7 @@
     "stylelint": "npx stylelint **/*.{css,vue} --fix"
   },
   "dependencies": {
+    "echarts": "^5.0.2",
     "element-plus": "^1.0.2-beta.32",
     "vue": "^3.0.5"
   },
