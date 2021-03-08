@@ -3,7 +3,7 @@
 		"scope": "javascript,typescript,vue",
 		"prefix": "con",
 		"body": [
-			"console.log('$1')"
+			"console.log($1)"
 		],
 		"description": "Log output to console"
 	},

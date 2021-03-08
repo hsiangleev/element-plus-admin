@@ -1,6 +1,6 @@
 <template>
     <el-submenu
-        v-if='haChild'
+        v-if='menuList.children && menuList.children.length > 0'
         :key='menuList.path'
         :index='menuList.path'
     >
@@ -10,7 +10,7 @@
         </template>
         <el-menu-item-group>
             <menubar-item
-                v-for='v in cMenuList'
+                v-for='v in menuList.children'
                 :key='v.path'
                 :index='v.path'
                 :menu-list='v'
@@ -31,8 +31,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { IMenubarList } from '/@/type/store/layout'
+
 export default defineComponent({
     name: 'MenubarItem',
     props: {
@@ -41,15 +42,8 @@ export default defineComponent({
             default: () => {return {}}
         }
     },
-    setup(context) {
-        const cMenuList = computed(() => {
-            if(context.menuList.children) return context.menuList.children.filter(v => !v.meta.hidden)
-            return []
-        })
-        return {
-            haChild: context.menuList.children && context.menuList.children.length > 0,
-            cMenuList
-        }
+    setup() {
+        return {}
     }
 })
 </script>

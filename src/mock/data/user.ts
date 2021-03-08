@@ -104,7 +104,7 @@ export const route:Array<IMenubarList> = [
         path: '/Nav/SecondNav',
         redirect: '/Nav/SecondNav/ThirdNav',
         component: 'SecondNav',
-        meta: { title: '二级导航', icon: 'el-icon-camera' }
+        meta: { title: '二级导航', icon: 'el-icon-camera', alwaysShow: true }
     },
     {
         id: 300,
@@ -121,7 +121,7 @@ export const route:Array<IMenubarList> = [
         path: '/Nav/SecondText',
         redirect: '/Nav/SecondText/ThirdText',
         component: 'SecondText',
-        meta: { title: '二级文本', icon: 'el-icon-s-opportunity' }
+        meta: { title: '二级文本', icon: 'el-icon-s-opportunity', alwaysShow: true }
     },
     {
         id: 310,
@@ -179,7 +179,7 @@ export const route:Array<IMenubarList> = [
         path: '/Permission',
         component: 'Layout',
         redirect: '/Permission/Directive',
-        meta: { title: '权限管理', icon: 'el-icon-phone' }
+        meta: { title: '权限管理', icon: 'el-icon-phone', alwaysShow: true }
     },
     {
         id: 50,

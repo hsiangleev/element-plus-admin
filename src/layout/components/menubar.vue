@@ -14,7 +14,7 @@
             @select='onOpenChange'
         >
             <menubar-item
-                v-for='v in menuList'
+                v-for='v in filterMenubarData'
                 :key='v.path'
                 :index='v.path'
                 :menu-list='v'
@@ -28,6 +28,27 @@ import { defineComponent, computed } from 'vue'
 import MenubarItem from '/@/layout/components/menubarItem.vue'
 import { useStore } from '/@/store/index'
 import { useRoute, useRouter } from 'vue-router'
+import { IMenubarList } from '/@/type/store/layout'
+
+// 过滤隐藏的菜单，并提取单条的子菜单
+const filterMenubar = (menuList:IMenubarList[]) => {
+    const f = (menuList:IMenubarList[]) => {
+        let arr:IMenubarList[] = []
+        menuList.filter(v => !v.meta.hidden).forEach(v => {
+            let child = v.children && v.children.filter(v => !v.meta.hidden)
+            let currentItem = v
+            if(!v.meta.alwaysShow && child && child.length === 1) {
+                [currentItem] = child
+            }
+            arr.push(currentItem)
+            if(currentItem.children && currentItem.children.length > 0) {
+                arr[arr.length - 1].children = f(currentItem.children)
+            }
+        })
+        return arr
+    }
+    return f(menuList)
+}
 
 export default defineComponent ({
     name: 'LayoutMenubar',
@@ -39,7 +60,8 @@ export default defineComponent ({
         const route = useRoute()
         const router = useRouter()
         const { menubar } = store.state.layout
-        const menuList = menubar.menuList.filter(v => !v.meta.hidden)
+
+        const filterMenubarData = filterMenubar(menubar.menuList)
 
         const activeMenu = computed(() => {
             if(route.meta.activeMenu) return route.meta.activeMenu
@@ -51,7 +73,7 @@ export default defineComponent ({
         }
         return {
             menubar,
-            menuList,
+            filterMenubarData,
             activeMenu,
             onOpenChange
         }
