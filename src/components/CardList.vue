@@ -8,7 +8,7 @@
                 v-if='showHeader'
                 #header
             >
-                <div class='flex justify-between items-center'>
+                <div class='card-list-header flex justify-between items-center'>
                     <span>{{ title }}</span>
                     <slot name='btn' />
                 </div>
@@ -101,17 +101,21 @@ export default defineComponent({
 })
 </script>
 
-<style>
-    .card-list .el-card__header {
-        padding: 10px 15px;
+<style lang="postcss" scoped>
+    ::v-deep(.el-card__header) {
+        padding: 7px 15px;
     }
 
-    .card-list .el-button {
+    ::v-deep(.el-button) {
         padding: 4px 6px;
         border-radius: 3px;
     }
-</style>
-<style lang="postcss" scoped>
+
+    .card-list-header {
+        height: 28px;
+        line-height: 28px;
+    }
+
     .card-list-body {
         list-style: square;
 

@@ -154,17 +154,24 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang='postcss' scoped>
+    ::v-deep(.el-card__header) {
+        margin-bottom: -1px;
+    }
 
-.c-list-card-body {
-    transition: all 0.3s;
-    position: relative;
-    padding: 15px;
-    box-shadow: 1px 0 0 0 #f0f0f0, 0 1px 0 0 #f0f0f0, 1px 1px 0 0 #f0f0f0, inset 1px 0 0 0 #f0f0f0, inset 0 1px 0 0 #f0f0f0;
-}
+    ::v-deep(.el-card__body) {
+        padding: 0;
+    }
 
-.c-list-card-body:hover {
-    z-index: 1;
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-}
+    .c-list-card-body {
+        transition: all 0.3s;
+        position: relative;
+        padding: 15px;
+        box-shadow: 1px 0 0 0 #f0f0f0, 0 1px 0 0 #f0f0f0, 1px 1px 0 0 #f0f0f0, inset 1px 0 0 0 #f0f0f0, inset 0 1px 0 0 #f0f0f0;
+    }
+
+    .c-list-card-body:hover {
+        z-index: 1;
+        box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    }
 </style>

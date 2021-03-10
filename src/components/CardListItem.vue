@@ -63,16 +63,17 @@ export default defineComponent({
 })
 </script>
 
-<style>
-    .card-list-item .el-form-item--mini.el-form-item,
-    .el-form-item--small.el-form-item {
-        margin-bottom: 0;
-    }
+    
+<style lang='postcss' scoped>
 
-    .card-list-item .el-select,
-    .card-list-item .el-date-editor.el-input,
-    .card-list-item .el-date-editor.el-input__inner {
+    ::v-deep(.el-select),
+    ::v-deep(.el-date-editor.el-input),
+    ::v-deep(.el-date-editor.el-input__inner) {
         width: 100%;
     }
+
+    ::v-deep(.el-form-item--mini.el-form-item),
+    ::v-deep(.el-form-item--small.el-form-item) {
+        margin-bottom: 0;
+    }
 </style>
-    

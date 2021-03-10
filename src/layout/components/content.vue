@@ -59,6 +59,11 @@ export default defineComponent ({
 </script>
 
 <style lang='postcss' scoped>
+
+::v-deep(.el-card) {
+    overflow: visible;
+}
+
 .fade-transform-leave-active,
 .fade-transform-enter-active {
     transition: all 0.5s;
