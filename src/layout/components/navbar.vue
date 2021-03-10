@@ -8,16 +8,21 @@
         <!-- 面包屑导航 -->
         <div class='px-4 hidden-xs-only'>
             <el-breadcrumb separator='/'>
-                <el-breadcrumb-item :to='{ path: "/" }'>
-                    主页
-                </el-breadcrumb-item>
-                <el-breadcrumb-item
-                    v-for='v in data.breadcrumbList'
-                    :key='v.path'
-                    :to='v.path'
-                >
-                    {{ v.title }}
-                </el-breadcrumb-item>
+                <transition-group name='breadcrumb'>
+                    <el-breadcrumb-item
+                        key='/'
+                        :to='{ path: "/" }'
+                    >
+                        主页
+                    </el-breadcrumb-item>
+                    <el-breadcrumb-item
+                        v-for='v in data.breadcrumbList'
+                        :key='v.path'
+                        :to='v.path'
+                    >
+                        {{ v.title }}
+                    </el-breadcrumb-item>
+                </transition-group>
             </el-breadcrumb>
         </div>
     </div>
@@ -117,3 +122,24 @@ export default defineComponent ({
     }
 })
 </script>
+
+<style lang='postcss' scoped>
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+    transition: all 0.5s;
+}
+
+.breadcrumb-enter,
+.breadcrumb-leave-active {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.breadcrumb-move {
+    transition: all 0.5s;
+}
+
+.breadcrumb-leave-active {
+    position: absolute;
+}
+</style>
