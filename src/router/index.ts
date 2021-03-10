@@ -44,15 +44,21 @@ export const allowRouter:Array<IMenubarList> = [
         ]
     },
     {
-        name: 'Redirect',
-        path: '/redirect/:pathMatch(.*)*',
-        meta: {
-            title: '重定向页面',
-            icon: '',
-            hidden: true,
-            permission: []
-        },
-        component: components.Redirect
+        name: 'RedirectPage',
+        path: '/redirect',
+        component: components['Layout'],
+        meta: { title: '重定向页面', icon: 'el-icon-eleme', hidden: true },
+        children: [
+            {
+                name: 'Redirect',
+                path: '/redirect/:pathMatch(.*)*',
+                meta: {
+                    title: '重定向页面',
+                    icon: ''
+                },
+                component: components.Redirect
+            }
+        ]
     },
     {
         name: 'Login',

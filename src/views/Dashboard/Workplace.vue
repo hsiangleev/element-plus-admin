@@ -190,7 +190,7 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import List, { IList } from '/@/components/List.vue'
 import { useStore } from '/@/store/index'
-import { echarts, ECOption } from '/@//components/Echart'
+import { echarts, ECOption } from '/@/components/Echart'
 
 // list初始化
 const listRender = () => {
