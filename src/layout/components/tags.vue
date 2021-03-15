@@ -6,9 +6,9 @@
         >
             <div class='layout-tags-container whitespace-nowrap'>
                 <span
-                    v-for='(v,i) in tagsList'
+                    v-for='v in tagsList'
                     :key='v.path'
-                    :ref='el => { layoutTagsItem[i] = el }'
+                    :ref='getTagsDom'
                     class='border border-gray-200 px-2 py-1 mx-1 cursor-pointer rounded-md'
                     :class='{"layout-tags-active": v.isActive}'
                     @contextmenu.prevent='contextRightMenu(v,$event)'
@@ -100,6 +100,7 @@ const tagScroll = (store:Store<IState>) => {
     const { tagsList, cachedViews } = store.state.layout.tags
     const scrollbar:Ref<{wrap:HTMLElement, update():void} | null> = ref(null)
     const layoutTagsItem:Ref<Array<ComponentInternalInstance | Element | null>> = ref([])
+    const getTagsDom = (el:ComponentInternalInstance | Element | null) => el && layoutTagsItem.value.push(el)
     // 监听标签页导航
     watch(
         () => tagsList.length,
@@ -121,7 +122,7 @@ const tagScroll = (store:Store<IState>) => {
     onBeforeUpdate(() => {
         layoutTagsItem.value = []
     })
-    return { tagsList, scrollbar, layoutTagsItem, cachedViews }
+    return { tagsList, scrollbar, layoutTagsItem, cachedViews, getTagsDom }
 }
 export default defineComponent({
     name: 'LayoutTags',

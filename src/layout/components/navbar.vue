@@ -85,7 +85,8 @@ interface IBreadcrumbList {
 const breadcrumb = (route: RouteLocationNormalizedLoaded) => {
     const fn = () => {
         const breadcrumbList:Array<IBreadcrumbList> = []
-        if(route.matched[0] && route.matched[0].name === 'Dashboard') return breadcrumbList
+        const notShowBreadcrumbList = ['Dashboard', 'RedirectPage'] // 不显示面包屑的导航
+        if(route.matched[0] && (notShowBreadcrumbList.includes(route.matched[0].name as string))) return breadcrumbList
         route.matched.forEach(v => {
             const obj:IBreadcrumbList = {
                 title: v.meta.title,
