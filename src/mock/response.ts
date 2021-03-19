@@ -6,7 +6,8 @@ export const setToken = function(name: string):string {
 }
 
 export const checkToken = function(token: string):string {
-    return token.replace(/^token_([\w|\W]+)_token$/, '$1')
+    const match = token.match(/^token_([\w|\W]+?)_token/)
+    return match ? match[1] : ''
 }
 
 export const login = function(name: string, pwd: string):boolean {
