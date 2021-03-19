@@ -1,27 +1,22 @@
 import { IMenubarList } from '/@/type/store/layout'
 import { listToTree } from '/@/utils/index'
 import { store } from '/@/store/index'
-// 引入动态路由页面
+// 动态路由名称映射表
 const modules = import.meta.glob('../views/**/**.vue')
 const components:IObject<() => Promise<typeof import('*.vue')>> = {
     Layout: (() => import('/@/layout/index.vue')) as unknown as () => Promise<typeof import('*.vue')>
 }
-const componentsIngore:Array<string> = ['login', 'Workplace'] // 忽略的页面
 Object.keys(modules).forEach(key => {
-    const nameMatch = key.match(/^\.\.\/views\/(.*)\/(.*)\.vue/)
+    const nameMatch = key.match(/^\.\.\/views\/(.+)\.vue/)
     if(!nameMatch) return
-    let [,,name] = nameMatch
     // 如果页面以Index命名，则使用父文件夹作为name
-    if(nameMatch[2] === 'Index') {
-        const nameSplit = nameMatch[1].split('/')
-        name = nameSplit[nameSplit.length - 1]
-    }
-    if(!componentsIngore.includes(name)) {
-        components[name] = modules[key] as () => Promise<typeof import('*.vue')>
-    }
+    const indexMatch = nameMatch[1].match(/(.*)\/Index$/i)
+    let name = indexMatch ? indexMatch[1] : nameMatch[1];
+    [name] = name.split('/').splice(-1)
+    components[name] = modules[key] as () => Promise<typeof import('*.vue')>
 })
 
-const asyncRouter:Array<IMenubarList> = [
+const asyncRouter:IMenubarList[] = [
     {
         path: '/:pathMatch(.*)*', 
         name: 'NotFound', 
@@ -37,10 +32,10 @@ const asyncRouter:Array<IMenubarList> = [
     }
 ]
 
-export const generatorDynamicRouter = (data:Array<IMenubarList>):void => {
-    const routerList:Array<IMenubarList> = listToTree(data, 0)
+export const generatorDynamicRouter = (data:IMenubarList[]):void => {
+    const routerList:IMenubarList[] = listToTree(data, 0)
     asyncRouter.forEach(v => routerList.push(v))
-    const f = (data:Array<IMenubarList>, pData:IMenubarList|null) => {
+    const f = (data:IMenubarList[], pData:IMenubarList|null) => {
         for(let i = 0,len = data.length;i < len;i++) {
             const v:IMenubarList = data[i]
             if(typeof v.component === 'string') v.component = components[v.component]
