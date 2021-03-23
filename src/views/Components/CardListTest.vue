@@ -4,7 +4,10 @@
             :gutter='15'
             class='clear-both'
         >
-            <el-col :span='12'>
+            <el-col
+                :xs='24'
+                :sm='12'
+            >
                 <card-list
                     :list-item='listItem'
                     :show-header='false'
@@ -12,7 +15,10 @@
                     :show-liststyle='false'
                 />
             </el-col>
-            <el-col :span='12'>
+            <el-col
+                :xs='24'
+                :sm='12'
+            >
                 <card-list
                     :list-item='listItem'
                     :show-header='false'
@@ -20,7 +26,10 @@
                     :show-liststyle='true'
                 />
             </el-col>
-            <el-col :span='12'>
+            <el-col
+                :xs='24'
+                :sm='12'
+            >
                 <card-list
                     title='列表'
                     :list-item='listItem'
@@ -29,7 +38,10 @@
                     :show-liststyle='true'
                 />
             </el-col>
-            <el-col :span='12'>
+            <el-col
+                :xs='24'
+                :sm='12'
+            >
                 <card-list
                     title='列表'
                     :list-item='listItem'

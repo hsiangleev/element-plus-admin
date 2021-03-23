@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from '/@/App.vue'
 import ElementPlus from 'element-plus'
-import direct from '/@/directive/action'
+import direct from '/@/directive/index'
 import router from '/@/router/index'
 import { store } from '/@/store/index'
 import '/@/mock/index'

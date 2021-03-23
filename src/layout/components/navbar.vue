@@ -130,7 +130,7 @@ export default defineComponent ({
     transition: all 0.5s;
 }
 
-.breadcrumb-enter,
+.breadcrumb-enter-from,
 .breadcrumb-leave-active {
     opacity: 0;
     transform: translateX(20px);

@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 interface IListItem {
     url?: string
@@ -92,11 +92,8 @@ export default defineComponent({
             default: true
         }
     },
-    emits: ['update:show'],
-    setup(props, context: SetupContext) {
-        return {
-            slots: context.slots
-        }
+    setup() {
+        return {}
     }
 })
 </script>

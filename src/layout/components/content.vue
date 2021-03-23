@@ -69,7 +69,7 @@ export default defineComponent ({
     transition: all 0.5s;
 }
 
-.fade-transform-enter {
+.fade-transform-enter-from {
     opacity: 0;
     transform: translateX(-30px);
 }

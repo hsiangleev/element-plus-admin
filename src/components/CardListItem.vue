@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext } from 'vue'
+import { defineComponent } from 'vue'
 export default defineComponent({
     name: 'CardListItem',
     props: {
@@ -54,11 +54,8 @@ export default defineComponent({
             default: ''
         }
     },
-    emits: ['update:show'],
-    setup(props, context: SetupContext) {
-        return {
-            slots: context.slots
-        }
+    setup() {
+        return {}
     }
 })
 </script>
