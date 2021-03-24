@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import OpenWindow from '/@/components/OpenWindow.vue'
+import OpenWindow from '/@/components/OpenWindow/index.vue'
 export default defineComponent({
     name: 'OpenWindowTest',
     components: {

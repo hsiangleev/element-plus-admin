@@ -253,8 +253,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-import CardList from '/@/components/CardList.vue'
-import CardListItem from '/@/components/CardListItem.vue'
+import CardList from '/@/components/CardList/CardList.vue'
+import CardListItem from '/@/components/CardList/CardListItem.vue'
 import { format } from '/@/utils/index'
 import { validate, resetFields } from '/@/utils/formExtend'
 

@@ -1,7 +1,7 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { nextTick, ComponentPublicInstance, ref } from 'vue'
-import CardList from '/@/components/CardList.vue'
-import CardListItem from '/@/components/CardListItem.vue'
+import CardList from '/@/components/CardList/CardList.vue'
+import CardListItem from '/@/components/CardList/CardListItem.vue'
 import ElementPlus from 'element-plus'
 
 describe('CardList.vue', () => {
@@ -77,14 +77,14 @@ describe('CardList.vue', () => {
     })
     it('keyvalue', async() => {
         const wrapper: VueWrapper<ComponentPublicInstance> = createCardList(
-            'type="KeyValue"',
+            'type="keyvalue"',
             {
                 setup() {
                     return { }
                 }
             },
             `
-            <template #KeyValue>
+            <template #keyvalue>
                 <card-list-item>
                     <template #key>
                         申请单号

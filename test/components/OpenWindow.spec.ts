@@ -1,6 +1,6 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { nextTick, ComponentPublicInstance, ref } from 'vue'
-import OpenWindow from '/@/components/OpenWindow.vue'
+import OpenWindow from '/@/components/OpenWindow/index.vue'
 import ElementPlus from 'element-plus'
 
 describe('OpenWindow.vue', () => {
@@ -15,7 +15,7 @@ describe('OpenWindow.vue', () => {
                 </el-button>
                 <open-window
                     v-model:show='show'
-                    :show='show'
+                    :is-show='show'
                     title='选择页'
                 >
                     <p style='height: 1500px;'>

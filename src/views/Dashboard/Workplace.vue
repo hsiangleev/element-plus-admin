@@ -188,7 +188,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
-import List, { IList } from '/@/components/List.vue'
+import List, { IList } from '/@/components/List/index.vue'
 import { useStore } from '/@/store/index'
 import { echarts, ECOption } from '/@/components/Echart'
 

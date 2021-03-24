@@ -167,9 +167,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-import TableSearch from '/@/components/TableSearch.vue'
-import CardList from '/@/components/CardList.vue'
-import CardListItem from '/@/components/CardListItem.vue'
+import TableSearch from '/@/components/TableSearch/index.vue'
+import CardList from '/@/components/CardList/CardList.vue'
+import CardListItem from '/@/components/CardList/CardListItem.vue'
 import { getTableList, ITag } from '/@/api/components/index'
 import { format, tableSummaries } from '/@/utils/index'
 import { validate } from '/@/utils/formExtend'
