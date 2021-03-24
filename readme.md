@@ -93,7 +93,7 @@ npm run stylelint
 
 ## 捐赠
 
-如果你觉得这个项目帮助到了你，你可以帮作者买一杯果汁表示鼓励 :tropical_drink:
+如果你觉得这个项目帮助到了你，你可以帮作者买一杯果汁表示鼓励 :tropical_drink:</br>
 ![donate](https://images.hsianglee.cn/pay.png?v=0.0.1)
 
 ## License
