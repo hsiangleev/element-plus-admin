@@ -17,7 +17,7 @@ export async function sleep(time:number):Promise<void> {
 export function format(num:number|string, symbol = '￥'):string {
     if(Number.isNaN(Number(num))) return `${symbol}0.00`
     return symbol + (Number(num).toFixed(2))
-        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
 }
 /**
  * 取消金额格式化
@@ -174,7 +174,7 @@ export function loadStorePage(modules: IObject<any>): IObject<any> {
  * @param url 
  * @returns 
  */
-export function decodeUrl(url: string): string {
+export function decode(url: string): string {
     return decodeURIComponent(decodeURIComponent(url))
 }
 
@@ -183,6 +183,6 @@ export function decodeUrl(url: string): string {
  * @param url 
  * @returns 
  */
-export function encodeUrl(url: string): string {
+export function encode(url: string): string {
     return encodeURIComponent(encodeURIComponent(url))
 }

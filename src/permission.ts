@@ -2,7 +2,7 @@ import router from '/@/router'
 import { store } from '/@/store/index'
 import { configure, start, done } from 'nprogress'
 import { RouteRecordRaw } from 'vue-router'
-import { decodeUrl, encodeUrl } from '/@/utils/tools'
+import { decode, encode } from '/@/utils/tools'
 
 configure({ showSpinner: false })
 
@@ -19,11 +19,14 @@ router.beforeEach(async(to, from) => {
     // 判断当前是否在登陆页面
     if (to.path.toLocaleLowerCase() === loginRoutePath.toLocaleLowerCase()) {
         done()
-        if(layout.token.ACCESS_TOKEN) return typeof to.query.from === 'string' ? decodeUrl(to.query.from) : defaultRoutePath
+        if(layout.token.ACCESS_TOKEN) return typeof to.query.from === 'string' ? decode(to.query.from) : defaultRoutePath
         return
     }
     // 判断是否登录
-    if(!layout.token.ACCESS_TOKEN) return loginRoutePath + (to.fullPath ? `?from=${encodeUrl(to.fullPath)}` : '')
+    if(!layout.token.ACCESS_TOKEN) {
+        return loginRoutePath + (to.fullPath ? `?from=${encode(to.fullPath)}` : '')
+    }
+    document.title = document.title ? `${document.title.split(' |')[0]} | ${to.meta.title}` : to.meta.title
     // 判断是否还没添加过路由
     if(layout.menubar.menuList.length === 0) {
         await store.dispatch('layout/GenerateRoutes')

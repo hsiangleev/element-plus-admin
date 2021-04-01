@@ -5,7 +5,7 @@ import router from '/@/router/index'
 import { allowRouter } from '/@/router/index'
 import { generatorDynamicRouter } from '/@/router/asyncRouter'
 import changeTheme from '/@/utils/changeTheme'
-import { setLocal, useLocal, getLocal, decodeUrl } from '/@/utils/tools'
+import { setLocal, useLocal, getLocal, decode } from '/@/utils/tools'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 
 const setting = getLocal<ISetting>('setting')
@@ -45,20 +45,17 @@ const state:ILayout = {
 }
 const mutations = {
     changeCollapsed(state: ILayout):void {
-        if(state.menubar.isPhone) {
-            state.menubar.status = state.menubar.status === IMenubarStatus.PHN ? IMenubarStatus.PHE : IMenubarStatus.PHN
-        }else{
-            state.menubar.status = state.menubar.status === IMenubarStatus.PCN ? IMenubarStatus.PCE : IMenubarStatus.PCN
-        }
+        state.menubar.status = state.menubar.isPhone
+            ? state.menubar.status === IMenubarStatus.PHN 
+                ? IMenubarStatus.PHE 
+                : IMenubarStatus.PHN
+            : state.menubar.status === IMenubarStatus.PCN 
+                ? IMenubarStatus.PCE 
+                : IMenubarStatus.PCN
     },
     changeDeviceWidth(state: ILayout):void {
-        if(document.body.offsetWidth < 768) {
-            state.menubar.isPhone = true
-            state.menubar.status = IMenubarStatus.PHN
-        }else{
-            state.menubar.isPhone = false
-            state.menubar.status = IMenubarStatus.PCE
-        }
+        state.menubar.isPhone = document.body.offsetWidth < 768
+        state.menubar.status = state.menubar.isPhone ? IMenubarStatus.PHN : IMenubarStatus.PCE
     },
     // 切换导航，记录打开的导航
     changeTagNavList(state: ILayout, cRouter:RouteLocationNormalizedLoaded):void {
@@ -121,7 +118,7 @@ const mutations = {
         state.token.ACCESS_TOKEN = token
         setLocal('token', state.token, 1000 * 60 * 60)
         const { query } = router.currentRoute.value
-        router.push(typeof query.from === 'string' ? decodeUrl(query.from) : '/')
+        router.push(typeof query.from === 'string' ? decode(query.from) : '/')
     },
     logout(state: ILayout):void {
         state.token.ACCESS_TOKEN = ''
