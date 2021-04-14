@@ -1,7 +1,7 @@
 import request from '/@/utils/request'
 import { AxiosResponse } from 'axios'
 const api = {
-    getTableList: '/getTableList'
+    getTableList: '/api/getTableList'
 }
 export type ITag = '所有' | '家' | '公司' | '学校' | '超市'
 export interface ITableList {
@@ -13,6 +13,6 @@ export function getTableList(tableList: ITableList): Promise<AxiosResponse<IResp
     return request({
         url: api.getTableList,
         method: 'get',
-        data: tableList
+        params: tableList
     })
 }

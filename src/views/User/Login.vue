@@ -57,6 +57,9 @@ import { defineComponent, reactive, ref } from 'vue'
 import { store } from '/@/store/index'
 import { ElNotification } from 'element-plus'
 import { validate, resetFields } from '/@/utils/formExtend'
+import JSEncrypt from 'jsencrypt'
+import base64 from '/@/utils/base64'
+import { publickey } from '/@/api/layout/index'
 
 const formRender = () => {
     let form = reactive({
@@ -72,6 +75,10 @@ const formRender = () => {
     const onSubmit = async() => {
         let { name, pwd } = form
         if(!await validate(ruleForm)) return
+        const key = await publickey()
+        const encrypt = new JSEncrypt({})
+        encrypt.setPublicKey(key.data.Data)
+        pwd = encrypt.encrypt(base64.encode(pwd)) as string
         await store.dispatch('layout/login', { username: name, password: pwd })
         ElNotification({
             title: '欢迎',

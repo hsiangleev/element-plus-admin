@@ -8,7 +8,9 @@
         "moduleResolution": "Node",
         "baseUrl": ".",
         "paths": {
-            "/@/*": ["src/*"]
+            "/@/*": ["src/*"],
+            "/mock/*": ["mock/*"],
+            "/server/*": ["server/*"]
         },
         "lib": ["esnext", "dom"],
         "types": ["vite/client", "jest", "node"],

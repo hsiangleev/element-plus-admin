@@ -5,7 +5,7 @@ import locale from 'element-plus/lib/locale/lang/zh-cn'
 import direct from '/@/directive/index'
 import router from '/@/router/index'
 import { store } from '/@/store/index'
-import '/@/mock/index'
+// import '/@/mock/index'
 import '/@/permission'
 
 import 'element-plus/lib/theme-chalk/index.css'

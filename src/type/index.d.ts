@@ -22,5 +22,11 @@ declare global {
     }
     interface ImportMetaEnv {
         VITE_APP_TITLE: string
+
+    }
+    
+    interface IEnv {
+        VITE_PORT: number;
+        VITE_PROXY: string;
     }
 }
