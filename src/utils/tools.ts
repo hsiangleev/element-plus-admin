@@ -143,3 +143,28 @@ export function listToTree(data:Array<IMenubarList>, pid: string | number = 1, i
     })
     return d
 }
+/**
+  * 字符串首字母大写
+  * @param str 
+  * @returns 
+  */
+export function firstUpperCase(str: string): string {
+    return str.replace(/^\S/, s => s.toUpperCase())
+}
+
+/**
+ * 加载store状态
+ * @param modules 
+ * @returns 
+ */
+export function loadStorePage(modules: IObject<any>): IObject<any> {
+    const page: IObject<any> = {}
+    Object.keys(modules).forEach(key => {
+        const nameMatch = key.substr(2).replace('.ts', '')
+            .split('/')
+            .map(v => firstUpperCase(v))
+            .join('')
+        page[nameMatch] = modules[key].default
+    })
+    return page
+}

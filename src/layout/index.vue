@@ -27,7 +27,7 @@
             </div>
             <div
                 v-if='layout.setting.showTags'
-                class='layout-main-tags h-10 leading-10 overflow-hidden shadow text-sm text-gray-600 px-3 position'
+                class='layout-main-tags h-10 leading-10 overflow-hidden shadow border-b border-gray-100 text-sm text-gray-600 px-3 position'
             >
                 <layout-tags />
             </div>

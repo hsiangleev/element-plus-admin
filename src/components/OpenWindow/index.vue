@@ -56,7 +56,7 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" scoped>
-    .open-select-btn .el-button {
+    ::v-deep(.open-select-btn .el-button) {
         border-radius: 0;
         flex: 1;
 

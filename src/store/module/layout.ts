@@ -70,7 +70,7 @@ const mutations = {
         }
         const tagsList:ITagsList = {
             name: cRouter.name as string,
-            title: cRouter.meta.title,
+            title: cRouter.meta.title as string,
             path: cRouter.path,
             isActive: true
         }
