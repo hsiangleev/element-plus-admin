@@ -171,7 +171,7 @@ import TableSearch from '/@/components/TableSearch/index.vue'
 import CardList from '/@/components/CardList/CardList.vue'
 import CardListItem from '/@/components/CardList/CardListItem.vue'
 import { getTableList, ITag } from '/@/api/components/index'
-import { format, tableSummaries } from '/@/utils/index'
+import { format, tableSummaries } from '/@/utils/tools'
 import { validate } from '/@/utils/formExtend'
 import { IRenderTableList } from '/@/type/views/Components/TableSearchTest'
 

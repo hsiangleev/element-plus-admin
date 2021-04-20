@@ -1,10 +1,12 @@
 import { IProject } from '/@/type/store/page'
 const state:IProject = {
-    b: 'bbb'
+    projcode: ''
 }
 
 const mutations = {
-
+    setProjcode(state: IProject, projcode: string):void {
+        state.projcode = projcode
+    }
 }
 
 const actions = {

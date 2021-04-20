@@ -5,7 +5,7 @@ import router from '/@/router/index'
 import { allowRouter } from '/@/router/index'
 import { generatorDynamicRouter } from '/@/router/asyncRouter'
 import changeTheme from '/@/utils/changeTheme'
-import { setLocal, useLocal, getLocal } from '/@/utils/index'
+import { setLocal, useLocal, getLocal, decodeUrl } from '/@/utils/tools'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 
 const setting = getLocal<ISetting>('setting')
@@ -118,7 +118,7 @@ const mutations = {
         state.token.ACCESS_TOKEN = token
         setLocal('token', state.token, 1000 * 60 * 60)
         const { query } = router.currentRoute.value
-        router.push(typeof query.from === 'string' ? decodeURIComponent(decodeURIComponent(query.from)) : '/')
+        router.push(typeof query.from === 'string' ? decodeUrl(query.from) : '/')
     },
     logout(state: ILayout):void {
         state.token.ACCESS_TOKEN = ''

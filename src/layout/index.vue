@@ -22,12 +22,12 @@
             </div>
         </div>
         <div class='layout-main flex flex-1 flex-col overflow-x-hidden overflow-y-auto'>
-            <div class='layout-main-navbar flex justify-between items-center h-12 shadow-sm border-b border-gray-100 overflow-hidden'>
+            <div class='layout-main-navbar flex justify-between items-center h-12 shadow-sm overflow-hidden'>
                 <layout-navbar />
             </div>
             <div
                 v-if='layout.setting.showTags'
-                class='layout-main-tags h-10 leading-10 overflow-hidden shadow border-b border-gray-100 text-sm text-gray-600 px-3 position'
+                class='layout-main-tags h-8 leading-8 overflow-hidden shadow border-b border-gray-100 text-sm text-gray-600 px-3 position'
             >
                 <layout-tags />
             </div>
@@ -49,7 +49,7 @@ import LayoutNavbar from '/@/layout/components/navbar.vue'
 import LayoutTags from '/@/layout/components/tags.vue'
 import LayoutTheme from '/@/layout/components/theme.vue'
 import { useStore } from '/@/store/index'
-import { throttle } from '/@/utils/index'
+import { throttle } from '/@/utils/tools'
 
 export default defineComponent ({
     name: 'Layout',
@@ -84,3 +84,9 @@ export default defineComponent ({
     }
 })
 </script>
+
+<style lang='postcss' scoped>
+    .layout-main-tags {
+        margin-bottom: 2px;
+    }
+</style>

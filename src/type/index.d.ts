@@ -20,4 +20,7 @@ declare global {
         page: number
         size: number
     }
+    interface ImportMetaEnv {
+        VITE_APP_TITLE: string
+    }
 }

@@ -1,5 +1,5 @@
 import { IMenubarList } from '/@/type/store/layout'
-import { listToTree } from '/@/utils/index'
+import { listToTree } from '/@/utils/tools'
 import { store } from '/@/store/index'
 // 动态路由名称映射表
 const modules = import.meta.glob('../views/**/**.vue')

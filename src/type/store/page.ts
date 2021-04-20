@@ -3,7 +3,7 @@ export interface IComponents {
     a: string
 }
 export interface IProject {
-    b: string
+    projcode: string
 }
 
 export interface IPage {

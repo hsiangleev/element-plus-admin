@@ -168,3 +168,21 @@ export function loadStorePage(modules: IObject<any>): IObject<any> {
     })
     return page
 }
+
+/**
+ * 两次编码url
+ * @param url 
+ * @returns 
+ */
+export function decodeUrl(url: string): string {
+    return decodeURIComponent(decodeURIComponent(url))
+}
+
+/**
+ * 两次解码url
+ * @param url 
+ * @returns 
+ */
+export function encodeUrl(url: string): string {
+    return encodeURIComponent(encodeURIComponent(url))
+}

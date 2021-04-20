@@ -2,6 +2,7 @@ import router from '/@/router'
 import { store } from '/@/store/index'
 import { configure, start, done } from 'nprogress'
 import { RouteRecordRaw } from 'vue-router'
+import { decodeUrl, encodeUrl } from '/@/utils/tools'
 
 configure({ showSpinner: false })
 
@@ -11,17 +12,18 @@ const defaultRoutePath = '/'
 router.beforeEach(async(to, from) => {
     start()
     const { layout } = store.state
+    // 修改页面title
+    const reg = new RegExp(/^(.+)(\s\|\s.+)$/)
+    const appTitle = import.meta.env.VITE_APP_TITLE
+    document.title = appTitle.match(reg) ? appTitle.replace(reg, `${to.meta.title}$2`) : `${to.meta.title} | ${appTitle}`
     // 判断当前是否在登陆页面
     if (to.path.toLocaleLowerCase() === loginRoutePath.toLocaleLowerCase()) {
         done()
-        if(layout.token.ACCESS_TOKEN) return typeof to.query.from === 'string' ? decodeURIComponent(decodeURIComponent(to.query.from)) : defaultRoutePath
+        if(layout.token.ACCESS_TOKEN) return typeof to.query.from === 'string' ? decodeUrl(to.query.from) : defaultRoutePath
         return
     }
-    // // 判断是否登录
-    if(!layout.token.ACCESS_TOKEN) {
-        return loginRoutePath + (to.fullPath ? `?from=${encodeURIComponent(encodeURIComponent(to.fullPath))}` : '')
-    }
-    document.title = document.title ? `${document.title.split(' |')[0]} | ${to.meta.title}` : to.meta.title
+    // 判断是否登录
+    if(!layout.token.ACCESS_TOKEN) return loginRoutePath + (to.fullPath ? `?from=${encodeUrl(to.fullPath)}` : '')
     // 判断是否还没添加过路由
     if(layout.menubar.menuList.length === 0) {
         await store.dispatch('layout/GenerateRoutes')
