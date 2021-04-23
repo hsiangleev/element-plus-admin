@@ -5,59 +5,61 @@
     />
     <el-drawer
         v-model='drawer'
-        title='主题设置'
+        title='系统布局配置'
         size='260px'
     >
-        <el-row :gutter='20'>
-            <el-col
-                v-for='(val,index) in theme'
-                :key='index'
-                :span='8'
-            >
-                <div
-                    class='flex shadow-lg border border-gray-100 w-18 cursor-pointer m-1'
-                    @click='changeTheme(index)'
-                > 
-                    <div class='flex flex-col w-4 h-16'>
-                        <div
-                            class='h-3'
-                            :style='{"backgroundColor": (val.logoBg || val.sidebarBg)}'
-                        />
-                        <div
-                            class='flex-1'
-                            :style='{"backgroundColor": val.sidebarBg}'
-                        />
-                    </div>
-                    <div class='flex flex-col flex-1'>
-                        <div
-                            class='h-3'
-                            :style='{"backgroundColor": val.navbarBg || "#fff"}'
-                        />
-                        <div
-                            v-if='layout.setting.showTags'
-                            class='h-2'
-                            :style='{"backgroundColor": val.tagsBg || "#fff"}'
-                        />
-                        <div
-                            class='flex-1 relative'
-                            :style='{"backgroundColor": val.mainBg}'
-                        >
-                            <i
-                                v-if='layout.setting.theme===index'
-                                class='el-icon-check absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4'
-                                style='color: #1890ff;'
+        <div class='p-4'>
+            <el-row :gutter='20'>
+                <el-col
+                    v-for='(val,index) in theme'
+                    :key='index'
+                    :span='8'
+                >
+                    <div
+                        class='flex shadow-lg border border-gray-100 w-18 cursor-pointer m-1'
+                        @click='changeTheme(index)'
+                    > 
+                        <div class='flex flex-col w-4 h-16'>
+                            <div
+                                class='h-3'
+                                :style='{"backgroundColor": (val.logoBg || val.sidebarBg)}'
+                            />
+                            <div
+                                class='flex-1'
+                                :style='{"backgroundColor": val.sidebarBg}'
                             />
                         </div>
+                        <div class='flex flex-col flex-1'>
+                            <div
+                                class='h-3'
+                                :style='{"backgroundColor": val.navbarBg || "#fff"}'
+                            />
+                            <div
+                                v-if='layout.setting.showTags'
+                                class='h-2'
+                                :style='{"backgroundColor": val.tagsBg || "#fff"}'
+                            />
+                            <div
+                                class='flex-1 relative'
+                                :style='{"backgroundColor": val.mainBg}'
+                            >
+                                <i
+                                    v-if='layout.setting.theme===index'
+                                    class='el-icon-check absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4'
+                                    style='color: #1890ff;'
+                                />
+                            </div>
+                        </div>
                     </div>
+                </el-col>
+            </el-row>
+    
+            <div class='flex justify-between mt-5 items-center'>
+                <div class='text-sm'>
+                    开启 Tags-View
                 </div>
-            </el-col>
-        </el-row>
-
-        <div class='flex justify-between mt-5 px-2 py-1 items-center'>
-            <div class='text-sm'>
-                开启 Tags-View
+                <el-switch v-model='showTags' />
             </div>
-            <el-switch v-model='showTags' />
         </div>
     </el-drawer>
 </template>

@@ -29,4 +29,8 @@ button:focus {
     .min-width-32 {
         min-width: 8rem;
     }
+
+    .leading-12 {
+        line-height: 3rem;
+    }
 }

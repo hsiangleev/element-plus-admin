@@ -1,12 +1,12 @@
 <template>
-    <div class='flex items-center px-4'>
+    <div class='flex items-center px-4 flex-wrap h-12 leading-12'>
         <span
-            class='text-2xl cursor-pointer'
+            class='text-2xl cursor-pointer h-12 leading-12'
             :class='{ "el-icon-s-fold": !menubar.status, "el-icon-s-unfold": menubar.status }'
             @click='changeCollapsed'
         />
         <!-- 面包屑导航 -->
-        <div class='px-4 hidden-xs-only'>
+        <div class='px-4'>
             <el-breadcrumb separator='/'>
                 <transition-group name='breadcrumb'>
                     <el-breadcrumb-item
@@ -89,7 +89,7 @@ const breadcrumb = (route: RouteLocationNormalizedLoaded) => {
         if(route.matched[0] && (notShowBreadcrumbList.includes(route.matched[0].name as string))) return breadcrumbList
         route.matched.forEach(v => {
             const obj:IBreadcrumbList = {
-                title: v.meta.title,
+                title: v.meta.title as string,
                 path: v.path
             }
             breadcrumbList.push(obj)

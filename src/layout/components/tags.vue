@@ -1,5 +1,5 @@
 <template>
-    <div class='position'>
+    <div class='shadow border-b border-gray-100 px-3 overflow-hidden relative z-10'>
         <el-scrollbar
             ref='scrollbar'
             wrap-class='scrollbar-wrapper'
@@ -26,31 +26,31 @@
                 </span>
             </div>
         </el-scrollbar>
-        <ul
-            ref='rightMenuEl'
-            class='border border-gray-200 absolute w-24 leading-none bg-white shadow-md rounded-lg py-0.5 z-10'
-            :style='menuPos'
-        >
-            <li
-                class='px-4 py-2 cursor-pointer hover:bg-gray-200'
-                @click='refresh'
-            >
-                刷新
-            </li>
-            <li
-                class='px-4 py-2 cursor-pointer hover:bg-gray-200'
-                @click='closeOther'
-            >
-                关闭其它
-            </li>
-            <li
-                class='px-4 py-2 cursor-pointer hover:bg-gray-200'
-                @click='closeAll'
-            >
-                关闭所有
-            </li>
-        </ul>
     </div>
+    <ul
+        ref='rightMenuEl'
+        class='border border-gray-200 absolute w-24 leading-none bg-white shadow-md rounded-lg py-0.5 z-10'
+        :style='menuPos'
+    >
+        <li
+            class='px-4 py-2 cursor-pointer hover:bg-gray-200'
+            @click='refresh'
+        >
+            刷新
+        </li>
+        <li
+            class='px-4 py-2 cursor-pointer hover:bg-gray-200'
+            @click='closeOther'
+        >
+            关闭其它
+        </li>
+        <li
+            class='px-4 py-2 cursor-pointer hover:bg-gray-200'
+            @click='closeAll'
+        >
+            关闭所有
+        </li>
+    </ul>
 </template>
 
 <script lang="ts">
@@ -74,13 +74,15 @@ const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNorm
         currentRightTags = v
         menuPos.display = 'block'
         nextTick(() => {
-            let left = event.clientX - 5
             if(!rightMenuEl.value) return
+            const parentNode = rightMenuEl.value?.parentNode as HTMLElement
+            let left = event.clientX - parentNode.offsetLeft - 5
+            let top = event.clientY - parentNode.offsetTop + 10
             if(event.clientX + rightMenuEl.value.offsetWidth > document.body.offsetWidth) {
-                left = event.clientX - rightMenuEl.value.offsetWidth
+                left = left - rightMenuEl.value.offsetWidth + 15
             }
             menuPos.left = `${left}px`
-            menuPos.top = `${event.clientY + 10}px`
+            menuPos.top = `${top}px`
         })
     }
     const refresh = () => {
