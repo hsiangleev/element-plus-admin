@@ -73,7 +73,7 @@ const getCSSString: (url: string, chalk: Ref<string>) => Promise<void> = (url, c
                 resolve()
             }
         }
-        xhr.open('GET', url)
+        xhr.open('GET', url, true)
         xhr.send()
     })
 }
@@ -84,8 +84,6 @@ export default defineComponent({
         const defaultTheme = ref('#409EFF')
         const prevTheme = ref(defaultTheme.value)
         const chalk = ref('')
-        console.log(import.meta.env.DEV)
-        console.log(import.meta.env.PROD)
         const changeTheme = async(theme: string) => {
             const { themeCluster, originalCluster } = getTheme(theme, prevTheme)
             if (!chalk.value) {
