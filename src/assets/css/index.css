@@ -1,36 +1,40 @@
-/*! @import */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html,
 body {
     overflow: hidden;
+    margin: 0;
 }
 
-button:focus {
-    outline: none;
-}
+/* 提高优先级，避免修改主题色的时候样式被修改 */
+body {
+    /*! @import */
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
 
-@responsive {
-    .transition-width {
-        transition-property: width;
+    button:focus {
+        outline: none;
     }
 
-    .flex-center {
-        justify-content: center;
-        align-items: center;
-    }
+    @responsive {
+        .transition-width {
+            transition-property: width;
+        }
 
-    .min-height-10 {
-        min-height: 2.5rem;
-    }
+        .flex-center {
+            justify-content: center;
+            align-items: center;
+        }
 
-    .min-width-32 {
-        min-width: 8rem;
-    }
+        .min-height-10 {
+            min-height: 2.5rem;
+        }
 
-    .leading-12 {
-        line-height: 3rem;
+        .min-width-32 {
+            min-width: 8rem;
+        }
+
+        .leading-12 {
+            line-height: 3rem;
+        }
     }
 }

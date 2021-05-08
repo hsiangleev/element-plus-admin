@@ -1,90 +1,107 @@
 <template>
-    <i
-        class='el-icon-s-tools text-2xl px-2 py-1 cursor-pointer rounded-l-md'
-        @click='drawer=!drawer'
-    />
-    <el-drawer
-        v-model='drawer'
-        title='系统布局配置'
-        size='260px'
-    >
-        <div class='p-4'>
-            <el-row :gutter='20'>
-                <el-col
-                    v-for='(val,index) in theme'
-                    :key='index'
-                    :span='8'
-                >
-                    <div
-                        class='flex shadow-lg border border-gray-100 w-18 cursor-pointer m-1'
-                        @click='changeTheme(index)'
-                    > 
-                        <div class='flex flex-col w-4 h-16'>
-                            <div
-                                class='h-3'
-                                :style='{"backgroundColor": (val.logoBg || val.sidebarBg)}'
-                            />
-                            <div
-                                class='flex-1'
-                                :style='{"backgroundColor": val.sidebarBg}'
-                            />
-                        </div>
-                        <div class='flex flex-col flex-1'>
-                            <div
-                                class='h-3'
-                                :style='{"backgroundColor": val.navbarBg || "#fff"}'
-                            />
-                            <div
-                                v-if='layout.setting.showTags'
-                                class='h-2'
-                                :style='{"backgroundColor": val.tagsBg || "#fff"}'
-                            />
-                            <div
-                                class='flex-1 relative'
-                                :style='{"backgroundColor": val.mainBg}'
-                            >
-                                <i
-                                    v-if='layout.setting.theme===index'
-                                    class='el-icon-check absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4'
-                                    style='color: #1890ff;'
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </el-col>
-            </el-row>
-    
-            <div class='flex justify-between mt-5 items-center'>
-                <div class='text-sm'>
-                    开启 Tags-View
-                </div>
-                <el-switch v-model='showTags' />
-            </div>
-        </div>
-    </el-drawer>
+    <div>
+        <el-color-picker
+            v-model='defaultTheme'
+            :predefine='["#409EFF", "#1890ff", "#304156","#212121","#11a983", "#13c2c2", "#6959CD", "#f5222d" ]'
+            size='mini'
+            @change='changeTheme'
+        />
+    </div>
 </template>
-
 <script lang='ts'>
-import { ref, defineComponent, watch } from 'vue'
-import theme from '/@/config/theme'
-import { useStore } from '/@/store/index'
+import { defineComponent, ref, Ref } from 'vue'
+import { version } from 'element-plus'
 
-export default defineComponent ({
+const getTheme = (theme: string, prevTheme: Ref<string>) => {
+    const themeCluster = getThemeCluster(theme.substr(1))
+    const originalCluster = getThemeCluster(prevTheme.value.substr(1))
+    prevTheme.value = theme
+    return { themeCluster, originalCluster }
+}
+
+const getThemeCluster: (theme: string) => string[] = (theme) => {
+    const tintColor = (color: string, tint: number) => {
+        let red = parseInt(color.slice(0, 2), 16)
+        let green = parseInt(color.slice(2, 4), 16)
+        let blue = parseInt(color.slice(4, 6), 16)
+
+        if (tint === 0) return [red, green, blue].join(',')
+            
+        red += Math.round(tint * (255 - red))
+        green += Math.round(tint * (255 - green))
+        blue += Math.round(tint * (255 - blue))
+        return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
+    }
+
+    const shadeColor = (color: string, shade: number) => {
+        let red = parseInt(color.slice(0, 2), 16)
+        let green = parseInt(color.slice(2, 4), 16)
+        let blue = parseInt(color.slice(4, 6), 16)
+
+        red = Math.round((1 - shade) * red)
+        green = Math.round((1 - shade) * green)
+        blue = Math.round((1 - shade) * blue)
+
+        return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
+    }
+
+    const clusters = [theme]
+    for (let i = 0; i <= 9; i++) {
+        clusters.push(tintColor(theme, Number((i / 10).toFixed(2))))
+    }
+    clusters.push(shadeColor(theme, 0.1))
+    return clusters
+}
+
+const getStyleElem: (id: string) => HTMLElement = (id) => {
+    let styleTag = document.getElementById(id)
+    if (!styleTag) {
+        styleTag = document.createElement('style')
+        styleTag.setAttribute('id', id)
+        document.head.appendChild(styleTag)
+    }
+
+    return styleTag
+}
+
+const getCSSString: (url: string, chalk: Ref<string>) => Promise<void> = (url, chalk) => {
+    return new Promise(resolve => {
+        const xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                chalk.value = xhr.responseText.replace(/@font-face{[^}]+}/, '')
+                resolve()
+            }
+        }
+        xhr.open('GET', url)
+        xhr.send()
+    })
+}
+
+export default defineComponent({
     name: 'LayoutTheme',
     setup() {
-        const store = useStore()
-        const drawer = ref(false)
-        const changeTheme = (index:number) => store.commit('layout/changeTheme', index)
-        const showTags = ref(store.state.layout.setting.showTags)
-
-        watch(() => showTags.value, () => store.commit('layout/changeTagsSetting', showTags.value))
+        const defaultTheme = ref('#409EFF')
+        const prevTheme = ref(defaultTheme.value)
+        const chalk = ref('')
+        console.log(import.meta.env.DEV)
+        console.log(import.meta.env.PROD)
+        const changeTheme = async(theme: string) => {
+            const { themeCluster, originalCluster } = getTheme(theme, prevTheme)
+            if (!chalk.value) {
+                const url = `https://unpkg.com/element-plus@${version}/lib/theme-chalk/index.css`
+                await getCSSString(url, chalk)
+            }
+            originalCluster.forEach((color, index) => {
+                chalk.value = chalk.value.replace(new RegExp(color, 'ig'), themeCluster[index])
+            })
+            const styleTag = getStyleElem('chalk-style')
+            styleTag.innerText = chalk.value
+        }
 
         return {
-            drawer,
-            theme,
-            changeTheme,
-            layout: store.state.layout,
-            showTags
+            defaultTheme,
+            changeTheme
         }
     }
 })

@@ -35,8 +35,8 @@
                 <layout-content />
             </div>
         </div>
-        <div class='layout-sidebar-theme fixed right-0 top-64 z-10'>
-            <layout-Theme />
+        <div class='layout-sidebar-sidesetting fixed right-0 top-64 z-10'>
+            <layout-side-setting />
         </div>
     </div>
 </template>
@@ -47,7 +47,7 @@ import LayoutContent from '/@/layout/components/content.vue'
 import LayoutMenubar from '/@/layout/components/menubar.vue'
 import LayoutNavbar from '/@/layout/components/navbar.vue'
 import LayoutTags from '/@/layout/components/tags.vue'
-import LayoutTheme from '/@/layout/components/theme.vue'
+import LayoutSideSetting from '/@/layout/components/sideSetting.vue'
 import { useStore } from '/@/store/index'
 import { throttle } from '/@/utils/tools'
 
@@ -58,7 +58,7 @@ export default defineComponent ({
         LayoutMenubar,
         LayoutNavbar,
         LayoutTags,
-        LayoutTheme
+        LayoutSideSetting
     },
     setup() {
         const store = useStore()
@@ -86,7 +86,7 @@ export default defineComponent ({
 </script>
 
 <style lang='postcss' scoped>
-    ::v-deep(.layout-sidebar-theme .el-drawer__header) {
+    ::v-deep(.layout-sidebar-sidesetting .el-drawer__header) {
         margin-bottom: 0;
     }
 </style>

@@ -4,7 +4,7 @@ export default function(num:number):HTMLStyleElement {
     const themeStyle:ITheme = num >= theme.length ? theme[0] : theme[num]
     
     const themeDom = document.createElement('style')
-    themeDom.className = 'layout-theme-setting'
+    themeDom.className = 'layout-side-setting'
     themeDom.innerText = `
     .layout-sidebar-logo {
         background-color: ${themeStyle.logoBg || themeStyle.sidebarBg};
@@ -82,12 +82,12 @@ export default function(num:number):HTMLStyleElement {
         background-color: ${themeStyle.tagsActiveBg};
         color: ${themeStyle.tagsActiveColor};
     }
-    .layout-sidebar-theme > i {
+    .layout-sidebar-sidesetting > i {
         background-color: ${themeStyle.sidebarActiveBg};
         color: ${themeStyle.sidebarColor};
     }
     `.replace(/\n/g, '').replace(/ {4}/g, '')
-    const prevTheme = document.querySelector('style.layout-theme-setting')
+    const prevTheme = document.querySelector('style.layout-side-setting')
     prevTheme && prevTheme.remove()
     document.head.appendChild(themeDom)
     return themeDom
