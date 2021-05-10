@@ -11,6 +11,7 @@
 <script lang='ts'>
 import { defineComponent, ref, Ref } from 'vue'
 import { version } from 'element-plus'
+import { store } from '/@/store/index'
 
 const getTheme = (theme: string, prevTheme: Ref<string>) => {
     const themeCluster = getThemeCluster(theme.substr(1))
@@ -81,20 +82,27 @@ const getCSSString: (url: string, chalk: Ref<string>) => Promise<void> = (url, c
 export default defineComponent({
     name: 'LayoutTheme',
     setup() {
-        const defaultTheme = ref('#409EFF')
+        const { setting } = store.state.layout
+        const defaultTheme = ref(setting.color.primary)
         const prevTheme = ref(defaultTheme.value)
         const chalk = ref('')
         const changeTheme = async(theme: string) => {
             const { themeCluster, originalCluster } = getTheme(theme, prevTheme)
+            setting.color.primary = `#${themeCluster[0]}`
             if (!chalk.value) {
                 const url = `https://unpkg.com/element-plus@${version}/lib/theme-chalk/index.css`
                 await getCSSString(url, chalk)
             }
+            const systemSetting = document.querySelector('style.layout-side-setting') as HTMLElement
+            let systemSettingText = systemSetting.innerText
             originalCluster.forEach((color, index) => {
                 chalk.value = chalk.value.replace(new RegExp(color, 'ig'), themeCluster[index])
+                systemSettingText = systemSettingText.replace(new RegExp(color, 'ig'), themeCluster[index])
             })
             const styleTag = getStyleElem('chalk-style')
             styleTag.innerText = chalk.value
+            systemSetting.innerText = systemSettingText
+            localStorage.setItem('setting', JSON.stringify(setting))
         }
 
         return {

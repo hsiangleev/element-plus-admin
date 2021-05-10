@@ -7,6 +7,9 @@ export enum IMenubarStatus {
 export interface ISetting {
     theme: number
     showTags: boolean
+    color: {
+        primary: string
+    }
 }
 export interface IToken {
     ACCESS_TOKEN: string

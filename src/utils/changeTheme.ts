@@ -1,11 +1,15 @@
 import theme from '/@/config/theme'
 import { ITheme } from '/@/type/config/theme'
+import { store } from '/@/store/index'
 export default function(num:number):HTMLStyleElement {
     const themeStyle:ITheme = num >= theme.length ? theme[0] : theme[num]
-    
+    const { color } = store.state.layout.setting
     const themeDom = document.createElement('style')
     themeDom.className = 'layout-side-setting'
     themeDom.innerText = `
+    :root {
+        --color-primary: ${color.primary};
+    }
     .layout-sidebar-logo {
         background-color: ${themeStyle.logoBg || themeStyle.sidebarBg};
         color: ${themeStyle.logoColor || themeStyle.sidebarColor};

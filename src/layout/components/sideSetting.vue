@@ -46,7 +46,7 @@
                                 <i
                                     v-if='layout.setting.theme===index'
                                     class='el-icon-check absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4'
-                                    style='color: #1890ff;'
+                                    :style='{"color": val.sidebarActiveBg}'
                                 />
                             </div>
                         </div>

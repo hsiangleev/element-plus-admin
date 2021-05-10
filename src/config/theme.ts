@@ -3,18 +3,18 @@ import { ITheme } from '/@/type/config/theme'
 const theme:Array<ITheme> = [
     {
         tagsActiveColor: '#fff',
-        tagsActiveBg: '#409EFF',
+        tagsActiveBg: 'var(--color-primary)',
         mainBg: '#f0f2f5',
         sidebarColor: '#fff',
         sidebarBg: '#001529',
         sidebarChildrenBg: '#000c17',
         sidebarActiveColor: '#fff',
-        sidebarActiveBg: '#409EFF',
+        sidebarActiveBg: 'var(--color-primary)',
         sidebarActiveBorderRightBG: '#1890ff'
     },
     {
         tagsActiveColor: '#fff',
-        tagsActiveBg: '#409EFF',
+        tagsActiveBg: 'var(--color-primary)',
         navbarColor: '#fff',
         navbarBg: '#393D49',
         mainBg: '#f0f2f5',
@@ -22,19 +22,19 @@ const theme:Array<ITheme> = [
         sidebarBg: '#001529',
         sidebarChildrenBg: '#000c17',
         sidebarActiveColor: '#fff',
-        sidebarActiveBg: '#409EFF',
+        sidebarActiveBg: 'var(--color-primary)',
         sidebarActiveBorderRightBG: '#1890ff'
     },
     {
         tagsActiveColor: '#fff',
-        tagsActiveBg: '#409EFF',
+        tagsActiveBg: 'var(--color-primary)',
         mainBg: '#f0f2f5',
         sidebarColor: '#333',
         sidebarBg: '#fff',
         sidebarChildrenBg: '#fff',
-        sidebarActiveColor: '#409EFF',
+        sidebarActiveColor: 'var(--color-primary)',
         sidebarActiveBg: '#e6f7ff',
-        sidebarActiveBorderRightBG: '#409EFF'
+        sidebarActiveBorderRightBG: 'var(--color-primary)'
     },
     {
         logoColor: 'rgba(255,255,255,.7)',

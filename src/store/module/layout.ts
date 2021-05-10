@@ -36,7 +36,10 @@ const state:ILayout = {
     },
     setting: {
         theme: setting.theme !== undefined ? setting.theme : 0,
-        showTags: setting.showTags !== undefined ? setting.showTags : true
+        showTags: setting.showTags !== undefined ? setting.showTags : true,
+        color: {
+            primary: setting.color !== undefined ? setting.color.primary : '#409eff'
+        }
     },
     isLoading: false
 }
