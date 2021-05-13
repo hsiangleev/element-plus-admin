@@ -132,7 +132,7 @@ export default defineComponent({
                 color: #666;
 
                 & > a:hover {
-                    color: #409eff;
+                    color: var(--color-primary);
                 }
 
                 & > span.card-list-item-circle {

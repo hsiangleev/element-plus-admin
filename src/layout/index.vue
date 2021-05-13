@@ -78,8 +78,8 @@ export default defineComponent ({
                 changeDeviceWidth()
             }
             window.addEventListener('resize', throttleF, true)
-            await changeThemeColor(defaultTheme.value)
-
+            // 判断是否修改过主题色
+            defaultTheme.value.toLowerCase() !== '#409eff' && await changeThemeColor(defaultTheme.value)
         })
         return {
             layout: store.state.layout,
