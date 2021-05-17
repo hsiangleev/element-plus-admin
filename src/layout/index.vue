@@ -42,7 +42,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import LayoutContent from '/@/layout/components/content.vue'
 import LayoutMenubar from '/@/layout/components/menubar.vue'
 import LayoutNavbar from '/@/layout/components/navbar.vue'
@@ -50,7 +50,6 @@ import LayoutTags from '/@/layout/components/tags.vue'
 import LayoutSideSetting from '/@/layout/components/sideSetting.vue'
 import { useStore } from '/@/store/index'
 import { throttle } from '/@/utils/tools'
-import changeThemeColor from '/@/utils/changeThemeColor'
 
 export default defineComponent ({
     name: 'Layout',
@@ -65,8 +64,6 @@ export default defineComponent ({
         const store = useStore()
         const changeDeviceWidth = () => store.commit('layout/changeDeviceWidth')
         const changeCollapsed = () => store.commit('layout/changeCollapsed')
-        const { setting } = store.state.layout
-        const defaultTheme = ref(setting.color.primary)
 
         store.commit('layout/changeTheme')
 
@@ -78,9 +75,8 @@ export default defineComponent ({
                 changeDeviceWidth()
             }
             window.addEventListener('resize', throttleF, true)
-            // 判断是否修改过主题色
-            defaultTheme.value.toLowerCase() !== '#409eff' && await changeThemeColor(defaultTheme.value)
         })
+
         return {
             layout: store.state.layout,
             changeCollapsed

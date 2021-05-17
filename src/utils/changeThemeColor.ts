@@ -1,6 +1,7 @@
 import { store } from '/@/store/index'
 import { ref, Ref } from 'vue'
 import { version } from 'element-plus'
+import { useStore } from '/@/store/index'
 const getTheme = (theme: string, prevTheme: Ref<string>) => {
     const themeCluster = getThemeCluster(theme.substr(1))
     const originalCluster = getThemeCluster(prevTheme.value.substr(1))
@@ -72,21 +73,35 @@ const getCSSString: (url: string, chalk: Ref<string>) => Promise<void> = (url, c
 const { setting } = store.state.layout
 const prevTheme = ref('#409eff')
 const chalk = ref('')
-export default async function(theme: string): Promise<void> {
+export default async function changeThemeColor(theme: string): Promise<void> {
     const { themeCluster, originalCluster } = getTheme(theme, prevTheme)
     setting.color.primary = `#${themeCluster[0]}`
     if (!chalk.value) {
         const url = `https://unpkg.com/element-plus@${version}/lib/theme-chalk/index.css`
         await getCSSString(url, chalk)
     }
-    const systemSetting = document.querySelector('style.layout-side-setting') as HTMLElement
-    let systemSettingText = systemSetting.innerText
     originalCluster.forEach((color, index) => {
         chalk.value = chalk.value.replace(new RegExp(color, 'ig'), themeCluster[index])
-        systemSettingText = systemSettingText.replace(new RegExp(color, 'ig'), themeCluster[index])
     })
     const styleTag = getStyleElem('chalk-style')
     styleTag.innerText = chalk.value
-    systemSetting.innerText = systemSettingText
+
+    const systemSetting = document.querySelector('style.layout-side-setting') as HTMLElement
+    if(systemSetting) {
+        let systemSettingText = systemSetting.innerText
+        originalCluster.forEach((color, index) => {
+            systemSettingText = systemSettingText.replace(new RegExp(color, 'ig'), themeCluster[index])
+        })
+        systemSetting.innerText = systemSettingText
+    }
+    
     localStorage.setItem('setting', JSON.stringify(setting))
+}
+
+export async function changeThemeDefaultColor():Promise<void> {
+    const store = useStore()
+    const { setting } = store.state.layout
+    const defaultTheme = ref(setting.color.primary)
+    // 判断是否修改过主题色
+    defaultTheme.value.toLowerCase() !== '#409eff' && await changeThemeColor(defaultTheme.value)
 }
