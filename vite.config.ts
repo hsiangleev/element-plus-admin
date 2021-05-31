@@ -22,7 +22,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     const root = process.cwd()
     const env = loadEnv(mode, root) as unknown as IEnv
     // console.log(env)
-    const prodMock = false
+    const prodMock = true
     return {
         resolve: {
             alias: setAlias([
