@@ -26,7 +26,6 @@ router.beforeEach(async(to, from) => {
     if(!layout.token.ACCESS_TOKEN) {
         return loginRoutePath + (to.fullPath ? `?from=${encode(to.fullPath)}` : '')
     }
-    document.title = document.title ? `${document.title.split(' |')[0]} | ${to.meta.title}` : to.meta.title
     // 判断是否还没添加过路由
     if(layout.menubar.menuList.length === 0) {
         await store.dispatch('layout/GenerateRoutes')

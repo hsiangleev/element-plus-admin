@@ -14,14 +14,12 @@ const proxy = (list: [string, string][]) => {
             ...(/^https:\/\//.test(v[1]) ? { secure: false } : {})
         }
     })
-    // console.log(obj)
     return obj
 }
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     const root = process.cwd()
     const env = loadEnv(mode, root) as unknown as IEnv
-    // console.log(env)
     const prodMock = true
     return {
         resolve: {

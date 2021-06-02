@@ -46,19 +46,9 @@ const responseData = (code: number, msg: string, data: any) => {
 
 export default [
     {
-        url: '/api/User/Publickey',
-        method: 'get',
-        timeout: 500,
-        response: (req: IReq) => {
-            const { username, password } = req.body
-            if(login(username, password)) return responseData(200, '登陆成功', setToken(username))
-            return responseData(401, '用户名或密码错误', '')
-        }
-    },
-    {
         url: '/api/User/login',
         method: 'post',
-        timeout: 500,
+        timeout: 300,
         response: (req: IReq) => {
             const { username, password } = req.body
             if(login(username, password)) return responseData(200, '登陆成功', setToken(username))
@@ -68,7 +58,7 @@ export default [
     {
         url: '/api/User/getUser',
         method: 'get',
-        timeout: 500,
+        timeout: 300,
         response: (req: IReq) => {
             const userName = checkToken(req)
             if(!userName) return responseData(401, '身份认证失败', '')
@@ -78,7 +68,7 @@ export default [
     {
         url: '/api/User/getRoute',
         method: 'get',
-        timeout: 500,
+        timeout: 300,
         response: (req: IReq) => {
             const userName = checkToken(req)
             if(!userName) return responseData(401, '身份认证失败', '')
@@ -88,7 +78,7 @@ export default [
     {
         url: '/api/getTableList',
         method: 'get',
-        timeout: 500,
+        timeout: 600,
         response: (req: IReq) => {
             const userName = checkToken(req)
             if(!userName) return responseData(401, '身份认证失败', '')
