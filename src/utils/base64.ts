@@ -1,6 +1,6 @@
 const Base64 = {
     _keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
-    _utf8_encode: function (string) {
+    _utf8_encode: function(string:string) {
         string = string.replace(/\r\n/g, '\n')
         let utftext = ''
         for (let n = 0; n < string.length; n++) {
@@ -18,7 +18,7 @@ const Base64 = {
         }
         return utftext
     },
-    _utf8_decode: function (utftext) {
+    _utf8_decode: function(utftext:string) {
         let string = ''
         let i = 0
         let c = 0
@@ -42,7 +42,7 @@ const Base64 = {
         }
         return string
     },
-    encode: function (input) {
+    encode: function(input:string) {
         let output = ''
         let chr1, chr2, chr3, enc1, enc2, enc3, enc4
         let i = 0
@@ -66,7 +66,7 @@ const Base64 = {
         }
         return output
     },
-    decode: function (input) {
+    decode: function(input:string) {
         let output = ''
         let chr1, chr2, chr3
         let enc1, enc2, enc3, enc4

@@ -48,37 +48,37 @@ export default function(num:number):HTMLStyleElement {
         color: ${themeStyle.sidebarActiveColor};
         border-right: 3px solid ${themeStyle.sidebarActiveBorderRightBG};
     }
-    ${(function() {
-        let s = ''
-        if(themeStyle.navbarBg) {
-            s += `.layout-main-navbar {
-                background-color: ${themeStyle.navbarBg};
-            }`
-        }
-        if(themeStyle.navbarColor) {
-            s += `.layout-main-navbar {
-                color: ${themeStyle.navbarColor};
-            }
-            .layout-main-navbar .el-breadcrumb .el-breadcrumb__inner,
-            .layout-main-navbar .el-breadcrumb .el-breadcrumb__separator,
-            .layout-main-navbar .el-breadcrumb .el-breadcrumb__inner:hover,
-            .layout-main-navbar .el-breadcrumb .el-breadcrumb__separator:hover,
-            .layout-main-navbar .el-dropdown {
-                color: ${themeStyle.navbarColor};
-            }`
-        }
-        if(themeStyle.tagsBg) {
-            s += `.layout-main-tags {
-                background-color: ${themeStyle.tagsBg};
-            }`
-        }
-        if(themeStyle.tagsColor) {
-            s += `.layout-main-tags {
-                color: ${themeStyle.tagsColor};
-            }`
-        }
-        return s
-    })()}
+${themeStyle.navbarBg ? `
+    .layout-main-navbar {
+        background-color: ${themeStyle.navbarBg};
+    }
+    ` : ''
+}
+${themeStyle.navbarColor ? `
+    .layout-main-navbar {
+        color: ${themeStyle.navbarColor};
+    }
+    .layout-main-navbar .el-breadcrumb .el-breadcrumb__inner,
+    .layout-main-navbar .el-breadcrumb .el-breadcrumb__separator,
+    .layout-main-navbar .el-breadcrumb .el-breadcrumb__inner:hover,
+    .layout-main-navbar .el-breadcrumb .el-breadcrumb__separator:hover,
+    .layout-main-navbar .el-dropdown {
+        color: ${themeStyle.navbarColor};
+    }
+    ` : ''
+}
+${themeStyle.tagsBg ? `
+    .layout-main-tags {
+        background-color: ${themeStyle.tagsBg};
+    }
+    ` : ''
+}
+${themeStyle.tagsColor ? `
+    .layout-main-tags {
+        color: ${themeStyle.tagsColor};
+    }
+    ` : ''
+}
     .layout-main-content {
         background-color: ${themeStyle.mainBg};
     }

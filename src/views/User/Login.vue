@@ -1,54 +1,72 @@
 <template>
-    <div
-        class='layout-login'
-        @keyup='enterSubmit'
-    >
-        <el-form
-            ref='ruleForm'
-            label-position='right'
-            label-width='80px'
-            :model='form'
-            :rules='rules'
+    <div class='w-screen h-screen bg-gray-800'>
+        <div
+            class='layout-login'
+            @keyup='enterSubmit'
         >
-            <el-form-item
-                label='用户名'
-                prop='name'
+            <h3 class='text-2xl font-semibold text-gray-100 text-center mb-6'>
+                系统登陆
+            </h3>
+            <el-form
+                ref='ruleForm'
+                label-position='right'
+                label-width='80px'
+                :model='form'
+                :rules='rules'
             >
-                <el-input v-model='form.name' />
-            </el-form-item>
-            <el-form-item
-                label='密码'
-                prop='pwd'
-            >
-                <el-input
-                    v-model='form.pwd'
-                    type='password'
-                    autocomplete='off'
-                />
-            </el-form-item>
-            <el-form-item>
-                <el-button
-                    type='primary'
-                    @click='onSubmit'
+                <el-form-item
+                    class='mb-6 -ml-20'
+                    prop='name'
                 >
-                    登录
-                </el-button>
-                <el-button @click='resetFields(ruleForm)'>
-                    重置
-                </el-button>
-            </el-form-item>
-            <el-form-item>
-                <p class='leading-5'>
-                    账号: admin 密码: admin
-                </p>
-                <p class='leading-5'>
-                    账号: dev 密码: dev
-                </p>
-                <p class='leading-5'>
-                    账号: test 密码: test
-                </p>
-            </el-form-item>
-        </el-form>
+                    <el-input
+                        v-model='form.name'
+                        placeholder='请输入用户名'
+                        prefix-icon='el-icon-user'
+                    />
+                </el-form-item>
+                <el-form-item
+                    class='mb-6 -ml-20'
+                    prop='pwd'
+                >
+                    <el-input
+                        v-model='form.pwd'
+                        placeholder='请输入密码'
+                        prefix-icon='el-icon-lock'
+                        show-password
+                    />
+                </el-form-item>
+                <el-form-item class='mb-6 -ml-20'>
+                    <el-button
+                        type='primary'
+                        class='w-full'
+                        @click='onSubmit'
+                    >
+                        登录
+                    </el-button>
+                </el-form-item>
+                
+                <div class='flex justify-between'>
+                    <div class='text-gray-300'>
+                        <p class='leading-6 text-sm'>
+                            <span class='w-24 inline-block'>账号: admin</span> 密码: admin
+                        </p>
+                        <p class='leading-6 text-sm'>
+                            <span class='w-24 inline-block'>账号: dev</span> 密码: dev
+                        </p>
+                        <p class='leading-6 text-sm'>
+                            <span class='w-24 inline-block'>账号: test</span> 密码: test
+                        </p>
+                    </div>
+                    <div>
+                        <el-button
+                            type='primary'
+                        >
+                            第三方登录
+                        </el-button>
+                    </div>
+                </div>
+            </el-form>
+        </div>
     </div>
 </template>
 
@@ -56,7 +74,7 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { store } from '/@/store/index'
 import { ElNotification } from 'element-plus'
-import { validate, resetFields } from '/@/utils/formExtend'
+import { validate } from '/@/utils/formExtend'
 
 const formRender = () => {
     let form = reactive({
@@ -104,7 +122,6 @@ const formRender = () => {
         onSubmit,
         enterSubmit,
         rules,
-        resetFields,
         ruleForm
     }
 }
@@ -121,10 +138,18 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang='postcss' scoped>
 .layout-login {
     padding-top: 200px;
     width: 400px;
     margin: 0 auto;
+
+    ::v-deep(.el-input__inner) {
+        border: 1px solid hsla(0, 0%, 100%, 0.1);
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        color: #ddd;
+    }
 }
+
 </style>
