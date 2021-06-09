@@ -2,6 +2,7 @@ import { UserConfigExport, ConfigEnv, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
+import viteSvgIcons from 'vite-plugin-svg-icons'
 
 const setAlias = (alias: [string, string][]) => alias.map(v => {return { find: v[0], replacement: path.resolve(__dirname, v[1]) }})
 const proxy = (list: [string, string][]) => {
@@ -57,6 +58,12 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
                 import { setupProdMockServer } from '/mock/mockProdServer';
                 setupProdMockServer();
                 `
+            }),
+            viteSvgIcons({
+                // 指定需要缓存的图标文件夹
+                iconDirs: [path.resolve(process.cwd(), 'src/icons')],
+                // 指定symbolId格式
+                symbolId: 'icon-[dir]-[name]'
             })
         ],
         css: {

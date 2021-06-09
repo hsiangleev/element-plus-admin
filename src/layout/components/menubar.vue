@@ -62,6 +62,7 @@ export default defineComponent ({
         const { menubar } = store.state.layout
 
         const filterMenubarData = filterMenubar(menubar.menuList)
+        store.commit('layout/setRoutes', filterMenubarData)
 
         const activeMenu = computed(() => {
             if(route.meta.activeMenu) return route.meta.activeMenu
