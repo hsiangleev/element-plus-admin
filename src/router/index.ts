@@ -5,7 +5,8 @@ const components:IObject<() => Promise<typeof import('*.vue')>> = {
     Layout: (() => import('/@/layout/index.vue')) as unknown as () => Promise<typeof import('*.vue')>,
     Redirect: (() => import('/@/layout/redirect.vue')) as unknown as () => Promise<typeof import('*.vue')>,
     LayoutBlank: (() => import('/@/layout/blank.vue')) as unknown as () => Promise<typeof import('*.vue')>,
-    404: (() => import('/@/views/ErrorPage/404.vue')) as unknown as () => Promise<typeof import('*.vue')>,
+    401: (() => import('../views/ErrorPage/401.vue')) as unknown as () => Promise<typeof import('*.vue')>,
+    404: (() => import('../views/ErrorPage/404.vue')) as unknown as () => Promise<typeof import('*.vue')>,
     Workplace: (() => import('/@/views/Dashboard/Workplace.vue')) as unknown as () => Promise<typeof import('*.vue')>,
 
     Login: (() => import('/@/views/User/Login.vue')) as unknown as () => Promise<typeof import('*.vue')>
@@ -31,10 +32,16 @@ export const allowRouter:Array<IMenubarList> = [
     {
         name: 'ErrorPage',
         path: '/ErrorPage',
-        meta: { title: '错误页面', hidden: true, icon: 'el-icon-eleme' },
-        component: components.LayoutBlank,
+        meta: { title: '错误页面', icon: 'el-icon-eleme' },
+        component: components.Layout,
         redirect: '/ErrorPage/404',
         children: [
+            {
+                name: '401',
+                path: '/ErrorPage/401',
+                component: components['401'],
+                meta: { title: '401', icon: 'el-icon-s-tools' }
+            },
             {
                 name: '404',
                 path: '/ErrorPage/404',

@@ -24,12 +24,12 @@ export interface ILayout {
     // 用户信息
     userInfo: {
         name: string,
-        role: Array<string>
+        role: string[]
     }
     // 标签栏
     tags: {
         tagsList: Array<ITagsList>
-        cachedViews: Array<string>
+        cachedViews: string[]
     }
     token: IToken
     setting: ISetting
@@ -44,7 +44,7 @@ export interface IMenubarList {
     meta: {
         icon: string
         title: string
-        permission?: Array<string>
+        permission?: string[]
         activeMenu?: string // 路由设置了该属性，则会高亮相对应的侧边栏
         noCache?: boolean // 页面是否不缓存
         hidden?: boolean // 是否隐藏路由
