@@ -10,6 +10,7 @@ export interface ISetting {
     color: {
         primary: string
     }
+    usePinyinSearch: boolean
 }
 export interface IToken {
     ACCESS_TOKEN: string

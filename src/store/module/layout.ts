@@ -39,7 +39,8 @@ const state:ILayout = {
         showTags: setting.showTags !== undefined ? setting.showTags : true,
         color: {
             primary: setting.color !== undefined ? setting.color.primary : '#409eff'
-        }
+        },
+        usePinyinSearch: setting.usePinyinSearch !== undefined ? setting.usePinyinSearch : true
     },
     isLoading: false
 }
@@ -156,6 +157,10 @@ const mutations = {
                 mutations.changeTagNavList(state, router.currentRoute.value)
             }
         }
+    },
+    changePinSearchSetting(state: ILayout, showPinyinSearch:boolean):void {
+        state.setting.usePinyinSearch = showPinyinSearch
+        localStorage.setItem('setting', JSON.stringify(state.setting))
     }
 }
 const actions = {

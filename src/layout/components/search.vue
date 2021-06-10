@@ -29,35 +29,70 @@
     </div>
 </template>
 <script lang='ts'>
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, Ref, ref, watch } from 'vue'
 import { useStore } from '/@/store/index'
-import { IMenubarList } from '/@/type/store/layout'
+import { IMenubarList, ISetting } from '/@/type/store/layout'
 import { useRouter } from 'vue-router'
+import Fuse from 'fuse.js'
+import pinyin from 'pinyin'
 
 interface ISearchList extends IMenubarList{
     searchLabel: string
+    pinyinTitle?: string
 }
 // 搜索查询
-const search = (searchList:ISearchList[], menuList: IMenubarList[]) => {
-    const f = (query: string, list:IMenubarList[], text: string) => {
+const search = (searchList:Ref<ISearchList[]>, menuList: IMenubarList[], setting: ISetting) => {
+    const fuseList:ISearchList[] = []
+    const f = (list:IMenubarList[], text: string) => {
         list.forEach(v => {
-            if(v.meta.title.toLocaleLowerCase().includes(query)) {
-                const obj = Object.assign({}, v, { searchLabel: text + v.meta.title })
-                searchList.push(obj)
+            const obj:ISearchList = Object.assign({}, v, { 
+                searchLabel: text + v.meta.title
+            })
+            // 判断是否开启拼音搜索
+            if(setting.usePinyinSearch) {
+                obj.pinyinTitle = pinyin(v.meta.title, {
+                    style: pinyin.STYLE_NORMAL
+                }).join('')
             }
+            fuseList.push(obj)
             if(v.children && v.children.length > 0) {
-                f(query, v.children, `${text + v.meta.title} > `)
+                f(v.children, `${text + v.meta.title} > `)
             }
         })
     }
-    const searchText = (query: string) => {
-        searchList.splice(0, searchList.length)
-        query && f(query, menuList, '')
+    f(menuList, '')
+
+    const FuseOpts = () => {
+        return {
+            shouldSort: true,
+            threshold: 0.4,
+            location: 0,
+            distance: 100,
+            minMatchCharLength: 1,
+            includeScore: true,
+            keys: setting.usePinyinSearch ? ['meta.title', 'path', 'pinyinTitle'] : ['meta.title', 'path']
+        }
     }
+    let fuse = new Fuse(fuseList, FuseOpts())
+
+    watch(() => setting.usePinyinSearch, () => {
+        fuseList.splice(0, fuseList.length)
+        f(menuList, '')
+        fuse = new Fuse(fuseList, FuseOpts())
+    })
+    
+    const searchText = (query: string) => {
+        if(query !== '') {
+            searchList.value = fuse.search(query).map(v => v.item)
+        }else{
+            searchList.value = []
+        }
+    }
+
     return { searchText }
 }
 // search显示隐藏状态
-const changeSearchStatus = (searchList:ISearchList[]) => {
+const changeSearchStatus = (searchList:Ref<ISearchList[]>) => {
     const router = useRouter()
     const href = ref('')
     const isShow = ref(false)
@@ -71,7 +106,7 @@ const changeSearchStatus = (searchList:ISearchList[]) => {
 
     const hideSearch = () => {
         href.value = ''
-        searchList.splice(0, searchList.length)
+        searchList.value.splice(0, searchList.value.length)
         isShow.value = false
     }
 
@@ -102,13 +137,14 @@ export default defineComponent({
     name: 'Search',
     setup() {
         const store = useStore()
-        const searchList:ISearchList[] = []
+        const searchList:Ref<ISearchList[]> = ref([])
         const { menuList } = store.state.layout.menubar
+        const { setting } = store.state.layout
         
 
         return {
             searchList,
-            ...search(searchList, menuList),
+            ...search(searchList, menuList, setting),
             ...changeSearchStatus(searchList)
         }
     }

@@ -63,6 +63,10 @@
                     <div>主题色</div>
                     <layout-theme />
                 </div>
+                <div class='flex justify-between items-center py-1'>
+                    <div>菜单支持拼音搜索</div>
+                    <el-switch v-model='showPinyinSearch' />
+                </div>
             </div>
         </div>
     </el-drawer>
@@ -84,15 +88,18 @@ export default defineComponent ({
         const drawer = ref(false)
         const changeTheme = (index:number) => store.commit('layout/changeTheme', index)
         const showTags = ref(store.state.layout.setting.showTags)
+        const showPinyinSearch = ref(store.state.layout.setting.usePinyinSearch)
 
         watch(() => showTags.value, () => store.commit('layout/changeTagsSetting', showTags.value))
+        watch(() => showPinyinSearch.value, () => store.commit('layout/changePinSearchSetting', showPinyinSearch.value))
 
         return {
             drawer,
             theme,
             changeTheme,
             layout: store.state.layout,
-            showTags
+            showTags,
+            showPinyinSearch
         }
     }
 })
