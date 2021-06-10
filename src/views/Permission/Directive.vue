@@ -1,5 +1,18 @@
 <template>
     <div>
+        <h3>当前用户: {{ username }}</h3>
+        <h3 class='mb-2'>
+            切换用户: 
+            <el-radio-group
+                v-model='username'
+                @change='changeUser'
+            >
+                <el-radio-button label='admin' />
+                <el-radio-button label='dev' />
+                <el-radio-button label='test' />
+            </el-radio-group>
+        </h3>
+        
         <el-row
             v-action='"add"'
             class='mb-1'
@@ -67,29 +80,26 @@
                 v-action:and='["add", "update", "remove"]'
             </el-tag>
         </el-row>
-
-        <el-row>
-            <el-button
-                type='primary'
-                @click='logout'
-            >
-                退出并切换用户
-            </el-button>
-        </el-row>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useStore } from '/@/store/index'
 import { checkPermission } from '/@/utils/permission'
 export default defineComponent({
     name: 'Directive',
     setup() {
         const store = useStore()
-        const logout = () => store.commit('layout/logout')
+        const username = ref(store.state.layout.userInfo.name)
+        const changeUser = () => {
+            store.commit('layout/login', `token_${username.value}_token`)
+            history.go(0)
+        }
+
         return {
-            logout,
+            changeUser,
+            username,
             checkPermission
         }
     }
