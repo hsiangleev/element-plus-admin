@@ -34,33 +34,36 @@ import { useStore } from '/@/store/index'
 import { IMenubarList, ISetting } from '/@/type/store/layout'
 import { useRouter } from 'vue-router'
 import Fuse from 'fuse.js'
-import pinyin from 'pinyin'
+
+// 不使用则不加载
+const pinyin = () => import('pinyin')
 
 interface ISearchList extends IMenubarList{
     searchLabel: string
     pinyinTitle?: string
 }
 // 搜索查询
-const search = (searchList:Ref<ISearchList[]>, menuList: IMenubarList[], setting: ISetting) => {
+const search = async(searchList:Ref<ISearchList[]>, menuList: IMenubarList[], setting: ISetting) => {
     const fuseList:ISearchList[] = []
-    const f = (list:IMenubarList[], text: string) => {
-        list.forEach(v => {
+    const f = async(list:IMenubarList[], text: string) => {
+        for(let v of list) {
             const obj:ISearchList = Object.assign({}, v, { 
                 searchLabel: text + v.meta.title
             })
             // 判断是否开启拼音搜索
             if(setting.usePinyinSearch) {
-                obj.pinyinTitle = pinyin(v.meta.title, {
-                    style: pinyin.STYLE_NORMAL
+                const data = await pinyin()
+                obj.pinyinTitle = data.default(v.meta.title, {
+                    style: data.STYLE_NORMAL
                 }).join('')
             }
             fuseList.push(obj)
             if(v.children && v.children.length > 0) {
                 f(v.children, `${text + v.meta.title} > `)
             }
-        })
+        }
     }
-    f(menuList, '')
+    await f(menuList, '')
 
     const FuseOpts = () => {
         return {
@@ -75,9 +78,9 @@ const search = (searchList:Ref<ISearchList[]>, menuList: IMenubarList[], setting
     }
     let fuse = new Fuse(fuseList, FuseOpts())
 
-    watch(() => setting.usePinyinSearch, () => {
+    watch(() => setting.usePinyinSearch, async() => {
         fuseList.splice(0, fuseList.length)
-        f(menuList, '')
+        await f(menuList, '')
         fuse = new Fuse(fuseList, FuseOpts())
     })
     
@@ -89,7 +92,7 @@ const search = (searchList:Ref<ISearchList[]>, menuList: IMenubarList[], setting
         }
     }
 
-    return { searchText }
+    return searchText
 }
 // search显示隐藏状态
 const changeSearchStatus = (searchList:Ref<ISearchList[]>) => {
@@ -140,11 +143,16 @@ export default defineComponent({
         const searchList:Ref<ISearchList[]> = ref([])
         const { menuList } = store.state.layout.menubar
         const { setting } = store.state.layout
+        const searchText:Ref<null | ((query: string) => void)> = ref(null)
+
+        search(searchList, menuList, setting).then(data => {
+            searchText.value = data
+        })
         
 
         return {
             searchList,
-            ...search(searchList, menuList, setting),
+            searchText,
             ...changeSearchStatus(searchList)
         }
     }
