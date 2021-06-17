@@ -1,27 +1,12 @@
 <template>
     <div class='flex items-center px-4 flex-wrap h-12 leading-12'>
-        <span
-            class='text-2xl cursor-pointer h-12 leading-12'
-            :class='{ "el-icon-s-fold": !menubar.status, "el-icon-s-unfold": menubar.status }'
-            @click='changeCollapsed'
-        />
+        <span class='text-2xl cursor-pointer h-12 leading-12' :class='{ "el-icon-s-fold": !menubar.status, "el-icon-s-unfold": menubar.status }' @click='changeCollapsed' />
         <!-- 面包屑导航 -->
         <div class='px-4'>
             <el-breadcrumb separator='/'>
                 <transition-group name='breadcrumb'>
-                    <el-breadcrumb-item
-                        key='/'
-                        :to='{ path: "/" }'
-                    >
-                        主页
-                    </el-breadcrumb-item>
-                    <el-breadcrumb-item
-                        v-for='v in data.breadcrumbList'
-                        :key='v.path'
-                        :to='v.path'
-                    >
-                        {{ v.title }}
-                    </el-breadcrumb-item>
+                    <el-breadcrumb-item key='/' :to='{ path: "/" }'>主页</el-breadcrumb-item>
+                    <el-breadcrumb-item v-for='v in data.breadcrumbList' :key='v.path' :to='v.path'>{{ v.title }}</el-breadcrumb-item>
                 </transition-group>
             </el-breadcrumb>
         </div>
@@ -30,39 +15,19 @@
         <!-- 用户下拉 -->
         <el-dropdown>
             <span class='el-dropdown-link flex flex-center px-2'>
-                <el-avatar
-                    :size='30'
-                    src='https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
-                />
+                <el-avatar :size='30' src='https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' />
                 <span class='ml-2'>{{ userInfo.name }}</span>
                 <i class='el-icon-arrow-down el-icon--right' />
             </span>
             <template #dropdown>
                 <el-dropdown-menu>
                     <el-dropdown-item>
-                        <el-link
-                            href='https://github.com/hsiangleev'
-                            target='_blank'
-                            :underline='false'
-                        >
-                            个人中心
-                        </el-link>
+                        <el-link href='https://github.com/hsiangleev' target='_blank' :underline='false'>个人中心</el-link>
                     </el-dropdown-item>
                     <el-dropdown-item>
-                        <el-link
-                            href='https://github.com/hsiangleev/element-plus-admin'
-                            target='_blank'
-                            :underline='false'
-                        >
-                            项目地址
-                        </el-link>
+                        <el-link href='https://github.com/hsiangleev/element-plus-admin' target='_blank' :underline='false'>项目地址</el-link>
                     </el-dropdown-item>
-                    <el-dropdown-item
-                        divided
-                        @click='logout'
-                    >
-                        退出登录
-                    </el-dropdown-item>
+                    <el-dropdown-item divided @click='logout'>退出登录</el-dropdown-item>
                 </el-dropdown-menu>
             </template>
         </el-dropdown>

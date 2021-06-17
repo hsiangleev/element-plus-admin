@@ -1,37 +1,17 @@
 <template>
-    <div class='errPage-container'>
-        <el-row>
+    <div class='flex flex-center'>
+        <el-row class='errPage-container'>
             <el-col :span='12'>
-                <h1 class='text-jumbo text-ginormous my-6'>
-                    Oops!
-                </h1>
+                <h1 class='text-jumbo text-ginormous my-6'>Oops!</h1>
                 gif来源
-                <a
-                    href='https://zh.airbnb.com/'
-                    target='_blank'
-                >
-                    airbnb
-                </a> 页面
-                <h2 class='font-semibold text-2xl my-6'>
-                    你没有权限去该页面
-                </h2>
-                <h6 class='font-semibold text-xs my-6'>
-                    如有不满请联系你领导
-                </h6>
-                <router-link
-                    to='/' 
-                    class='bullshit__return-home'
-                >
-                    回首页
-                </router-link>
+                <a href='https://zh.airbnb.com/' target='_blank'>airbnb</a>
+                页面
+                <h2 class='font-semibold text-2xl my-6'>你没有权限去该页面</h2>
+                <h6 class='font-semibold text-xs my-6'>如有不满请联系你领导</h6>
+                <router-link to='/' class='bullshit__return-home'>回首页</router-link>
             </el-col>
             <el-col :span='12'>
-                <img
-                    :src='errGif'
-                    width='313'
-                    height='428'
-                    alt='Girl has dropped her ice cream.'
-                >
+                <img :src='errGif' width='313' height='428' alt='Girl has dropped her ice cream.'>
             </el-col>
         </el-row>
     </div>
@@ -53,14 +33,9 @@ export default defineComponent({
 </script>
 
 <style lang='postcss' scoped>
-::v-deep(.layout-main-content) {
-    background-color: #fff;
-}
-
 .errPage-container {
+    padding-top: 100px;
     width: 800px;
-    max-width: 100%;
-    margin: 100px auto;
 
     .pan-back-btn {
         background: #008489;
@@ -118,6 +93,10 @@ export default defineComponent({
         animation-duration: 0.5s;
         animation-delay: 0.3s;
         animation-fill-mode: forwards;
+    }
+
+    img {
+        filter: brightness(95%);
     }
 }
 </style>

@@ -1,53 +1,23 @@
 <template>
     <div class='card-list mb-2'>
-        <el-card
-            class='box-card'
-            shadow='hover'
-        >
-            <template
-                v-if='showHeader'
-                #header
-            >
+        <el-card class='box-card' shadow='hover'>
+            <template v-if='showHeader' #header>
                 <div class='card-list-header flex justify-between items-center'>
                     <span>{{ title }}</span>
                     <slot name='btn' />
                 </div>
             </template>
-            <ul
-                v-if='type === "default"'
-                class='card-list-body flex flex-col text-sm'
-            >
-                <li
-                    v-for='(v,i) in listItem'
-                    :key='i'
-                >
+            <ul v-if='type === "default"' class='card-list-body flex flex-col text-sm'>
+                <li v-for='(v,i) in listItem' :key='i'>
                     <div :class='{"card-list-text": true,"nowrap": isNowrap, "wrap": !isNowrap}'>
-                        <span
-                            v-if='showListstyle'
-                            class='card-list-item-circle'
-                        />
-                        <a
-                            v-if='v.url' 
-                            :href='v.url'
-                            :target='v.target || "_self"'
-                            :class='{"nowrap": isNowrap, "wrap": !isNowrap}'
-                        >{{ v.text }}</a>
-                        <template v-else>
-                            {{ v.text }}
-                        </template>
+                        <span v-if='showListstyle' class='card-list-item-circle' />
+                        <a v-if='v.url' :href='v.url' :target='v.target || "_self"' :class='{"nowrap": isNowrap, "wrap": !isNowrap}'>{{ v.text }}</a>
+                        <template v-else>{{ v.text }}</template>
                     </div>
-                    <div
-                        v-if='v.mark'
-                        class='card-list-mark'
-                    >
-                        {{ v.mark }}
-                    </div>
+                    <div v-if='v.mark' class='card-list-mark'>{{ v.mark }}</div>
                 </li>
             </ul>
-            <slot
-                v-if='type === "keyvalue"'
-                name='keyvalue'
-            />
+            <slot v-if='type === "keyvalue"' name='keyvalue' />
         </el-card>
     </div>
 </template>

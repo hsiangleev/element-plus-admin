@@ -1,22 +1,12 @@
 <template>
     <el-dropdown trigger='click'>
-        <el-badge
-            :value='6'
-            type='danger'
-            class='el-dropdown-link item mx-2 cursor-pointer leading-none'
-        >
+        <el-badge :value='6' type='danger' class='el-dropdown-link item mx-2 cursor-pointer leading-none'>
             <i class='el-icon-bell text-xl' />
         </el-badge>
         <template #dropdown>
             <el-dropdown-menu>
-                <el-tabs
-                    type='border-card'
-                    class='notice-tabs z-10'
-                >
-                    <el-tab-pane
-                        label='通知'
-                        class='notice-tabs-pane'
-                    >
+                <el-tabs type='border-card' class='notice-tabs z-10'>
+                    <el-tab-pane label='通知' class='notice-tabs-pane'>
                         <el-scrollbar class='scrollbar-wrapper'>
                             <list :data='data' />
                             <el-pagination
@@ -28,18 +18,12 @@
                             />
                         </el-scrollbar>
                     </el-tab-pane>
-                    <el-tab-pane
-                        label='关注' 
-                        class='notice-tabs-pane'
-                    >
+                    <el-tab-pane label='关注' class='notice-tabs-pane'>
                         <el-scrollbar class='scrollbar-wrapper'>
                             <list :data='data' />
                         </el-scrollbar>
                     </el-tab-pane>
-                    <el-tab-pane
-                        label='待办' 
-                        class='notice-tabs-pane'
-                    >
+                    <el-tab-pane label='待办' class='notice-tabs-pane'>
                         <el-scrollbar class='scrollbar-wrapper'>
                             <list :data='data' />
                         </el-scrollbar>

@@ -1,36 +1,16 @@
 <template>
-    <el-col
-        :xs='24'
-        :sm='12'
-        :xl='8'
-    >
+    <el-col :xs='24' :sm='12' :xl='8'>
         <div class='card-list-item flex mb-3 text-sm'>
-            <div
-                class='text-right pr-3'
-                :style='{"lineHeight": "28px","width": width, "minWidth": width}'
-            >
-                <span
-                    v-if='isRequire'
-                    class='text-red-600 select-none'
-                >*</span>
+            <div class='text-right pr-3' :style='{"lineHeight": "28px","width": width, "minWidth": width}'>
+                <span v-if='isRequire' class='text-red-600 select-none'>*</span>
                 <slot name='key' />
                 <span>:</span>
             </div>
-            <div
-                class='flex-1 font-semibold'
-                :class='{"truncate": !prop}'
-                :style='{"lineHeight": !prop ? "28px" : "inherit"}'
-            >
-                <el-form-item
-                    v-if='prop'
-                    :prop='prop'
-                >
+            <div class='flex-1 font-semibold' :class='{"truncate": !prop}' :style='{"lineHeight": !prop ? "28px" : "inherit"}'>
+                <el-form-item v-if='prop' :prop='prop'>
                     <slot name='value' />
                 </el-form-item>
-                <slot
-                    v-else
-                    name='value'
-                />
+                <slot v-else name='value' />
             </div>
         </div>
     </el-col>

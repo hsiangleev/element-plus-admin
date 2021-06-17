@@ -3,9 +3,7 @@
         <el-tab-pane label='通知'>
             <list :data='data'>
                 <template #default='scope'>
-                    <el-button @click='edit(scope.item)'>
-                        操作
-                    </el-button>
+                    <el-button @click='edit(scope.item)'>操作</el-button>
                 </template>
             </list>
         </el-tab-pane>

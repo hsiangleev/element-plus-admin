@@ -1,69 +1,25 @@
 <template>
     <div class='w-screen h-screen bg-gray-800'>
-        <div
-            class='layout-login'
-            @keyup='enterSubmit'
-        >
-            <h3 class='text-2xl font-semibold text-gray-100 text-center mb-6'>
-                系统登陆
-            </h3>
-            <el-form
-                ref='ruleForm'
-                label-position='right'
-                label-width='80px'
-                :model='form'
-                :rules='rules'
-            >
-                <el-form-item
-                    class='mb-6 -ml-20'
-                    prop='name'
-                >
-                    <el-input
-                        v-model='form.name'
-                        placeholder='请输入用户名'
-                        prefix-icon='el-icon-user'
-                    />
+        <div class='layout-login' @keyup='enterSubmit'>
+            <h3 class='text-2xl font-semibold text-gray-100 text-center mb-6'>系统登陆</h3>
+            <el-form ref='ruleForm' label-position='right' label-width='80px' :model='form' :rules='rules'>
+                <el-form-item class='mb-6 -ml-20' prop='name'>
+                    <el-input v-model='form.name' placeholder='请输入用户名' prefix-icon='el-icon-user' />
                 </el-form-item>
-                <el-form-item
-                    class='mb-6 -ml-20'
-                    prop='pwd'
-                >
-                    <el-input
-                        v-model='form.pwd'
-                        placeholder='请输入密码'
-                        prefix-icon='el-icon-lock'
-                        show-password
-                    />
+                <el-form-item class='mb-6 -ml-20' prop='pwd'>
+                    <el-input v-model='form.pwd' placeholder='请输入密码' prefix-icon='el-icon-lock' show-password />
                 </el-form-item>
                 <el-form-item class='mb-6 -ml-20'>
-                    <el-button
-                        type='primary'
-                        class='w-full'
-                        @click='onSubmit'
-                    >
-                        登录
-                    </el-button>
+                    <el-button type='primary' class='w-full' @click='onSubmit'>登录</el-button>
                 </el-form-item>
                 
                 <div class='flex justify-between'>
                     <div class='text-gray-300'>
-                        <p class='leading-6 text-sm'>
-                            <span class='w-24 inline-block'>账号: admin</span> 密码: admin
-                        </p>
-                        <p class='leading-6 text-sm'>
-                            <span class='w-24 inline-block'>账号: dev</span> 密码: dev
-                        </p>
-                        <p class='leading-6 text-sm'>
-                            <span class='w-24 inline-block'>账号: test</span> 密码: test
-                        </p>
+                        <p class='leading-6 text-sm'><span class='w-24 inline-block'>账号: admin</span> 密码: admin</p>
+                        <p class='leading-6 text-sm'><span class='w-24 inline-block'>账号: dev</span> 密码: dev</p>
+                        <p class='leading-6 text-sm'><span class='w-24 inline-block'>账号: test</span> 密码: test</p>
                     </div>
-                    <div>
-                        <el-button
-                            type='primary'
-                        >
-                            第三方登录
-                        </el-button>
-                    </div>
+                    <div><el-button type='primary'>第三方登录</el-button></div>
                 </div>
             </el-form>
         </div>

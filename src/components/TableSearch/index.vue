@@ -1,34 +1,20 @@
 <template>
     <div class='table-search flex flex-col'>
-        <div
-            ref='searchEl'
-            class='table-search-form'
-        >
+        <div ref='searchEl' class='table-search-form'>
             <slot name='search' />
         </div>
         
         <div class='flex justify-between items-center mb-2'>
             <div>
                 <el-button-group>
-                    <el-button
-                        type='primary'
-                        icon='el-icon-edit'
-                    />
-                    <el-button
-                        type='primary'
-                        icon='el-icon-share'
-                    />
-                    <el-button
-                        type='primary'
-                        icon='el-icon-delete'
-                    />
+                    <el-button type='primary' icon='el-icon-edit' />
+                    <el-button type='primary' icon='el-icon-share' />
+                    <el-button type='primary' icon='el-icon-delete' />
                 </el-button-group>
             </div>
-            <el-button
-                type='text'
-                @click='toggleSearch'
-            >
-                高级搜索<i :class='{"el-icon-arrow-down": !isShow, "el-icon-arrow-up": isShow}' />
+            <el-button type='text' @click='toggleSearch'>
+                高级搜索
+                <i :class='{"el-icon-arrow-down": !isShow, "el-icon-arrow-up": isShow}' />
             </el-button>
         </div>
         <slot />

@@ -3,8 +3,8 @@
         <el-menu
             :default-active='activeMenu'
             :collapse='menubar.status === 1 || menubar.status === 3'
-            class='el-menu-vertical-demo'
             :class='{ 
+                "el-menu-vertical-demo": true,
                 "w-64": menubar.status === 0 || menubar.status === 2, 
                 "w-0": menubar.status === 3, 
                 "w-16": menubar.status === 1, 
@@ -13,12 +13,7 @@
             :unique-opened='true'
             @select='onOpenChange'
         >
-            <menubar-item
-                v-for='v in filterMenubarData'
-                :key='v.path'
-                :index='v.path'
-                :menu-list='v'
-            />
+            <menubar-item v-for='v in filterMenubarData' :key='v.path' :index='v.path' :menu-list='v' />
         </el-menu>
     </el-scrollbar>
 </template>

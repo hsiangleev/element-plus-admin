@@ -1,55 +1,24 @@
 <template>
     <div v-if='type==="default"'>
-        <div
-            v-for='(val,index) in data'
-            :key='index'
-            class='py-2 border-b hover:bg-gray-100'
-        >
+        <div v-for='(val,index) in data' :key='index' class='py-2 border-b hover:bg-gray-100'>
             <div class='flex justify-between items-center'>
                 <div class='flex items-center'>
-                    <div
-                        v-if='val.imgUrl || val.iconClass'
-                        class='mr-4'
-                    >
-                        <el-avatar
-                            v-if='val.imgUrl'
-                            size='large'
-                            :src='val.imgUrl'
-                        />
-                        <i
-                            v-if='val.iconClass'
-                            :class='{"text-3xl": true, [val.iconClass]: true}'
-                        />
+                    <div v-if='val.imgUrl || val.iconClass' class='mr-4'>
+                        <el-avatar v-if='val.imgUrl' size='large' :src='val.imgUrl' />
+                        <i v-if='val.iconClass' :class='{"text-3xl": true, [val.iconClass]: true}' />
                     </div>
                     <div>
-                        <el-link
-                            v-if='val.href'
-                            type='primary'
-                            :underline='false'
-                            :href='val.href'
-                        >
+                        <el-link v-if='val.href' type='primary' :underline='false' :href='val.href'>
                             <p class='text-sm mb-1'>
                                 {{ val.subTitle }}
-                                <el-tag v-if='val.tag'>
-                                    {{ val.tag }}
-                                </el-tag>
+                                <el-tag v-if='val.tag'>{{ val.tag }}</el-tag>
                             </p>
                         </el-link>
-                        <p
-                            v-else
-                            class='text-sm mb-1'
-                        >
+                        <p v-else class='text-sm mb-1'>
                             {{ val.subTitle }}
-                            <el-tag v-if='val.tag'>
-                                {{ val.tag }}
-                            </el-tag>
+                            <el-tag v-if='val.tag'>{{ val.tag }}</el-tag>
                         </p>
-                        <p
-                            v-if='val.time'
-                            class='text-xs text-gray-500'
-                        >
-                            {{ val.time }}
-                        </p>
+                        <p v-if='val.time' class='text-xs text-gray-500'>{{ val.time }}</p>
                     </div>
                 </div>
                 <slot :item='val' />
@@ -57,59 +26,25 @@
         </div>
     </div>
 
-    <div
-        v-if='type==="card"'
-        class='component-list-card'
-    >
-        <el-card
-            shadow='never'
-            class='mb-2'
-        >
+    <div v-if='type==="card"' class='component-list-card'>
+        <el-card shadow='never' class='mb-2'>
             <template #header>
                 <slot name='header' />
             </template>
             <el-row>
-                <el-col
-                    v-for='(val,index) in data'
-                    :key='index'
-                    :xs='24'
-                    :sm='12'
-                    :md='8'
-                    class='c-list-card-body h-40 text-sm text-gray-400'
-                >
-                    <div
-                        v-if='val.title'
-                        class='flex items-center py-1 text-black font-medium'
-                    >
+                <el-col v-for='(val,index) in data' :key='index' :xs='24' :sm='12' :md='8' class='c-list-card-body h-40 text-sm text-gray-400'>
+                    <div v-if='val.title' class='flex items-center py-1 text-black font-medium'>
                         <div>
-                            <el-avatar
-                                v-if='val.imgUrl'
-                                size='small'
-                                :src='val.imgUrl'
-                            />
-                            <i
-                                v-if='val.iconClass'
-                                :class='{"text-3xl": true, [val.iconClass]: true}'
-                            />
+                            <el-avatar v-if='val.imgUrl' size='small' :src='val.imgUrl' />
+                            <i v-if='val.iconClass' :class='{"text-3xl": true, [val.iconClass]: true}' />
                         </div>
-                        <div class='px-4 truncate text-base'>
-                            {{ val.title }}
-                        </div>
+                        <div class='px-4 truncate text-base'>{{ val.title }}</div>
                     </div>
                     <div class='py-1 h-16 overflow-ellipsis overflow-hidden leading-6'>
-                        <el-link
-                            v-if='val.href'
-                            type='primary'
-                            :underline='false'
-                            :href='val.href'
-                        >
-                            <p class='text-sm mb-1'>
-                                {{ val.subTitle }}
-                            </p>
+                        <el-link v-if='val.href' type='primary' :underline='false' :href='val.href'>
+                            <p class='text-sm mb-1'>{{ val.subTitle }}</p>
                         </el-link>
-                        <p v-else>
-                            {{ val.subTitle }}
-                        </p>
+                        <p v-else>{{ val.subTitle }}</p>
                     </div>
                     <div class='flex items-center justify-between'>
                         <div>{{ val.tag }}</div>

@@ -1,8 +1,6 @@
 <template>
     <div>
-        <p style='height: 1500px;'>
-            高度超出，滚动条测试
-        </p>
+        <p style='height: 1500px;'>高度超出，滚动条测试</p>
         <span>aa</span>
     </div>
 </template>

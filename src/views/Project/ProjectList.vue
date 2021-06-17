@@ -1,35 +1,13 @@
 <template>
     <div>
-        <el-table
-            :data='list.tableData'
-            border
-            style='width: 100%;'
-        >
-            <el-table-column
-                fixed
-                prop='date'
-                label='日期'
-            />
-            <el-table-column
-                prop='name'
-                label='姓名'
-            />
-            <el-table-column
-                prop='province'
-                label='省份'
-            />
-            <el-table-column
-                fixed='right'
-                label='操作'
-            >
+        <el-table :data='list.tableData' border style='width: 100%;'>
+            <el-table-column fixed prop='date' label='日期' />
+            <el-table-column prop='name' label='姓名' />
+            <el-table-column prop='province' label='省份' />
+            <el-table-column fixed='right' label='操作'>
                 <template #default='scope'>
-                    <el-button
-                        type='text'
-                        size='small'
-                    >
-                        <router-link :to='"/Project/ProjectDetail/" + scope.row.projName'>
-                            编辑
-                        </router-link>
+                    <el-button type='text' size='small'>
+                        <router-link :to='"/Project/ProjectDetail/" + scope.row.projName'>编辑</router-link>
                     </el-button>
                 </template>
             </el-table-column>

@@ -1,9 +1,6 @@
 <template>
     <div class='shadow border-b border-gray-100 px-3 overflow-hidden relative z-10'>
-        <el-scrollbar
-            ref='scrollbar'
-            wrap-class='scrollbar-wrapper'
-        >
+        <el-scrollbar ref='scrollbar' wrap-class='scrollbar-wrapper'>
             <div class='layout-tags-container whitespace-nowrap'>
                 <span
                     v-for='v in tagsList'
@@ -13,43 +10,17 @@
                     :class='{"layout-tags-active": v.isActive}'
                     @contextmenu.prevent='contextRightMenu(v,$event)'
                 >
-                    <i
-                        v-if='v.isActive'
-                        class='rounded-full inline-block w-2 h-2 bg-white -ml-1 mr-1'
-                    />
+                    <i v-if='v.isActive' class='rounded-full inline-block w-2 h-2 bg-white -ml-1 mr-1' />
                     <router-link :to='v.path'>{{ v.title }}</router-link>
-                    <i
-                        v-if='tagsList.length>1'
-                        class='el-icon-close text-xs hover:bg-gray-300 hover:text-white rounded-full leading-3 p-0.5 ml-1 -mr-1'
-                        @click='removeTagNav(v)'
-                    />
+                    <i v-if='tagsList.length>1' class='el-icon-close text-xs hover:bg-gray-300 hover:text-white rounded-full leading-3 p-0.5 ml-1 -mr-1' @click='removeTagNav(v)' />
                 </span>
             </div>
         </el-scrollbar>
     </div>
-    <ul
-        ref='rightMenuEl'
-        class='border border-gray-200 absolute w-24 leading-none bg-white shadow-md rounded-lg py-0.5 z-10'
-        :style='menuPos'
-    >
-        <li
-            class='px-4 py-2 cursor-pointer hover:bg-gray-200'
-            @click='refresh'
-        >
-            刷新
-        </li>
-        <li
-            class='px-4 py-2 cursor-pointer hover:bg-gray-200'
-            @click='closeOther'
-        >
-            关闭其它
-        </li>
-        <li
-            class='px-4 py-2 cursor-pointer hover:bg-gray-200'
-            @click='closeAll'
-        >
-            关闭所有
-        </li>
+    <ul ref='rightMenuEl' class='border border-gray-200 absolute w-24 leading-none bg-white shadow-md rounded-lg py-0.5 z-10' :style='menuPos'>
+        <li class='px-4 py-2 cursor-pointer hover:bg-gray-200' @click='refresh'>刷新</li>
+        <li class='px-4 py-2 cursor-pointer hover:bg-gray-200' @click='closeOther'>关闭其它</li>
+        <li class='px-4 py-2 cursor-pointer hover:bg-gray-200' @click='closeAll'>关闭所有</li>
     </ul>
 </template>
 

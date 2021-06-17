@@ -20,6 +20,15 @@ module.exports = {
         'plugin:vue/vue3-recommended'
     ],
     rules: {
+        'vue/max-attributes-per-line': ['error', {
+            singleline: 10,
+            multiline: {
+                max: 1,
+                allowFirstLine: false
+            }
+        }],
+        'vue/singleline-html-element-content-newline': 'off',
+        'vue/multiline-html-element-content-newline':'off',
         'vue/html-indent': ['error', 4],
         indent: ['error', 4], // 4行缩进
         'vue/script-indent': ['error', 4],

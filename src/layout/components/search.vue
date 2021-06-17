@@ -1,13 +1,6 @@
 <template>
-    <div
-        class='layout-navbar-search hidden-xs-only cursor-pointer flex flex-center px-2'
-        :class='{"open": isShow}'
-    >
-        <svg-icon
-            class-name='svg-icon'
-            icon-class='svg-search'
-            @click.stop='changeStatus'
-        />
+    <div class='layout-navbar-search hidden-xs-only cursor-pointer flex flex-center px-2' :class='{"open": isShow}'>
+        <svg-icon class-name='svg-icon' icon-class='svg-search' @click.stop='changeStatus' />
         <div class='layout-navbar-search-select'>
             <el-select
                 ref='elSelect'
@@ -18,12 +11,7 @@
                 :remote-method='searchText'
                 @change='changeRoute'
             >
-                <el-option
-                    v-for='item in searchList'
-                    :key='item.path'
-                    :label='item.searchLabel'
-                    :value='item.path'
-                />
+                <el-option v-for='item in searchList' :key='item.path' :label='item.searchLabel' :value='item.path' />
             </el-select>
         </div>
     </div>

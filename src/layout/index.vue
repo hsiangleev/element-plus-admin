@@ -1,10 +1,6 @@
 <template>
     <div class='layout flex h-screen'>
-        <div
-            class='layout-sidebar-mask fixed w-screen h-screen bg-black bg-opacity-25 z-20'
-            :class='{"hidden": layout.menubar.status !== 2 }'
-            @click='changeCollapsed'
-        />
+        <div class='layout-sidebar-mask fixed w-screen h-screen bg-black bg-opacity-25 z-20' :class='{"hidden": layout.menubar.status !== 2 }' @click='changeCollapsed' />
         <div
             class='layout-sidebar flex flex-col h-screen transition-width duration-200 shadow'
             :class='{ 
