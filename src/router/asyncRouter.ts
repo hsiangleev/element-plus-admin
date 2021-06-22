@@ -9,6 +9,8 @@ const components:IObject<() => Promise<typeof import('*.vue')>> = {
 Object.keys(modules).forEach(key => {
     const nameMatch = key.match(/^\.\.\/views\/(.+)\.vue/)
     if(!nameMatch) return
+    // 排除_Components文件夹下的文件
+    if(nameMatch[1].includes('_Components')) return
     // 如果页面以Index命名，则使用父文件夹作为name
     const indexMatch = nameMatch[1].match(/(.*)\/Index$/i)
     let name = indexMatch ? indexMatch[1] : nameMatch[1];
@@ -32,7 +34,7 @@ const asyncRouter:IMenubarList[] = [
     }
 ]
 
-export const generatorDynamicRouter = (data:IMenubarList[]):void => {
+const generatorDynamicRouter = (data:IMenubarList[]):void => {
     const routerList:IMenubarList[] = listToTree(data, 0)
     asyncRouter.forEach(v => routerList.push(v))
     const f = (data:IMenubarList[], pData:IMenubarList|null) => {
@@ -49,4 +51,9 @@ export const generatorDynamicRouter = (data:IMenubarList[]):void => {
     }
     f(routerList, null)
     store.commit('layout/setRoutes', routerList)
+}
+
+export {
+    components,
+    generatorDynamicRouter
 }
