@@ -162,6 +162,13 @@ const mutations = {
     changePinSearchSetting(state: ILayout, showPinyinSearch:boolean):void {
         state.setting.usePinyinSearch = showPinyinSearch
         localStorage.setItem('setting', JSON.stringify(state.setting))
+    },
+    // 下次进去该页面刷新该页面(解决子页面保存之后，回到父页面页面不刷新问题)
+    refreshPage(state: ILayout, path: string):void {
+        const name = state.tags.tagsList.filter(v => v.path === path)[0]?.name
+        if(!name) return
+        const index = state.tags.cachedViews.findIndex(v => v === name)
+        state.tags.cachedViews.splice(index, 1)
     }
 }
 const actions = {
