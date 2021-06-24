@@ -40,15 +40,15 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useStore } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 import { checkPermission } from '/@/utils/permission'
 export default defineComponent({
     name: 'Directive',
     setup() {
-        const store = useStore()
-        const username = ref(store.state.layout.userInfo.name)
+        const { getUserInfo, setToken } = useLayoutStore()
+        const username = ref(getUserInfo.name)
         const changeUser = () => {
-            store.commit('layout/login', `token_${username.value}_token`)
+            setToken(`token_${username.value}_token`)
             history.go(0)
         }
 

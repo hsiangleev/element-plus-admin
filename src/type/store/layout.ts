@@ -12,29 +12,32 @@ export interface ISetting {
     }
     usePinyinSearch: boolean
 }
-export interface IToken {
+export interface IMenubar {
+    status: IMenubarStatus
+    menuList: Array<IMenubarList>
+    isPhone: boolean
+}
+export interface IUserInfo {
+    name: string,
+    role: string[]
+}
+export interface ITags {
+    tagsList: Array<ITagsList>
+    cachedViews: string[]
+}
+export interface IStatus {
+    isLoading: boolean
     ACCESS_TOKEN: string
 }
 export interface ILayout {
     // 左侧导航栏
-    menubar: {
-        status: IMenubarStatus
-        menuList: Array<IMenubarList>
-        isPhone: boolean
-    }
+    menubar: IMenubar
     // 用户信息
-    userInfo: {
-        name: string,
-        role: string[]
-    }
+    userInfo: IUserInfo
     // 标签栏
-    tags: {
-        tagsList: Array<ITagsList>
-        cachedViews: string[]
-    }
-    token: IToken
+    tags: ITags
     setting: ISetting
-    isLoading: boolean
+    status:IStatus
 }
 export interface IMenubarList {
     parentId?: number | string

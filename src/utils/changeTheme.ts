@@ -1,9 +1,9 @@
 import theme from '/@/config/theme'
 import { ITheme } from '/@/type/config/theme'
-import { store } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 export default function(num:number):HTMLStyleElement {
     const themeStyle:ITheme = num >= theme.length ? theme[0] : theme[num]
-    const { color } = store.state.layout.setting
+    const { color } = useLayoutStore().getSetting
     const themeDom = document.createElement('style')
     themeDom.className = 'layout-side-setting'
     themeDom.innerText = `

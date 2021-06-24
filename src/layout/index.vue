@@ -1,17 +1,17 @@
 <template>
     <div class='layout flex h-screen'>
-        <div class='layout-sidebar-mask fixed w-screen h-screen bg-black bg-opacity-25 z-20' :class='{"hidden": layout.menubar.status !== 2 }' @click='changeCollapsed' />
+        <div class='layout-sidebar-mask fixed w-screen h-screen bg-black bg-opacity-25 z-20' :class='{"hidden": getMenubar.status !== 2 }' @click='changeCollapsed' />
         <div
             class='layout-sidebar flex flex-col h-screen transition-width duration-200 shadow'
             :class='{ 
-                "w-64": layout.menubar.status === 0 || layout.menubar.status === 2, 
-                "w-0": layout.menubar.status === 3, 
-                "w-16": layout.menubar.status === 1, 
-                "absolute z-30": layout.menubar.status === 2 || layout.menubar.status === 3, 
+                "w-64": getMenubar.status === 0 || getMenubar.status === 2, 
+                "w-0": getMenubar.status === 3, 
+                "w-16": getMenubar.status === 1, 
+                "absolute z-30": getMenubar.status === 2 || getMenubar.status === 3, 
             }'
         >
             <div class='layout-sidebar-logo flex h-12 relative flex-center shadow-lg'>
-                {{ layout.menubar.status === 0 || layout.menubar.status === 2 ? 'hsianglee' : (layout.menubar.status === 1 ? 'lee' : '') }}
+                {{ getMenubar.status === 0 || getMenubar.status === 2 ? 'hsianglee' : (getMenubar.status === 1 ? 'lee' : '') }}
             </div>
             <div class='layout-sidebar-menubar flex flex-1 overflow-hidden'>
                 <layout-menubar />
@@ -22,7 +22,7 @@
                 <layout-navbar />
             </div>
             <div
-                v-if='layout.setting.showTags'
+                v-if='getSetting.showTags'
                 class='layout-main-tags h-8 leading-8 text-sm text-gray-600 relative'
             >
                 <layout-tags />
@@ -44,8 +44,8 @@ import LayoutMenubar from '/@/layout/components/menubar.vue'
 import LayoutNavbar from '/@/layout/components/navbar.vue'
 import LayoutTags from '/@/layout/components/tags.vue'
 import LayoutSideSetting from '/@/layout/components/sideSetting.vue'
-import { useStore } from '/@/store/index'
 import { throttle } from '/@/utils/tools'
+import { useLayoutStore } from '/@/store/modules/layout'
 
 export default defineComponent ({
     name: 'Layout',
@@ -57,11 +57,9 @@ export default defineComponent ({
         LayoutSideSetting
     },
     setup() {
-        const store = useStore()
-        const changeDeviceWidth = () => store.commit('layout/changeDeviceWidth')
-        const changeCollapsed = () => store.commit('layout/changeCollapsed')
+        const { changeTheme, changeDeviceWidth, changeCollapsed, getMenubar, getSetting } = useLayoutStore()
 
-        store.commit('layout/changeTheme')
+        changeTheme()
 
         onMounted(async() => {
             changeDeviceWidth()
@@ -74,7 +72,8 @@ export default defineComponent ({
         })
 
         return {
-            layout: store.state.layout,
+            getMenubar,
+            getSetting,
             changeCollapsed
         }
     }

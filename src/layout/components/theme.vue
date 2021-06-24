@@ -10,14 +10,14 @@
 </template>
 <script lang='ts'>
 import { defineComponent, ref } from 'vue'
-import { store } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 import changeThemeColor from '/@/utils/changeThemeColor'
 
 export default defineComponent({
     name: 'LayoutTheme',
     setup() {
-        const { setting } = store.state.layout
-        const defaultTheme = ref(setting.color.primary)
+        const { getSetting } = useLayoutStore()
+        const defaultTheme = ref(getSetting.color.primary)
         return {
             defaultTheme,
             changeThemeColor

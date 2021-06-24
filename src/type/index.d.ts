@@ -1,6 +1,4 @@
-import { ILayout } from '/@/type/store/layout'
-import { IPage } from '/@/type/store/page'
-
+export {}
 declare global {
     interface IResponse<T = any> {
         Code: number;
@@ -11,9 +9,6 @@ declare global {
         [index: string]: T
     }
     
-    interface IState extends IPage {
-        layout: ILayout
-    }
     interface ITable<T = any> {
         data : Array<T>
         total: number

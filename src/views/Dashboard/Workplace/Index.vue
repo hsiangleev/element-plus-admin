@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useStore } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 import Chart from '/@/views/Dashboard/Workplace/_Components/Chart.vue'
 import List from '/@/views/Dashboard/Workplace/_Components/List.vue'
 
@@ -76,9 +76,9 @@ export default defineComponent({
         Chart
     },
     setup() {
-        const store = useStore()
+        const { getUserInfo } = useLayoutStore()
         return {
-            user: store.state.layout.userInfo
+            user: getUserInfo
         }
     }
 })

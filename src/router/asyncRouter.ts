@@ -1,6 +1,7 @@
 import { IMenubarList } from '/@/type/store/layout'
 import { listToTree } from '/@/utils/tools'
-import { store } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
+
 // 动态路由名称映射表
 const modules = import.meta.glob('../views/**/**.vue')
 const components:IObject<() => Promise<typeof import('*.vue')>> = {
@@ -35,6 +36,7 @@ const asyncRouter:IMenubarList[] = [
 ]
 
 const generatorDynamicRouter = (data:IMenubarList[]):void => {
+    const { setRoutes } = useLayoutStore()
     const routerList:IMenubarList[] = listToTree(data, 0)
     asyncRouter.forEach(v => routerList.push(v))
     const f = (data:IMenubarList[], pData:IMenubarList|null) => {
@@ -50,7 +52,7 @@ const generatorDynamicRouter = (data:IMenubarList[]):void => {
         }
     }
     f(routerList, null)
-    store.commit('layout/setRoutes', routerList)
+    setRoutes(routerList)
 }
 
 export {

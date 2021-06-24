@@ -40,11 +40,12 @@
 
 <script lang='ts'>
 import { defineComponent, reactive, watch } from 'vue'
-import { useStore } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router'
 import Notice from '/@/layout/components/notice.vue'
 import Screenfull from '/@/layout/components/screenfull.vue'
 import Search from '/@/layout/components/search.vue'
+
 
 interface IBreadcrumbList {
     path: string
@@ -80,13 +81,11 @@ export default defineComponent ({
         Screenfull
     },
     setup() {
-        const store = useStore()
+        const { getMenubar, getUserInfo, changeCollapsed, logout } = useLayoutStore()
         const route = useRoute()
-        const changeCollapsed = () => store.commit('layout/changeCollapsed')
-        const logout = () => store.commit('layout/logout')
         return {
-            menubar: store.state.layout.menubar,
-            userInfo: store.state.layout.userInfo,
+            menubar: getMenubar,
+            userInfo: getUserInfo,
             changeCollapsed,
             logout,
             ...breadcrumb(route)

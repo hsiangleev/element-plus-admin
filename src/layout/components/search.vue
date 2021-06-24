@@ -18,7 +18,7 @@
 </template>
 <script lang='ts'>
 import { defineComponent, Ref, ref, watch } from 'vue'
-import { useStore } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 import { IMenubarList, ISetting } from '/@/type/store/layout'
 import { useRouter } from 'vue-router'
 import Fuse from 'fuse.js'
@@ -127,16 +127,13 @@ const changeSearchStatus = (searchList:Ref<ISearchList[]>) => {
 export default defineComponent({
     name: 'Search',
     setup() {
-        const store = useStore()
+        const { getMenubar, getSetting } = useLayoutStore()
         const searchList:Ref<ISearchList[]> = ref([])
-        const { menuList } = store.state.layout.menubar
-        const { setting } = store.state.layout
         const searchText:Ref<null | ((query: string) => void)> = ref(null)
 
-        search(searchList, menuList, setting).then(data => {
+        search(searchList, getMenubar.menuList, getSetting).then(data => {
             searchText.value = data
         })
-        
 
         return {
             searchList,

@@ -12,7 +12,7 @@
                 >
                     <i v-if='v.isActive' class='rounded-full inline-block w-2 h-2 bg-white -ml-1 mr-1' />
                     <router-link :to='v.path'>{{ v.title }}</router-link>
-                    <i v-if='tagsList.length>1' class='el-icon-close text-xs hover:bg-gray-300 hover:text-white rounded-full leading-3 p-0.5 ml-1 -mr-1' @click='removeTagNav(v)' />
+                    <i v-if='tagsList.length>1' class='el-icon-close text-xs hover:bg-gray-300 hover:text-white rounded-full leading-3 p-0.5 ml-1 -mr-1' @click='removeTag(v)' />
                 </span>
             </div>
         </el-scrollbar>
@@ -20,19 +20,21 @@
     <ul ref='rightMenuEl' class='border border-gray-200 absolute w-24 leading-none bg-white shadow-md rounded-lg py-0.5 z-10' :style='menuPos'>
         <li class='px-4 py-2 cursor-pointer hover:bg-gray-200' @click='refresh'>刷新</li>
         <li class='px-4 py-2 cursor-pointer hover:bg-gray-200' @click='closeOther'>关闭其它</li>
-        <li class='px-4 py-2 cursor-pointer hover:bg-gray-200' @click='closeAll'>关闭所有</li>
+        <li class='px-4 py-2 cursor-pointer hover:bg-gray-200' @click='removeAllTagNav'>关闭所有</li>
     </ul>
 </template>
 
 <script lang="ts">
 import { defineComponent, nextTick, ref, watch, onBeforeUpdate, onMounted, reactive, Ref, ComponentInternalInstance } from 'vue'
-import { useStore } from '/@/store/index'
-import { Store } from 'vuex'
-import { useRoute, useRouter, Router, RouteLocationNormalizedLoaded } from 'vue-router'
+import { useLayoutStore } from '/@/store/modules/layout'
+import { useRoute, useRouter } from 'vue-router'
 import { ITagsList } from '/@/type/store/layout'
 
 // 右键菜单
-const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNormalizedLoaded) => {
+const rightMenu = () => {
+    const { removeOtherTagNav } = useLayoutStore()
+    const route = useRoute()
+    const router = useRouter()
     const menuPos = reactive({
         left: '0px',
         top: '0px',
@@ -63,14 +65,15 @@ const rightMenu = (store:Store<IState>, router: Router, route: RouteLocationNorm
             router.push(`/redirect${currentRightTags.path}`)
         }
     }
-    const closeOther = () => store.commit('layout/removeOtherTagNav', currentRightTags)
+    const closeOther = () => removeOtherTagNav(currentRightTags)
     document.body.addEventListener('click', () => menuPos.display = 'none')
     return { menuPos, contextRightMenu, refresh, rightMenuEl, closeOther }
 }
 
 // 标签页滚动
-const tagScroll = (store:Store<IState>) => {
-    const { tagsList, cachedViews } = store.state.layout.tags
+const tagScroll = () => {
+    const { getTags } = useLayoutStore()
+    const { tagsList, cachedViews } = getTags
     const scrollbar:Ref<{wrap:HTMLElement, update():void} | null> = ref(null)
     const layoutTagsItem:Ref<Array<ComponentInternalInstance | Element | null>> = ref([])
     const getTagsDom = (el:ComponentInternalInstance | Element | null) => el && layoutTagsItem.value.push(el)
@@ -100,24 +103,19 @@ const tagScroll = (store:Store<IState>) => {
 export default defineComponent({
     name: 'LayoutTags',
     setup() {
-        const store = useStore()
+        const { removeAllTagNav, addCachedViews, removeTagNav } = useLayoutStore()
         const route = useRoute()
-        const router = useRouter()
-        const removeTagNav = (v: any) => store.commit('layout/removeTagNav', { cPath: route.path, tagsList: v })
-        const closeAll = () => store.commit('layout/removeAllTagNav')
+        const removeTag = (v: any) => removeTagNav({ cPath: route.path, tagsList: v })
         
         onMounted(() => {
-            store.commit('layout/addCachedViews', { name: route.name, noCache: route.meta.noCache })
+            addCachedViews({ name: route.name as string, noCache: route.meta.noCache as boolean })
         })
         
-        const rightMenuData = rightMenu(store, router, route)
-        const tagScrollData = tagScroll(store)
-        
         return {
-            removeTagNav,
-            ...tagScrollData,
-            ...rightMenuData,
-            closeAll
+            removeTag,
+            removeAllTagNav,
+            ...tagScroll(),
+            ...rightMenu()
         }
     }
 })

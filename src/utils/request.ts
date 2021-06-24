@@ -1,4 +1,4 @@
-import { store } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 import axios from 'axios'
 import { AxiosResponse } from 'axios'
 import { ElLoading, ElNotification } from 'element-plus'
@@ -25,13 +25,14 @@ const errorHandler = (error:{message:string}) => {
 
 // request interceptor
 request.interceptors.request.use(config => {
+    const { getStatus } = useLayoutStore()
     loading = ElLoading.service({
         lock: true,
         text: 'Loading',
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.4)'
     })
-    const token = store.state.layout.token.ACCESS_TOKEN
+    const token = getStatus.ACCESS_TOKEN
     // 如果 token 存在
     // 让每个请求携带自定义 token 请根据实际情况自行修改
     if (token) {
@@ -43,12 +44,13 @@ request.interceptors.request.use(config => {
 // response interceptor
 request.interceptors.response.use((response:AxiosResponse<IResponse>) => {
     const { data } = response
+    const { getStatus, logout } = useLayoutStore()
     loading.close()
     if(data.Code !== 200) {
         let title = '请求失败'
         if(data.Code === 401) {
-            if (store.state.layout.token.ACCESS_TOKEN) {
-                store.commit('layout/logout')
+            if (getStatus.ACCESS_TOKEN) {
+                logout()
             }
             title = '身份认证失败'
         }

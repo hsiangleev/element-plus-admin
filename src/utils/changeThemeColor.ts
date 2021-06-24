@@ -1,7 +1,7 @@
-import { store } from '/@/store/index'
 import { ref, Ref } from 'vue'
 import { version } from 'element-plus'
-import { useStore } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
+
 const getTheme = (theme: string, prevTheme: Ref<string>) => {
     const themeCluster = getThemeCluster(theme.substr(1))
     const originalCluster = getThemeCluster(prevTheme.value.substr(1))
@@ -70,12 +70,11 @@ const getCSSString: (url: string, chalk: Ref<string>) => Promise<void> = (url, c
 
 
 // 切换主题色，并记录
-const { setting } = store.state.layout
 const prevTheme = ref('#409eff')
 const chalk = ref('')
 export default async function changeThemeColor(theme: string): Promise<void> {
+    const { changeThemeColor } = useLayoutStore()
     const { themeCluster, originalCluster } = getTheme(theme, prevTheme)
-    setting.color.primary = `#${themeCluster[0]}`
     if (!chalk.value) {
         const url = `https://unpkg.com/element-plus@${version}/lib/theme-chalk/index.css`
         await getCSSString(url, chalk)
@@ -95,13 +94,12 @@ export default async function changeThemeColor(theme: string): Promise<void> {
         systemSetting.innerText = systemSettingText
     }
     
-    localStorage.setItem('setting', JSON.stringify(setting))
+    changeThemeColor(`#${themeCluster[0]}`)
 }
 
 export async function changeThemeDefaultColor():Promise<void> {
-    const store = useStore()
-    const { setting } = store.state.layout
-    const defaultTheme = ref(setting.color.primary)
+    const { getSetting } = useLayoutStore()
+    const defaultTheme = ref(getSetting.color.primary)
     // 判断是否修改过主题色
     defaultTheme.value.toLowerCase() !== '#409eff' && await changeThemeColor(defaultTheme.value)
 }

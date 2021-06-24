@@ -11,9 +11,9 @@
                         </div>
                         <div class='flex flex-col flex-1'>
                             <div class='h-3' :style='{"backgroundColor": val.navbarBg || "#fff"}' />
-                            <div v-if='layout.setting.showTags' class='h-2' :style='{"backgroundColor": val.tagsBg || "#fff"}' />
+                            <div v-if='setting.showTags' class='h-2' :style='{"backgroundColor": val.tagsBg || "#fff"}' />
                             <div class='flex-1 relative' :style='{"backgroundColor": val.mainBg}'>
-                                <i v-if='layout.setting.theme===index' class='el-icon-check absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4' :style='{"color": val.sidebarActiveBg}' />
+                                <i v-if='setting.theme===index' class='el-icon-check absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4' :style='{"color": val.sidebarActiveBg}' />
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
 <script lang='ts'>
 import { ref, defineComponent, watch } from 'vue'
 import theme from '/@/config/theme'
-import { useStore } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 import LayoutTheme from '/@/layout/components/theme.vue'
 
 export default defineComponent ({
@@ -50,20 +50,19 @@ export default defineComponent ({
         LayoutTheme
     },
     setup() {
-        const store = useStore()
+        const { changeTheme, getSetting, changeTagsSetting, changePinSearchSetting } = useLayoutStore()
         const drawer = ref(false)
-        const changeTheme = (index:number) => store.commit('layout/changeTheme', index)
-        const showTags = ref(store.state.layout.setting.showTags)
-        const showPinyinSearch = ref(store.state.layout.setting.usePinyinSearch)
+        const showTags = ref(getSetting.showTags)
+        const showPinyinSearch = ref(getSetting.usePinyinSearch)
 
-        watch(() => showTags.value, () => store.commit('layout/changeTagsSetting', showTags.value))
-        watch(() => showPinyinSearch.value, () => store.commit('layout/changePinSearchSetting', showPinyinSearch.value))
+        watch(() => showTags.value, () => changeTagsSetting(showTags.value))
+        watch(() => showPinyinSearch.value, () => changePinSearchSetting(showPinyinSearch.value))
 
         return {
             drawer,
             theme,
             changeTheme,
-            layout: store.state.layout,
+            setting: getSetting,
             showTags,
             showPinyinSearch
         }

@@ -1,8 +1,9 @@
 import router from '/@/router'
-import { store } from '/@/store/index'
 import { configure, start, done } from 'nprogress'
 import { RouteRecordRaw } from 'vue-router'
 import { decode, encode } from '/@/utils/tools'
+import { useLayoutStore } from '/@/store/modules/layout'
+import { useLocal } from '/@/utils/tools'
 
 configure({ showSpinner: false })
 
@@ -11,7 +12,7 @@ const defaultRoutePath = '/'
 
 router.beforeEach(async(to, from) => {
     start()
-    const { layout } = store.state
+    const { getStatus, getMenubar, getTags, setToken, logout, GenerateRoutes, getUser, concatAllowRoutes, changeTagNavList, addCachedViews } = useLayoutStore()
     // 修改页面title
     const reg = new RegExp(/^(.+)(\s\|\s.+)$/)
     const appTitle = import.meta.env.VITE_APP_TITLE
@@ -23,31 +24,38 @@ router.beforeEach(async(to, from) => {
     // 判断当前是否在登陆页面
     if (to.path.toLocaleLowerCase() === loginRoutePath.toLocaleLowerCase()) {
         done()
-        if(layout.token.ACCESS_TOKEN) return typeof to.query.from === 'string' ? decode(to.query.from) : defaultRoutePath
+        if(getStatus.ACCESS_TOKEN) return typeof to.query.from === 'string' ? decode(to.query.from) : defaultRoutePath
         return
     }
     // 判断是否登录
-    if(!layout.token.ACCESS_TOKEN) {
+    if(!getStatus.ACCESS_TOKEN) {
         return loginRoutePath + (to.fullPath ? `?from=${encode(to.fullPath)}` : '')
     }
+    
+    // 前端检查token是否失效
+    useLocal('token')
+        .then(d => setToken(d.ACCESS_TOKEN))
+        .catch(() => logout())
+
+
     // 判断是否还没添加过路由
-    if(layout.menubar.menuList.length === 0) {
-        await store.dispatch('layout/GenerateRoutes')
-        await store.dispatch('layout/getUser')
-        for(let i = 0;i < layout.menubar.menuList.length;i++) {
-            router.addRoute(layout.menubar.menuList[i] as RouteRecordRaw)
+    if(getMenubar.menuList.length === 0) {
+        await GenerateRoutes()
+        await getUser()
+        for(let i = 0;i < getMenubar.menuList.length;i++) {
+            router.addRoute(getMenubar.menuList[i] as RouteRecordRaw)
         }
-        store.commit('layout/concatAllowRoutes')
+        concatAllowRoutes()
         return to.fullPath
     }
-    store.commit('layout/changeTagNavList', to) // 切换导航，记录打开的导航(标签页)
+    changeTagNavList(to) // 切换导航，记录打开的导航(标签页)
 
     // 离开当前页面时是否需要添加当前页面缓存
     !new RegExp(/^\/redirect\//).test(from.path) 
-        && store.state.layout.tags.tagsList.some(v => v.name === from.name) 
-        && !store.state.layout.tags.cachedViews.some(v => v === from.name)
-        && store.commit('layout/addCachedViews', { name: from.name, noCache: from.meta.noCache })
-    
+        && getTags.tagsList.some(v => v.name === from.name) 
+        && !getTags.cachedViews.some(v => v === from.name)
+        && addCachedViews({ name: from.name as string, noCache: from.meta.noCache as boolean })
+
 })
 
 router.afterEach(() => {

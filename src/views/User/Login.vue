@@ -28,11 +28,12 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-import { store } from '/@/store/index'
+import { useLayoutStore } from '/@/store/modules/layout'
 import { ElNotification } from 'element-plus'
 import { validate } from '/@/utils/formExtend'
 
 const formRender = () => {
+    const { login } = useLayoutStore()
     let form = reactive({
         name: 'admin',
         pwd: 'admin'
@@ -46,7 +47,7 @@ const formRender = () => {
     const onSubmit = async() => {
         let { name, pwd } = form
         if(!await validate(ruleForm)) return
-        await store.dispatch('layout/login', { username: name, password: pwd })
+        await login({ username: name, password: pwd })
         ElNotification({
             title: '欢迎',
             message: '欢迎回来',
@@ -84,7 +85,6 @@ const formRender = () => {
 export default defineComponent({
     name: 'Login',
     setup() {
-        
         return {
             labelCol: { span: 4 },
             wrapperCol: { span: 14 },

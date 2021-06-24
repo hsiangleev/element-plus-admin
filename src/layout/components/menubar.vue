@@ -21,9 +21,9 @@
 <script lang='ts'>
 import { defineComponent, computed } from 'vue'
 import MenubarItem from '/@/layout/components/menubarItem.vue'
-import { useStore } from '/@/store/index'
 import { useRoute, useRouter } from 'vue-router'
 import { IMenubarList } from '/@/type/store/layout'
+import { useLayoutStore } from '/@/store/modules/layout'
 
 // 过滤隐藏的菜单，并提取单条的子菜单
 const filterMenubar = (menuList:IMenubarList[]) => {
@@ -51,13 +51,12 @@ export default defineComponent ({
         MenubarItem
     },
     setup() {
-        const store = useStore()
         const route = useRoute()
         const router = useRouter()
-        const { menubar } = store.state.layout
+        const { getMenubar, setRoutes, changeCollapsed } = useLayoutStore()
 
-        const filterMenubarData = filterMenubar(menubar.menuList)
-        store.commit('layout/setRoutes', filterMenubarData)
+        const filterMenubarData = filterMenubar(getMenubar.menuList)
+        setRoutes(filterMenubarData)
 
         const activeMenu = computed(() => {
             if(route.meta.activeMenu) return route.meta.activeMenu
@@ -65,10 +64,10 @@ export default defineComponent ({
         })
         const onOpenChange = (d: any) => {
             router.push({ path: d })
-            menubar.status === 2 && store.commit('layout/changeCollapsed')
+            getMenubar.status === 2 && changeCollapsed()
         }
         return {
-            menubar,
+            menubar: getMenubar,
             filterMenubarData,
             activeMenu,
             onOpenChange
