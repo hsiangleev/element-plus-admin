@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from '/@/App.vue'
 import ElementPlus from 'element-plus'
-import locale from 'element-plus/lib/locale/lang/zh-cn'
 import direct from '/@/directive/index'
 import router from '/@/router/index'
 import { pinia } from '/@/store'
@@ -16,7 +15,7 @@ import SvgIcon from '/@/components/SvnIcon/index.vue'
 
 const app = createApp(App)
 direct(app)
-app.use(ElementPlus, { locale })
+app.use(ElementPlus)
 app.use(router)
 app.use(pinia)
 app.component('SvgIcon', SvgIcon)
