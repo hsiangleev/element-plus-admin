@@ -1,7 +1,7 @@
 <template>
     <i class='el-icon-s-tools text-2xl px-2 py-1 cursor-pointer rounded-l-md' @click='drawer=!drawer' />
-    <el-drawer v-model='drawer' title='系统布局配置' size='260px'>
-        <div class='p-4'>
+    <el-drawer v-model='drawer' title='系统布局配置' size='260px' custom-class='p-4'>
+        <div class='pt-4'>
             <el-row :gutter='20'>
                 <el-col v-for='(val,index) in theme' :key='index' :span='8'>
                     <div class='flex shadow-lg border border-gray-100 w-18 cursor-pointer m-1' @click='changeTheme(index)'> 
@@ -60,7 +60,7 @@ export default defineComponent ({
 
         return {
             drawer,
-            theme,
+            theme: theme(),
             changeTheme,
             setting: getSetting,
             showTags,

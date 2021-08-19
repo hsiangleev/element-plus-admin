@@ -57,9 +57,7 @@ export default defineComponent ({
         LayoutSideSetting
     },
     setup() {
-        const { changeTheme, changeDeviceWidth, changeCollapsed, getMenubar, getSetting } = useLayoutStore()
-
-        changeTheme()
+        const { changeDeviceWidth, changeCollapsed, getMenubar, getSetting } = useLayoutStore()
 
         onMounted(async() => {
             changeDeviceWidth()

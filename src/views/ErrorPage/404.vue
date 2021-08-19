@@ -11,7 +11,7 @@
                 <div class='bullshit__oops'>OOPS!</div>
                 <div class='bullshit__info'>
                     All rights reserved
-                    <a style='color: var(--color-primary);' href='https://wallstreetcn.com' target='_blank'>wallstreetcn</a>
+                    <a class='bullshit__info-link' href='https://wallstreetcn.com' target='_blank'>wallstreetcn</a>
                 </div>
                 <div class='bullshit__headline'>{{ message }}</div>
                 <div class='bullshit__info'>
@@ -24,6 +24,7 @@
 </template>
 <script lang='ts'>
 import { defineComponent } from 'vue'
+import { useLayoutStore } from '/@/store/modules/layout'
 
 import err404 from '/@/assets/img/404.png'
 import errCloud from '/@/assets/img/404_cloud.png'
@@ -31,10 +32,12 @@ import errCloud from '/@/assets/img/404_cloud.png'
 export default defineComponent({
     name: '404',
     setup() {
+        const { color } = useLayoutStore().getSetting
         return {
             err404,
             errCloud,
-            message: 'The webmaster said that you can not enter this page...'
+            message: 'The webmaster said that you can not enter this page...',
+            color
         }
     }
 })
@@ -190,11 +193,15 @@ export default defineComponent({
         padding: 30px 0;
         overflow: hidden;
 
+        .bullshit__info-link {
+            color: v-bind(color.primary);
+        }
+
         &__oops {
             font-size: 32px;
             font-weight: bold;
             line-height: 40px;
-            color: var(--color-primary);
+            color: v-bind(color.primary);
             opacity: 0;
             margin-bottom: 20px;
             animation-name: slideUp;
@@ -232,7 +239,7 @@ export default defineComponent({
             float: left;
             width: 110px;
             height: 36px;
-            background: var(--color-primary);
+            background: v-bind(color.primary);
             border-radius: 100px;
             text-align: center;
             color: #fff;

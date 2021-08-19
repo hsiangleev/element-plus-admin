@@ -13,6 +13,7 @@ module.exports = {
         "indentation": 4,        // 4个空格
         "selector-pseudo-element-no-unknown": [true, {
             "ignorePseudoElements": ["v-deep"]
-        }]
+        }],
+        "value-keyword-case": null
     }
 }

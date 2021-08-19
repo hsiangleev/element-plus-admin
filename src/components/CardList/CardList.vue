@@ -24,6 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import { useLayoutStore } from '/@/store/modules/layout'
 
 interface IListItem {
     url?: string
@@ -63,7 +64,10 @@ export default defineComponent({
         }
     },
     setup() {
-        return {}
+        const { color } = useLayoutStore().getSetting
+        return {
+            color
+        }
     }
 })
 </script>
@@ -102,7 +106,7 @@ export default defineComponent({
                 color: #666;
 
                 & > a:hover {
-                    color: var(--color-primary);
+                    color: v-bind(color.primary);
                 }
 
                 & > span.card-list-item-circle {

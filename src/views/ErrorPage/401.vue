@@ -20,13 +20,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import errGif from '/@/assets/img/401.gif'
+import { useLayoutStore } from '/@/store/modules/layout'
 export default defineComponent({
     name: '401',
     setup() {
+        const { color } = useLayoutStore().getSetting
         
         return {
             errGif: `${errGif}?${+new Date()}`,
-            ewizardClap: 'https://wpimg.wallstcn.com/007ef517-bafd-4066-aae4-6883632d9646'
+            ewizardClap: 'https://wpimg.wallstcn.com/007ef517-bafd-4066-aae4-6883632d9646',
+            color
         }
     }
 })
@@ -82,7 +85,7 @@ export default defineComponent({
         float: left;
         width: 110px;
         height: 36px;
-        background: var(--color-primary);
+        background: v-bind(color.primary);
         border-radius: 50px;
         text-align: center;
         color: #fff;

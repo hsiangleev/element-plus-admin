@@ -4,7 +4,6 @@ import { ILayout, IMenubarStatus, ITagsList, IMenubarList, ISetting, IMenubar, I
 import router from '/@/router/index'
 import { allowRouter } from '/@/router/index'
 import { generatorDynamicRouter } from '/@/router/asyncRouter'
-import changeTheme from '/@/utils/changeTheme'
 import { setLocal, getLocal, decode } from '/@/utils/tools'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 
@@ -150,7 +149,6 @@ export const useLayoutStore = defineStore({
         changeTheme(num?:number):void {
             if(num === this.setting.theme) return
             if(typeof num !== 'number') num = this.setting.theme
-            changeTheme(num)
             this.setting.theme = num
             localStorage.setItem('setting', JSON.stringify(this.setting))
         },
