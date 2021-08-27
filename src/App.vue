@@ -64,7 +64,7 @@ export default defineComponent ({
             }
         }
 
-        .el-submenu__title {
+        .el-sub-menu__title {
             color: v-bind(themeStyle.sidebarColor);
         }
 
@@ -74,7 +74,7 @@ export default defineComponent ({
 
         .el-menu-item:focus,
         .el-menu-item:hover,
-        .el-submenu__title:hover {
+        .el-sub-menu__title:hover {
             background-color: transparent;
             color: v-bind(themeStyle.sidebarActiveColor);
         }
@@ -89,8 +89,8 @@ export default defineComponent ({
             border-right: 3px solid v-bind(themeStyle.sidebarActiveBorderRightBg);
         }
 
-        .el-submenu.is-active > .el-submenu__title,
-        .el-submenu.is-active > .el-submenu__title > i {
+        .el-sub-menu.is-active > .el-sub-menu__title,
+        .el-sub-menu.is-active > .el-sub-menu__title > i {
             color: v-bind(themeStyle.sidebarActiveColor);
         }
     }
