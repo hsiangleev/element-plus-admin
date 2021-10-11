@@ -34,7 +34,8 @@ export default defineComponent ({
 
         return {
             locale,
-            themeStyle
+            themeStyle,
+            getSetting
         }
     }
 })
@@ -96,8 +97,8 @@ export default defineComponent ({
     }
 
     .layout-main-navbar {
-        background-color: v-bind(themeStyle.navbarBg);
-        color: v-bind(themeStyle.navbarColor);
+        background-color: v-bind(getSetting.mode === "vertical" || getSetting.isPhone ? themeStyle.navbarBg : themeStyle.sidebarBg);
+        color: v-bind(getSetting.mode === "vertical" || getSetting.isPhone ? themeStyle.navbarColor : themeStyle.sidebarColor);
 
         .el-breadcrumb .el-breadcrumb__inner,
         .el-breadcrumb .el-breadcrumb__separator,
@@ -105,6 +106,49 @@ export default defineComponent ({
         .el-breadcrumb .el-breadcrumb__separator:hover,
         .el-dropdown {
             color: v-bind(themeStyle.navbarColor);
+        }
+
+        .layout-sidebar-menubar {
+            .el-menu {
+                background-color: v-bind(themeStyle.sidebarBg);
+                border-right: 0;
+            }
+
+            .el-menu--horizontal {
+                & > .el-menu-item {
+                    color: v-bind(themeStyle.sidebarColor);
+                }
+
+                & > .el-sub-menu .el-sub-menu__title {
+                    color: v-bind(themeStyle.sidebarColor);
+                }
+
+                .el-menu-item:not(.is-disabled):focus,
+                .el-menu-item:not(.is-disabled):hover {
+                    background-color: v-bind(themeStyle.sidebarActiveBg);
+                    color: v-bind(themeStyle.sidebarActiveColor);
+                }
+
+                & > .el-sub-menu .el-sub-menu__title:hover {
+                    background-color: v-bind(themeStyle.sidebarActiveBg);
+                    color: v-bind(themeStyle.sidebarActiveColor);
+                }
+
+                & > .el-menu-item-group__title {
+                    padding: 0;
+                }
+
+                & > .el-menu-item.is-active {
+                    background-color: v-bind(themeStyle.sidebarActiveBg);
+                    color: v-bind(themeStyle.sidebarActiveColor) !important;
+                    border-right: 3px solid v-bind(themeStyle.sidebarActiveBorderRightBg);
+                }
+
+                & > .el-sub-menu.is-active > .el-sub-menu__title,
+                & > .el-sub-menu.is-active > .el-sub-menu__title > i {
+                    color: v-bind(themeStyle.sidebarActiveColor);
+                }
+            }
         }
     }
 

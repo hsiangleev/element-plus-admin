@@ -2,6 +2,7 @@
     <div class='layout flex h-screen'>
         <div class='layout-sidebar-mask fixed w-screen h-screen bg-black bg-opacity-25 z-20' :class='{"hidden": getMenubar.status !== 2 }' @click='changeCollapsed' />
         <div
+            v-if='getSetting.mode === "vertical" || getMenubar.isPhone'
             class='layout-sidebar flex flex-col h-screen transition-width duration-200 shadow'
             :class='{ 
                 "w-64": getMenubar.status === 0 || getMenubar.status === 2, 
@@ -11,10 +12,13 @@
             }'
         >
             <div class='layout-sidebar-logo flex h-12 relative flex-center shadow-lg'>
-                {{ getMenubar.status === 0 || getMenubar.status === 2 ? 'hsianglee' : (getMenubar.status === 1 ? 'lee' : '') }}
+                <img class='w-8 h-8' :src='icon'>
+                <span v-if='getMenubar.status === 0 || getMenubar.status === 2' class='pl-2'>hsianglee</span>
             </div>
             <div class='layout-sidebar-menubar flex flex-1 overflow-hidden'>
-                <layout-menubar />
+                <el-scrollbar wrap-class='scrollbar-wrapper'>
+                    <layout-menubar />
+                </el-scrollbar>
             </div>
         </div>
         <div class='layout-main flex flex-1 flex-col overflow-x-hidden overflow-y-auto'>
@@ -46,6 +50,7 @@ import LayoutTags from '/@/layout/components/tags.vue'
 import LayoutSideSetting from '/@/layout/components/sideSetting.vue'
 import { throttle } from '/@/utils/tools'
 import { useLayoutStore } from '/@/store/modules/layout'
+import icon from '/@/assets/img/icon.png'
 
 export default defineComponent ({
     name: 'Layout',
@@ -72,7 +77,8 @@ export default defineComponent ({
         return {
             getMenubar,
             getSetting,
-            changeCollapsed
+            changeCollapsed,
+            icon
         }
     }
 })
@@ -81,5 +87,14 @@ export default defineComponent ({
 <style lang='postcss' scoped>
     ::v-deep(.layout-sidebar-sidesetting .el-drawer__header) {
         margin-bottom: 0;
+    }
+
+    ::v-deep(.el-menu--horizontal>.el-menu-item) {
+        height: 48px;
+    }
+
+    ::v-deep(.el-menu--horizontal>.el-sub-menu .el-sub-menu__title) {
+        height: 48px;
+        line-height: 48px;
     }
 </style>

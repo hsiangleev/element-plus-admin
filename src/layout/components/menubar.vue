@@ -1,21 +1,21 @@
 <template>
-    <el-scrollbar wrap-class='scrollbar-wrapper'>
-        <el-menu
-            :default-active='activeMenu'
-            :collapse='menubar.status === 1 || menubar.status === 3'
-            :class='{ 
-                "el-menu-vertical-demo": true,
-                "w-64": menubar.status === 0 || menubar.status === 2, 
-                "w-0": menubar.status === 3, 
-                "w-16": menubar.status === 1, 
-            }'
-            :collapse-transition='false'
-            :unique-opened='true'
-            @select='onOpenChange'
-        >
-            <menubar-item v-for='v in filterMenubarData' :key='v.path' :index='v.path' :menu-list='v' />
-        </el-menu>
-    </el-scrollbar>
+    <el-menu
+        :mode='getMenubar.isPhone ? "vertical" : getSetting.mode'
+        :default-active='activeMenu'
+        :collapse='getMenubar.status === 1 || getMenubar.status === 3'
+        :class='{ 
+            "el-menu-vertical-demo": true,
+            "w-64": getMenubar.status === 0 || getMenubar.status === 2, 
+            "w-0": getMenubar.status === 3, 
+            "w-16": getMenubar.status === 1, 
+            "w-full": getSetting.mode === "horizontal" && !getMenubar.isPhone, 
+        }'
+        :collapse-transition='false'
+        :unique-opened='true'
+        @select='onOpenChange'
+    >
+        <menubar-item v-for='v in filterMenubarData' :key='v.path' :index='v.path' :menu-list='v' />
+    </el-menu>
 </template>
 
 <script lang='ts'>
@@ -53,7 +53,7 @@ export default defineComponent ({
     setup() {
         const route = useRoute()
         const router = useRouter()
-        const { getMenubar, setRoutes, changeCollapsed } = useLayoutStore()
+        const { getMenubar, setRoutes, changeCollapsed, getSetting } = useLayoutStore()
 
         const filterMenubarData = filterMenubar(getMenubar.menuList)
         setRoutes(filterMenubarData)
@@ -67,10 +67,11 @@ export default defineComponent ({
             getMenubar.status === 2 && changeCollapsed()
         }
         return {
-            menubar: getMenubar,
+            getMenubar,
             filterMenubarData,
             activeMenu,
-            onOpenChange
+            onOpenChange,
+            getSetting
         }
     }
 })

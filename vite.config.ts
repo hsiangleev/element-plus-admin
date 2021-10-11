@@ -35,7 +35,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             port: env.VITE_PORT
         },
         build: {
-            sourcemap: true,
+            // sourcemap: true,
             manifest: true,
             rollupOptions: {
                 output: {

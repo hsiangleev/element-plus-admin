@@ -1,6 +1,6 @@
 <template>
-    <div class='flex items-center px-4 flex-wrap h-12 leading-12'>
-        <span class='text-2xl cursor-pointer h-12 leading-12' :class='{ "el-icon-s-fold": !menubar.status, "el-icon-s-unfold": menubar.status }' @click='changeCollapsed' />
+    <div v-if='getSetting.mode === "vertical" || getMenubar.isPhone' class='flex items-center px-4 flex-wrap h-12 leading-12'>
+        <span class='text-2xl cursor-pointer h-12 leading-12' :class='{ "el-icon-s-fold": !getMenubar.status, "el-icon-s-unfold": getMenubar.status }' @click='changeCollapsed' />
         <!-- 面包屑导航 -->
         <div class='px-4'>
             <el-breadcrumb separator='/'>
@@ -9,6 +9,15 @@
                     <el-breadcrumb-item v-for='v in data.breadcrumbList' :key='v.path' :to='v.path'>{{ v.title }}</el-breadcrumb-item>
                 </transition-group>
             </el-breadcrumb>
+        </div>
+    </div>
+    <div v-else class='flex items-center px-4 flex-wrap h-12 flex-1'>
+        <div class='layout-sidebar-logo flex relative shadow-lg w-40 leading-12 items-center'>
+            <img class='w-6 h-8' :src='icon'>
+            <span v-if='getMenubar.status === 0 || getMenubar.status === 2' class='pl-2'>hsianglee</span>
+        </div>
+        <div class='layout-sidebar-menubar flex flex-1 overflow-hidden'>
+            <layout-menubar />
         </div>
     </div>
     <div class='flex items-center flex-row-reverse px-4 min-width-32'>
@@ -45,6 +54,8 @@ import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router'
 import Notice from '/@/layout/components/notice.vue'
 import Screenfull from '/@/layout/components/screenfull.vue'
 import Search from '/@/layout/components/search.vue'
+import LayoutMenubar from '/@/layout/components/menubar.vue'
+import icon from '/@/assets/img/icon.png'
 
 
 interface IBreadcrumbList {
@@ -78,17 +89,20 @@ export default defineComponent ({
     components: {
         Notice,
         Search,
-        Screenfull
+        Screenfull,
+        LayoutMenubar
     },
     setup() {
-        const { getMenubar, getUserInfo, changeCollapsed, logout } = useLayoutStore()
+        const { getMenubar, getUserInfo, changeCollapsed, logout, getSetting } = useLayoutStore()
         const route = useRoute()
         return {
-            menubar: getMenubar,
+            getMenubar,
             userInfo: getUserInfo,
             changeCollapsed,
             logout,
-            ...breadcrumb(route)
+            ...breadcrumb(route),
+            getSetting,
+            icon
         }
     }
 })

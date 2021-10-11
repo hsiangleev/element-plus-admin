@@ -34,7 +34,8 @@ export const useLayoutStore = defineStore({
             color: {
                 primary: setting.color !== undefined ? setting.color.primary : '#409eff'
             },
-            usePinyinSearch: setting.usePinyinSearch !== undefined ? setting.usePinyinSearch : false
+            usePinyinSearch: setting.usePinyinSearch !== undefined ? setting.usePinyinSearch : false,
+            mode: setting.mode || 'vertical'
         },
         status: {
             isLoading: false,
@@ -181,6 +182,10 @@ export const useLayoutStore = defineStore({
             if(!name) return
             const index = this.tags.cachedViews.findIndex(v => v === name)
             this.tags.cachedViews.splice(index, 1)
+        },
+        changemenubarMode(mode: 'horizontal' | 'vertical'):void {
+            this.setting.mode = mode
+            localStorage.setItem('setting', JSON.stringify(this.setting))
         },
         async login(param: loginParam):Promise<void> {
             const res = await login(param)
