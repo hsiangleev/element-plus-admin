@@ -21,13 +21,13 @@ export const allowRouter:Array<IMenubarList> = [
                 name: 'Workplace',
                 path: '/Dashboard/Workplace',
                 component: Components['Workplace'],
-                meta: { title: '工作台', icon: 'el-icon-s-tools' }
+                meta: { title: '工作台', icon: 'el-icon-tools' }
             }
             // {
             //     name: 'Welcome',
             //     path: '/Dashboard/Welcome',
             //     component: Components['Welcome'],
-            //     meta: { title: '欢迎页', icon: 'el-icon-s-tools' }
+            //     meta: { title: '欢迎页', icon: 'el-icon-tools' }
             // }
         ]
     },
@@ -42,13 +42,13 @@ export const allowRouter:Array<IMenubarList> = [
                 name: '401',
                 path: '/ErrorPage/401',
                 component: Components['401'],
-                meta: { title: '401', icon: 'el-icon-s-tools' }
+                meta: { title: '401', icon: 'el-icon-tools' }
             },
             {
                 name: '404',
                 path: '/ErrorPage/404',
                 component: Components['404'],
-                meta: { title: '404', icon: 'el-icon-s-tools' }
+                meta: { title: '404', icon: 'el-icon-tools' }
             }
         ]
     },

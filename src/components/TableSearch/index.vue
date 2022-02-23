@@ -14,7 +14,10 @@
             </div>
             <el-button type='text' @click='toggleSearch'>
                 高级搜索
-                <i :class='{"el-icon-arrow-down": !isShow, "el-icon-arrow-up": isShow}' />
+                <el-icon>
+                    <el-icon-arrow-up v-if='isShow' />
+                    <el-icon-arrow-down v-else />
+                </el-icon>
             </el-button>
         </div>
         <slot />

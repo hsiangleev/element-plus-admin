@@ -71,8 +71,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             postcss: {
                 plugins: [
                     require('autoprefixer'),
+                    require('tailwindcss/nesting'),
                     require('tailwindcss'),
-                    require('postcss-nested'),
                     require('postcss-simple-vars'),
                     require('postcss-import')
                 ]

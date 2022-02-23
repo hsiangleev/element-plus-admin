@@ -49,7 +49,6 @@ export default defineComponent({
         width: 100%;
     }
 
-    ::v-deep(.el-form-item--mini.el-form-item),
     ::v-deep(.el-form-item--small.el-form-item) {
         margin-bottom: 0;
     }

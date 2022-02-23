@@ -4,8 +4,8 @@
             <div class='open-select w-11/12 max-w-screen-xl h-5/6 bg-white flex flex-col overflow-x-hidden overflow-y-auto'>
                 <div class='h-10 flex justify-between items-center px-3 shadow-sm border-b border-gray-100'>
                     <span>{{ title }}</span>
-                    <div>
-                        <i class='el-icon-close cursor-pointer' @click='close' />
+                    <div class='cursor-pointer'>
+                        <el-icon @click='close'><el-icon-close /></el-icon>
                     </div>
                 </div>
                 <div class='flex-1 overflow-hidden'>
@@ -50,6 +50,7 @@ export default defineComponent({
     ::v-deep(.open-select-btn .el-button) {
         border-radius: 0;
         flex: 1;
+        min-height: 46px;
 
         & + .el-button {
             margin-left: -1px;

@@ -12,7 +12,8 @@
                 >
                     <i v-if='v.isActive' class='rounded-full inline-block w-2 h-2 bg-white -ml-1 mr-1' />
                     <router-link :to='v.path'>{{ v.title }}</router-link>
-                    <i v-if='tagsList.length>1' class='el-icon-close text-xs hover:bg-gray-300 hover:text-white rounded-full leading-3 p-0.5 ml-1 -mr-1' @click='removeTag(v)' />
+
+                    <el-icon v-if='tagsList.length>1' class='text-xs hover:bg-gray-300 hover:text-white rounded-full leading-3 p-0.5 ml-1 -mr-1' @click='removeTag(v)'><el-icon-close /></el-icon>
                 </span>
             </div>
         </el-scrollbar>
@@ -27,14 +28,13 @@
 <script lang="ts">
 import { defineComponent, nextTick, ref, watch, onBeforeUpdate, onMounted, reactive, Ref, ComponentInternalInstance } from 'vue'
 import { useLayoutStore } from '/@/store/modules/layout'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { ITagsList } from '/@/type/store/layout'
 
 // 右键菜单
 const rightMenu = () => {
-    const { removeOtherTagNav } = useLayoutStore()
+    const { removeOtherTagNav, refreshViews } = useLayoutStore()
     const route = useRoute()
-    const router = useRouter()
     const menuPos = reactive({
         left: '0px',
         top: '0px',
@@ -58,13 +58,7 @@ const rightMenu = () => {
             menuPos.top = `${top}px`
         })
     }
-    const refresh = () => {
-        if(currentRightTags.path === route.path) {
-            router.replace(`/redirect${currentRightTags.path}`)
-        }else{
-            router.push(`/redirect${currentRightTags.path}`)
-        }
-    }
+    const refresh = () => refreshViews(currentRightTags.path === route.path ? 'replace' : 'push', currentRightTags.path, currentRightTags.name)
     const closeOther = () => removeOtherTagNav(currentRightTags)
     document.body.addEventListener('click', () => menuPos.display = 'none')
     return { menuPos, contextRightMenu, refresh, rightMenuEl, closeOther }
@@ -74,7 +68,7 @@ const rightMenu = () => {
 const tagScroll = () => {
     const { getTags } = useLayoutStore()
     const { tagsList, cachedViews } = getTags
-    const scrollbar:Ref<{wrap:HTMLElement, update():void} | null> = ref(null)
+    const scrollbar:Ref<{wrap$:HTMLElement, update():void} | null> = ref(null)
     const layoutTagsItem:Ref<Array<ComponentInternalInstance | Element | null>> = ref([])
     const getTagsDom = (el:ComponentInternalInstance | Element | null) => el && layoutTagsItem.value.push(el)
     // 监听标签页导航
@@ -89,8 +83,8 @@ const tagScroll = () => {
                     return acc + val.offsetWidth + 6
                 }, 0)
                 if(!scrollbar.value) return
-                const scrollLeft = itemWidth - scrollbar.value.wrap.offsetWidth + 70
-                if(scrollLeft > 0) scrollbar.value.wrap.scrollLeft = scrollLeft
+                const scrollLeft = itemWidth - scrollbar.value.wrap$.offsetWidth + 70
+                if(scrollLeft > 0) scrollbar.value.wrap$.scrollLeft = scrollLeft
             })
         })
     )

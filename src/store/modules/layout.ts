@@ -26,7 +26,8 @@ export const useLayoutStore = defineStore({
         // 标签栏
         tags: {
             tagsList: [],
-            cachedViews: []
+            cachedViews: [],
+            isNocacheView: false
         },
         setting: {
             theme: setting.theme !== undefined ? setting.theme : 0,
@@ -130,6 +131,27 @@ export const useLayoutStore = defineStore({
             // 判断标签页是否还有该页面
             if(this.tags.tagsList.map(v => v.name).includes(obj.name)) return
             this.tags.cachedViews.splice(obj.index, 1)
+        },
+        // 删除所有缓存页面并刷新当前页面
+        removeAllCachedViews() {
+            this.tags.cachedViews.splice(0)
+            this.refreshViews()
+        },
+        // 刷新页面，默认刷新当前页面
+        refreshViews(type: 'push' | 'replace' = 'replace', path = router.currentRoute.value.fullPath, name = router.currentRoute.value.name) {
+            this.changeNocacheViewStatus(true)
+            // 删除页面的缓存
+            const index = this.tags.cachedViews.findIndex(v => v === name)
+            index !== -1 && this.tags.cachedViews.splice(index, 1)
+            if(type === 'push') {
+                router.push(`/redirect${path}`)
+            }else{
+                router.replace(`/redirect${path}`)
+            }
+            
+        },
+        changeNocacheViewStatus(isNoCache: boolean) {
+            this.tags.isNocacheView = isNoCache
         },
         logout():void {
             this.status.ACCESS_TOKEN = ''

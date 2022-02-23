@@ -14,8 +14,8 @@
                 <card-list title='列表' :list-item='listItem' :show-header='true' :is-nowrap='true' :show-liststyle='true'>
                     <template #btn>
                         <el-button-group>
-                            <el-button size='mini' icon='el-icon-delete' @click='remove'>删除</el-button>
-                            <el-button size='mini' icon='el-icon-edit' @click='edit'>编辑</el-button>
+                            <el-button size='small' icon='el-icon-delete' @click='remove'>删除</el-button>
+                            <el-button size='small' icon='el-icon-edit' @click='edit'>编辑</el-button>
                         </el-button-group>
                     </template>
                 </card-list>
@@ -49,13 +49,13 @@
                 <card-list title='表单' type='keyvalue' :show-header='true'>
                     <template #btn>
                         <el-button-group>
-                            <el-button icon='el-icon-edit' size='mini' @click='submit'>提交</el-button>
-                            <el-button size='mini' icon='el-icon-edit' @click='resetFields(refForm)'>重置</el-button>
+                            <el-button icon='el-icon-edit' size='small' @click='submit'>提交</el-button>
+                            <el-button size='small' icon='el-icon-edit' @click='resetFields(refForm)'>重置</el-button>
                         </el-button-group>
                     </template>
 
                     <template #keyvalue>
-                        <el-form ref='refForm' class='card-list-form' :model='form' :rules='rules' size='mini'>
+                        <el-form ref='refForm' class='card-list-form' :model='form' :rules='rules' size='small'>
                             <el-row :gutter='15'>
                                 <card-list-item width='100px' :is-require='true' prop='name'>
                                     <template #key>姓名</template>

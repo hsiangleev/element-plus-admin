@@ -12,7 +12,7 @@ const defaultRoutePath = '/'
 
 router.beforeEach(async(to, from) => {
     start()
-    const { getStatus, getMenubar, getTags, setToken, logout, GenerateRoutes, getUser, concatAllowRoutes, changeTagNavList, addCachedViews } = useLayoutStore()
+    const { getStatus, getMenubar, getTags, setToken, logout, GenerateRoutes, getUser, concatAllowRoutes, changeTagNavList, addCachedViews, changeNocacheViewStatus } = useLayoutStore()
     // 修改页面title
     const reg = new RegExp(/^(.+)(\s\|\s.+)$/)
     const appTitle = import.meta.env.VITE_APP_TITLE
@@ -54,8 +54,11 @@ router.beforeEach(async(to, from) => {
     !new RegExp(/^\/redirect\//).test(from.path) 
         && getTags.tagsList.some(v => v.name === from.name) 
         && !getTags.cachedViews.some(v => v === from.name)
+        && !getTags.isNocacheView
         && addCachedViews({ name: from.name as string, noCache: from.meta.noCache as boolean })
 
+    // 缓存重置
+    changeNocacheViewStatus(false)
 })
 
 router.afterEach(() => {

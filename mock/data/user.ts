@@ -112,7 +112,7 @@ export const route:Array<IMenubarList> = [
         name: 'ThirdNav',
         path: '/Nav/SecondNav/ThirdNav',
         component: 'ThirdNav',
-        meta: { title: '三级导航', icon: 'el-icon-s-platform' }
+        meta: { title: '三级导航', icon: 'el-icon-platform' }
     },
     {
         id: 31,
@@ -121,7 +121,7 @@ export const route:Array<IMenubarList> = [
         path: '/Nav/SecondText',
         redirect: '/Nav/SecondText/ThirdText',
         component: 'SecondText',
-        meta: { title: '二级文本', icon: 'el-icon-s-opportunity', alwaysShow: true }
+        meta: { title: '二级文本', icon: 'el-icon-opportunity', alwaysShow: true }
     },
     {
         id: 310,
@@ -154,7 +154,7 @@ export const route:Array<IMenubarList> = [
         name: 'CardListTest',
         path: '/Components/CardListTest',
         component: 'CardListTest',
-        meta: { title: '卡片列表', icon: 'el-icon-question' }
+        meta: { title: '卡片列表', icon: 'el-icon-question-filled' }
     },
     {
         id: 42,
@@ -162,7 +162,7 @@ export const route:Array<IMenubarList> = [
         name: 'TableSearchTest',
         path: '/Components/TableSearchTest',
         component: 'TableSearchTest',
-        meta: { title: '表格搜索', icon: 'el-icon-question' }
+        meta: { title: '表格搜索', icon: 'el-icon-question-filled' }
     },
     {
         id: 43,
@@ -170,7 +170,7 @@ export const route:Array<IMenubarList> = [
         name: 'ListTest',
         path: '/Components/ListTest',
         component: 'ListTest',
-        meta: { title: '标签页列表', icon: 'el-icon-question' }
+        meta: { title: '标签页列表', icon: 'el-icon-question-filled' }
     },
     {
         id: 5,

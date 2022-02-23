@@ -165,5 +165,10 @@ export default defineComponent ({
     .layout-main-content {
         background-color: v-bind(themeStyle.mainBg);
     }
-
+    
+    .el-popper{
+        .el-menu-item-group__title {
+            padding: 0;
+        }
+    }
 </style>

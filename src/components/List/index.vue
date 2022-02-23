@@ -5,7 +5,7 @@
                 <div class='flex items-center'>
                     <div v-if='val.imgUrl || val.iconClass' class='mr-4'>
                         <el-avatar v-if='val.imgUrl' size='large' :src='val.imgUrl' />
-                        <i v-if='val.iconClass' :class='{"text-3xl": true, [val.iconClass]: true}' />
+                        <component :is='UseElIcon(val.iconClass)' v-if='val.iconClass' class='text-3xl' />
                     </div>
                     <div>
                         <el-link v-if='val.href' type='primary' :underline='false' :href='val.href'>
@@ -36,7 +36,8 @@
                     <div v-if='val.title' class='flex items-center py-1 text-black font-medium'>
                         <div>
                             <el-avatar v-if='val.imgUrl' size='small' :src='val.imgUrl' />
-                            <i v-if='val.iconClass' :class='{"text-3xl": true, [val.iconClass]: true}' />
+                            <component :is='UseElIcon(val.iconClass)' v-if='val.iconClass' class='text-3xl' />
+
                         </div>
                         <div class='px-4 truncate text-base'>{{ val.title }}</div>
                     </div>
@@ -58,6 +59,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import { UseElIcon } from '/@/components/SvnIcon/elIcon'
 
 export interface IList {
     imgUrl?: string
@@ -84,7 +86,9 @@ export default defineComponent({
         }
     },
     setup() {
-        return {}
+        return {
+            UseElIcon
+        }
     }
 })
 </script>

@@ -21,10 +21,11 @@ module.exports = {
     ],
     rules: {
         'vue/max-attributes-per-line': ['error', {
-            singleline: 10,
+            singleline: {
+                max: 5
+            },      
             multiline: {
-                max: 1,
-                allowFirstLine: false
+                max: 1
             }
         }],
         'vue/singleline-html-element-content-newline': 'off',
@@ -51,6 +52,8 @@ module.exports = {
         }, {
             enforceForRenamedProperties: false
         }],
+        // 组件名称为多个单词，忽略的组件名称
+        'vue/multi-word-component-names': ['off'],
         'comma-dangle': ['error', 'never'], // 最后一个属性不允许有逗号
         'arrow-spacing': 'error', // 箭头函数空格
         'prefer-template': 'error',

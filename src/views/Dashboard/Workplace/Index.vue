@@ -1,7 +1,14 @@
 <template>
     <div class='content'>
         <a href='https://github.com/hsiangleev/element-plus-admin' class='absolute right-0 top-0 z-10'>
-            <img width='149' height='149' src='https://layuiextend.hsianglee.cn/layui/images/forkme_right_red_aa0000.png' class='attachment-full size-full' alt='Fork me on GitHub' data-recalc-dims='1'>
+            <img
+                width='149'
+                height='149'
+                src='https://layuiextend.hsianglee.cn/layui/images/forkme_right_red_aa0000.png'
+                class='attachment-full size-full'
+                alt='Fork me on GitHub'
+                data-recalc-dims='1'
+            >
         </a>
         <el-card class='mb-2' shadow='hover'>
             <div class='py-4 font-bold'>工作台</div>

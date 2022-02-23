@@ -1,7 +1,7 @@
 <template>
     <el-dropdown trigger='click'>
         <el-badge :value='6' type='danger' class='el-dropdown-link item mx-2 cursor-pointer leading-none'>
-            <i class='el-icon-bell text-xl' />
+            <el-icon class='text-xl'><el-icon-bell /></el-icon>
         </el-badge>
         <template #dropdown>
             <el-dropdown-menu>
@@ -65,7 +65,9 @@ export default defineComponent({
     border: none;
     width: 300px;
 }
-
+.el-dropdown-menu{
+    padding: 10px 0;
+}
 .notice-tabs-pane {
     height: 400px;
     overflow: hidden;

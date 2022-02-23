@@ -25,6 +25,7 @@ export interface IUserInfo {
 export interface ITags {
     tagsList: Array<ITagsList>
     cachedViews: string[]
+    isNocacheView: boolean
 }
 export interface IStatus {
     isLoading: boolean

@@ -6,11 +6,11 @@
                     <card-list title='高级搜索' type='keyvalue' :show-header='true'>
                         <template #btn>
                             <el-button-group>
-                                <el-button icon='el-icon-search' size='mini' @click='submit'>搜索</el-button>
+                                <el-button icon='el-icon-search' size='small' @click='submit'>搜索</el-button>
                             </el-button-group>
                         </template>
                         <template #keyvalue>
-                            <el-form ref='refForm' class='card-list-form' :model='form' :rules='rules' size='mini'>
+                            <el-form ref='refForm' class='card-list-form' :model='form' :rules='rules' size='small'>
                                 <el-row :gutter='15'>
                                     <card-list-item width='100px' prop='name'>
                                         <template #key>日期</template>
@@ -57,7 +57,7 @@
             </el-table-column>
             <el-table-column prop='tag' label='标签' width='100'>
                 <template #default='scope'>
-                    <el-tag :type='scope.row.tag === "家" ? "primary" : (scope.row.tag === "公司" ? "danger" : scope.row.tag === "超市" ? "info" : "success")' disable-transitions>
+                    <el-tag :type='scope.row.tag === "家" ? "" : (scope.row.tag === "公司" ? "danger" : scope.row.tag === "超市" ? "info" : "success")' disable-transitions>
                         {{ scope.row.tag }}
                     </el-tag>
                 </template>
