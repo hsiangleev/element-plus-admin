@@ -24,7 +24,6 @@
     </a>
 </p>
 
-
 ## 简介
 
 [element-plus-admin](https://github.com/hsiangleev/element-plus-admin) 是一个后台前端解决方案，它基于 [vue-next](https://github.com/vuejs/vue-next) 和 [element-plus](https://github.com/element-plus/element-plus)实现。它使用了最新的前端技术栈vite，typescript和postcss构建，内置了 动态路由，权限验证，皮肤更换，提供了丰富的功能组件，它可以帮助你快速搭建中后台产品原型。
@@ -90,7 +89,7 @@ npm run stylelint
 ## 捐赠
 
 如果你觉得这个项目帮助到了你，你可以帮作者买一杯果汁表示鼓励 :tropical_drink:</br>
-![donate](https://images.hsianglee.cn/pay.png?v=0.0.1)
+![donate](https://images.hsianglee.cn/pay/pay.png?v=0.0.2)
 
 ## License
 
